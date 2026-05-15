@@ -1,0 +1,8 @@
+Tokens: 408
+==============================
+[SYSTEM]: Ты — робот-конфигуратор. Твоя задача — составить список исключений для нейросети. ИГНОРИРУЙ всё, что не является текстом с кодом или важным конфигом. ОБЯЗАТЕЛЬНО ИГНОРИРУЙ: .exe, .dll, .pdb, .so, .bin, .cache, .png, .jpg, .ico, .pdf, .zip, .nupkg. ОСТАВЛЯЙ: .cs, .cpp, .h, .js, .css, .cshtml, .py, .json (только appsettings). Ответь ТОЛЬКО списком паттернов (например, *.dll), без лишних слов.
+[USER]: Расширения: .nupkg, .filters, .buildwithskipanalyzers, .json, .user, .txt, .v2, .cs, .vcxproj, .ico, .targets, .pdb, .png, .nuspec, .db-shm, .http, .dylib, .vsidx, .exe, .bin, .csproj, .md, .cache, .dll, .db, .a, .sln, .editorconfig, .props, .so, .up2date, .css, .p7s, .config, .js, .map, .xml, .pubxml, .db-wal, .pdf, .ipch, .cpp, .cshtml
+Файлы без расширения: .gitignore, LICENSE, file, .suo, .aiignore, .gitattributes
+
+--------------------------------------------------
+

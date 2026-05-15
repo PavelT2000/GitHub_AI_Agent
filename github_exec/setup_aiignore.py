@@ -13,10 +13,10 @@ def setup_aiignore(repo: MyRepo):
     """
     project_root = Path.cwd()
     repo_path = project_root / "temp" / repo.name
-    
+
     # --- ШАГ 1: Фильтрация по расширениям ---
     stats = get_repo_extensions(repo_path)
-    
+
     prompt1 = [
         {"role": "system", "content": (
             "Ты — робот-конфигуратор. Твоя задача — составить список исключений для нейросети. "
@@ -27,7 +27,7 @@ def setup_aiignore(repo: MyRepo):
         )},
         {"role": "user", "content": stats}
     ]
-    
+
     res1 = get_groq_completion(prompt1)
     ext_rules = clean_ai_response(res1.choices[0].message.content) if not isinstance(res1, str) else []
     if isinstance(res1, str): return
@@ -38,25 +38,29 @@ def setup_aiignore(repo: MyRepo):
 
     # --- ШАГ 2: Фильтрация по структуре папок (Дерево) ---
     compact_tree = get_optimized_tree(repo_path, spec)
-    
+
     prompt2 = [
-        {"role": "system", "content": (
-            "Ты — чистильщик контекста. Тебе дано дерево файлов. "
-            "Выдели папки, которые нужно ИСКЛЮЧИТЬ (артефакты сборки, внешние либы, метаданные). "
-            "ВСЕГДА ИСКЛЮЧАЙ: obj/, bin/, .vs/, Properties/, Migrations/, wwwroot/lib/, node_modules/. "
-            "Выдай ТОЛЬКО список паттернов для .gitignore. Не пиши пояснений и заголовков."
-        )},
-        {"role": "user", "content": compact_tree}
-    ]
-    
+    {"role": "system", "content": (
+        "Ты — оптимизатор контекста. Перед тобой дерево папок с оценкой количества токенов. "
+        "Твой лимит на весь проект — 100,000 токенов. "
+        "Твоя задача: безжалостно выкинуть папки, которые:"
+        "1. Содержат внешние библиотеки (даже если они называются не packages/ или node_modules/)."
+        "2. Являются артефактами сборки или кэшем."
+        "3. Содержат слишком много токенов, но не несут уникальной бизнес-логики (картинки, огромные JSON-даты)."
+        "Выдай ТОЛЬКО список паттернов для .aiignore."
+    )},
+    {"role": "user", "content": compact_tree}
+]
+
     res2 = get_groq_completion(prompt2)
-    folder_ignore_rules = clean_ai_response(res2.choices[0].message.content) if not isinstance(res2, str) else []
+    folder_ignore_rules_list = clean_ai_response(res2.choices[0].message.content) if not isinstance(res2, str) else []
 
     # --- ФИНАЛ: Сборка файла ---
-    final_rules = f"# Extension rules\n{ext_ignore_rules}\n\n# Structural rules\n{folder_ignore_rules}"
-    
+    all_rules = sorted(list(set(ext_rules + folder_ignore_rules_list)))
+    final_content = "# Generated AI Ignore Rules\n" + "\n".join(all_rules)
+
     tool_dir = repo_path / ".ai_github_tool"
     tool_dir.mkdir(exist_ok=True)
-    (tool_dir / ".aiignore").write_text(final_rules, encoding="utf-8")
-    
-    print(f"[{repo.name}] .aiignore успешно сгенерирован в два этапа.")
+    (tool_dir / ".aiignore").write_text(final_content, encoding="utf-8")
+
+    print(f"[{repo.name}] .aiignore успешно обновлен. Записано правил: {len(all_rules)}")

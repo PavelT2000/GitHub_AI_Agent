@@ -1,0 +1,1122 @@
+==================================================
+NEW REQUEST | Model: meta-llama/llama-4-scout-17b-16e-instruct | Tokens: 408
+--------------------------------------------------
+[SYSTEM]: Ты — робот-конфигуратор. Твоя задача — составить список исключений для нейросети. ИГНОРИРУЙ всё, что не является текстом с кодом или важным конфигом. ОБЯЗАТЕЛЬНО ИГНОРИРУЙ: .exe, .dll, .pdb, .so, .bin, .cache, .png, .jpg, .ico, .pdf, .zip, .nupkg. ОСТАВЛЯЙ: .cs, .cpp, .h, .js, .css, .cshtml, .py, .json (только appsettings). Ответь ТОЛЬКО списком паттернов (например, *.dll), без лишних слов.
+[USER]: Расширения: .txt, .ico, .dll, .pubxml, .xml, .db, .vcxproj, .map, .csproj, .exe, .cshtml, .pdf, .editorconfig, .a, .db-shm, .vsidx, .config, .css, .js, .cs, .http, .up2date, .dylib, .nuspec, .bin, .user, .targets, .pdb, .sln, .json, .p7s, .cpp, .filters, .v2, .png, .buildwithskipanalyzers, .nupkg, .cache, .ipch, .so, .props, .md, .db-wal
+Файлы без расширения: .gitattributes, file, LICENSE, .aiignore, .gitignore, .suo
+
+--------------------------------------------------
+[RESPONSE]:
+*.exe
+*.dll
+*.pdb
+*.so
+*.bin
+*.cache
+*.png
+*.jpg
+*.ico
+*.pdf
+*.zip
+*.nupkg
+*.db-shm
+*.db-wal
+*.ipch
+*.dylib
+*.vcxproj
+*.csproj
+*.sln
+*.targets
+*.nuspec
+*.up2date
+*.user
+*.suo
+*.gitattributes
+*.gitignore
+*.aiignore
+LICENSE
+*.pubxml
+*.xml
+*.db
+*.map
+*.http
+*.editorconfig
+*.v2
+*.buildwithskipanalyzers
+*.vsidx
+*.p7s
+*.a
+*.filters
+*.props
+*.md
+==================================================
+
+==================================================
+NEW REQUEST | Model: meta-llama/llama-4-scout-17b-16e-instruct | Tokens: 6539
+--------------------------------------------------
+[SYSTEM]: Ты — оптимизатор контекста. Перед тобой дерево папок с оценкой количества токенов. Твой лимит на весь проект — 100,000 токенов. Твоя задача: безжалостно выкинуть папки, которые:1. Содержат внешние библиотеки (даже если они называются не packages/ или node_modules/).2. Являются артефактами сборки или кэшем.3. Содержат слишком много токенов, но не несут уникальной бизнес-логики (картинки, огромные JSON-даты).Выдай ТОЛЬКО список паттернов для .aiignore.
+[USER]: 1Task/ (~30573 tokens)
+  .vs/1Task/ (~15100 tokens)
+    v17/ (~13151 tokens)
+      DocumentLayout.backup.json
+      DocumentLayout.json
+  1Task/ (~15193 tokens)
+    Properties/ (~449 tokens)
+      AssemblyInfo.cs
+    bin/Debug/ (~6191 tokens)
+      1Task.exe.config
+    obj/Debug/ (~7775 tokens)
+      .NETFramework,Version=v4.7.2.AssemblyAttributes.cs
+      1Task.csproj.FileListAbsolute.txt
+    App.config
+    Program.cs
+2Task/ (~30512 tokens)
+  .vs/2Task/ (~15046 tokens)
+    v17/ (~13152 tokens)
+      DocumentLayout.backup.json
+      DocumentLayout.json
+  2Task/ (~15185 tokens)
+    Properties/ (~449 tokens)
+      AssemblyInfo.cs
+    bin/Debug/ (~6191 tokens)
+      2Task.exe.config
+    obj/Debug/ (~7775 tokens)
+      .NETFramework,Version=v4.7.2.AssemblyAttributes.cs
+      2Task.csproj.FileListAbsolute.txt
+    App.config
+    Program.cs
+5Task/ (~32960 tokens)
+  .vs/5Task/ (~15457 tokens)
+    v17/ (~13151 tokens)
+      DocumentLayout.backup.json
+      DocumentLayout.json
+  5Task/ (~17223 tokens)
+    Properties/ (~449 tokens)
+      AssemblyInfo.cs
+    bin/Debug/ (~6959 tokens)
+      5Task.exe.config
+    obj/Debug/ (~8543 tokens)
+      .NETFramework,Version=v4.7.2.AssemblyAttributes.cs
+      5Task.csproj.FileListAbsolute.txt
+    App.config
+    Program.cs
+6Task/ (~31520 tokens)
+  .vs/6Task/ (~14521 tokens)
+    v17/ (~12256 tokens)
+      DocumentLayout.backup.json
+      DocumentLayout.json
+  6Task/ (~16718 tokens)
+    Properties/ (~449 tokens)
+      AssemblyInfo.cs
+    bin/Debug/ (~6831 tokens)
+      6Task.exe.config
+    obj/Debug/ (~8466 tokens)
+      .NETFramework,Version=v4.7.2.AssemblyAttributes.cs
+      6Task.csproj.FileListAbsolute.txt
+    App.config
+    Program.cs
+7Task/ (~34672 tokens)
+  .vs/7Task/ (~16101 tokens)
+    v17/ (~13664 tokens)
+      DocumentLayout.backup.json
+      DocumentLayout.json
+  7Task/ (~18290 tokens)
+    Properties/ (~449 tokens)
+      AssemblyInfo.cs
+    bin/Debug/ (~7599 tokens)
+      7Task.exe.config
+    obj/Debug/ (~9183 tokens)
+      .NETFramework,Version=v4.7.2.AssemblyAttributes.cs
+      7Task.csproj.FileListAbsolute.txt
+    App.config
+    Program.cs
+Burley/ (~32209 tokens)
+  .vs/Burley/ (~15179 tokens)
+    v17/ (~13159 tokens)
+      DocumentLayout.backup.json
+      DocumentLayout.json
+  Burley/ (~16748 tokens)
+    Properties/ (~450 tokens)
+      AssemblyInfo.cs
+    bin/Debug/ (~6831 tokens)
+      Burley.exe.config
+    obj/Debug/ (~8421 tokens)
+      .NETFramework,Version=v4.7.2.AssemblyAttributes.cs
+      Burley.csproj.FileListAbsolute.txt
+    App.config
+    Program.cs
+CorrectDays/ (~33155 tokens)
+  .vs/CorrectDays/ (~15448 tokens)
+    v17/ (~13066 tokens)
+      DocumentLayout.backup.json
+      DocumentLayout.json
+  CorrectDays/ (~17421 tokens)
+    Properties/ (~452 tokens)
+      AssemblyInfo.cs
+    bin/Debug/ (~7087 tokens)
+      CorrectDays.exe.config
+    obj/Debug/ (~8711 tokens)
+      .NETFramework,Version=v4.7.2.AssemblyAttributes.cs
+      CorrectDays.csproj.FileListAbsolute.txt
+    App.config
+    Program.cs
+First_week/ (~4276351 tokens)
+  Projects/ (~4060430 tokens)
+    Books/ (~35297 tokens)
+      .vs/Books/ (~15180 tokens)
+        v17/ (~11887 tokens)
+          DocumentLayout.backup.json
+          DocumentLayout.json
+      Books/ (~19867 tokens)
+        Properties/ (~449 tokens)
+          AssemblyInfo.cs
+        bin/Debug/ (~8239 tokens)
+          Books.exe.config
+        obj/Debug/ (~9945 tokens)
+          .NETFramework,Version=v4.7.2.AssemblyAttributes.cs
+          Books.csproj.FileListAbsolute.txt
+        App.config
+        Book.cs
+        Program.cs
+    Calculator/ (~32121 tokens)
+      .vs/Calculator/ (~14995 tokens)
+        v17/ (~12702 tokens)
+          DocumentLayout.backup.json
+          DocumentLayout.json
+      Calculator/ (~16872 tokens)
+        Properties/ (~452 tokens)
+          AssemblyInfo.cs
+        bin/Debug/ (~6831 tokens)
+          Calculator.exe.config
+        obj/Debug/ (~8601 tokens)
+          .NETFramework,Version=v4.7.2.AssemblyAttributes.cs
+          Calculator.csproj.FileListAbsolute.txt
+        App.config
+        Program.cs
+    IsOdd/ (~29071 tokens)
+      .vs/IsOdd/ (~13534 tokens)
+        v17/ (~11635 tokens)
+          DocumentLayout.backup.json
+          DocumentLayout.json
+      IsOdd/ (~15287 tokens)
+        Properties/ (~449 tokens)
+          AssemblyInfo.cs
+        bin/Debug/ (~6191 tokens)
+          IsOdd.exe.config
+        obj/Debug/ (~7902 tokens)
+          .NETFramework,Version=v4.7.2.AssemblyAttributes.cs
+          IsOdd.csproj.FileListAbsolute.txt
+        App.config
+        Program.cs
+    Loading/ (~33650 tokens)
+      .vs/Loading/ (~14987 tokens)
+        v17/ (~13058 tokens)
+          DocumentLayout.backup.json
+          DocumentLayout.json
+      Loading/ (~18411 tokens)
+        Properties/ (~450 tokens)
+          AssemblyInfo.cs
+        bin/Debug/ (~7727 tokens)
+          Loading.exe.config
+        obj/Debug/ (~9347 tokens)
+          .NETFramework,Version=v4.7.2.AssemblyAttributes.cs
+          Loading.csproj.FileListAbsolute.txt
+        App.config
+        Program.cs
+    MasSum/ (~25616 tokens)
+      .vs/MasSum/ (~7544 tokens)
+        v17/ (~5568 tokens)
+          DocumentLayout.backup.json
+          DocumentLayout.json
+      MasSum/ (~17821 tokens)
+        .vs/ (~736 tokens)
+          MasSum.csproj.dtbcache.json
+        Properties/ (~450 tokens)
+          AssemblyInfo.cs
+        bin/Debug/ (~6831 tokens)
+          MasSum.exe.config
+        obj/Debug/ (~8590 tokens)
+          .NETFramework,Version=v4.7.2.AssemblyAttributes.cs
+          MasSum.csproj.FileListAbsolute.txt
+        App.config
+        Program.cs
+    MaxValue/ (~31034 tokens)
+      .vs/MaxValue/ (~13864 tokens)
+        v17/ (~11784 tokens)
+          DocumentLayout.backup.json
+          DocumentLayout.json
+      MaxValue/ (~16918 tokens)
+        Properties/ (~451 tokens)
+          AssemblyInfo.cs
+        bin/Debug/ (~6959 tokens)
+          MaxValue.exe.config
+        obj/Debug/ (~8705 tokens)
+          .NETFramework,Version=v4.7.2.AssemblyAttributes.cs
+          MaxValue.csproj.FileListAbsolute.txt
+        App.config
+        Program.cs
+    PasswordGenerator/ (~31384 tokens)
+      .vs/PasswordGenerator/ (~14171 tokens)
+        v17/ (~11976 tokens)
+          DocumentLayout.backup.json
+          DocumentLayout.json
+      PasswordGenerator/ (~16953 tokens)
+        Properties/ (~455 tokens)
+          AssemblyInfo.cs
+        bin/Debug/ (~6831 tokens)
+          PasswordGenerator.exe.config
+        obj/Debug/ (~8683 tokens)
+          .NETFramework,Version=v4.7.2.AssemblyAttributes.cs
+          PasswordGenerator.csproj.FileListAbsolute.txt
+        App.config
+        Program.cs
+    PersonSays/ (~33160 tokens)
+      .vs/PersonSays/ (~15140 tokens)
+        v17/ (~13003 tokens)
+          DocumentLayout.backup.json
+          DocumentLayout.json
+      PersonSays/ (~17766 tokens)
+        Properties/ (~452 tokens)
+          AssemblyInfo.cs
+        bin/Debug/ (~7343 tokens)
+          PersonSays.exe.config
+        obj/Debug/ (~9113 tokens)
+          .NETFramework,Version=v4.7.2.AssemblyAttributes.cs
+          PersonSays.csproj.FileListAbsolute.txt
+        App.config
+        Person.cs
+        Program.cs
+    Ready/ (~33967 tokens)
+      .vs/Ready/ (~14995 tokens)
+        v17/ (~13044 tokens)
+          DocumentLayout.backup.json
+          DocumentLayout.json
+      Ready/ (~18722 tokens)
+        Properties/ (~449 tokens)
+          AssemblyInfo.cs
+        bin/Debug/ (~7855 tokens)
+          Ready.exe.config
+        obj/Debug/ (~9461 tokens)
+          .NETFramework,Version=v4.7.2.AssemblyAttributes.cs
+          Ready.csproj.FileListAbsolute.txt
+        App.config
+        Program.cs
+    TODOLIst/ (~3640127 tokens)
+      .vs/TODOLIst/ (~21820 tokens)
+        v17/ (~16259 tokens)
+          DocumentLayout.backup.json
+          DocumentLayout.json
+      TODOLIst/ (~385191 tokens)
+        Properties/ (~451 tokens)
+          AssemblyInfo.cs
+        bin/Debug/ (~367792 tokens)
+          TODOLIst.exe.config
+          file
+          file.json
+          file.txt
+        obj/Debug/ (~13377 tokens)
+          .NETFramework,Version=v4.7.2.AssemblyAttributes.cs
+          TODOLIst.csproj.FileListAbsolute.txt
+          TODOLIst.csproj.Up2Date
+        App.config
+        App.cs
+        Program.cs
+        Task.cs
+        packages.config
+      packages/Newtonsoft.Json.13.0.3/lib/ (~2613241 tokens)
+    TextFileReader/ (~37009 tokens)
+      .vs/TextFileReader/ (~17911 tokens)
+        v17/ (~15265 tokens)
+          DocumentLayout.backup.json
+          DocumentLayout.json
+      TextFileReader/ (~18841 tokens)
+        Properties/ (~454 tokens)
+          AssemblyInfo.cs
+        bin/Debug/ (~7855 tokens)
+          TextFileReader.exe.config
+        obj/Debug/ (~9522 tokens)
+          .NETFramework,Version=v4.7.2.AssemblyAttributes.cs
+          TextFileReader.csproj.FileListAbsolute.txt
+        App.config
+        FileReader.cs
+        Program.cs
+    ThreeDividingNumbers/ (~30330 tokens)
+      .vs/ThreeDividingNumbers/ (~14071 tokens)
+        v17/ (~12125 tokens)
+          DocumentLayout.backup.json
+          DocumentLayout.json
+      ThreeDividingNumbers/ (~15997 tokens)
+        Properties/ (~457 tokens)
+          AssemblyInfo.cs
+        bin/Debug/ (~6447 tokens)
+          ThreeDividingNumbers.exe.config
+        obj/Debug/ (~8334 tokens)
+          .NETFramework,Version=v4.7.2.AssemblyAttributes.cs
+          ThreeDividingNumbers.csproj.FileListAbsolute.txt
+        App.config
+        Program.cs
+    UserData/ (~35363 tokens)
+      .vs/UserData/ (~16666 tokens)
+        v17/ (~13711 tokens)
+          DocumentLayout.backup.json
+          DocumentLayout.json
+      UserData/ (~18444 tokens)
+        Properties/ (~451 tokens)
+          AssemblyInfo.cs
+        bin/Debug/ (~7599 tokens)
+          UserData.exe.config
+        obj/Debug/ (~9203 tokens)
+          .NETFramework,Version=v4.7.2.AssemblyAttributes.cs
+          UserData.csproj.FileListAbsolute.txt
+        App.config
+        Program.cs
+        User.cs
+    ZereDividingCheck/ (~32296 tokens)
+      .vs/ZereDividingCheck/ (~15374 tokens)
+        v17/ (~13384 tokens)
+          DocumentLayout.backup.json
+          DocumentLayout.json
+      ZereDividingCheck/ (~16663 tokens)
+        Properties/ (~455 tokens)
+          AssemblyInfo.cs
+        bin/Debug/ (~6831 tokens)
+          ZereDividingCheck.exe.config
+        obj/Debug/ (~8518 tokens)
+          .NETFramework,Version=v4.7.2.AssemblyAttributes.cs
+          ZereDividingCheck.csproj.FileListAbsolute.txt
+        App.config
+        Program.cs
+ProgTask/ (~15228318 tokens)
+  .vs/ProgTask/ (~15225994 tokens)
+    v17/ (~15223806 tokens)
+      DocumentLayout.json
+  ProgTask/ (~1993 tokens)
+    ProgTask.cpp
+Projects/ (~384365 tokens)
+  Books/ (~35297 tokens)
+    .vs/Books/ (~15180 tokens)
+      v17/ (~11887 tokens)
+        DocumentLayout.backup.json
+        DocumentLayout.json
+    Books/ (~19867 tokens)
+      Properties/ (~449 tokens)
+        AssemblyInfo.cs
+      bin/Debug/ (~8239 tokens)
+        Books.exe.config
+      obj/Debug/ (~9945 tokens)
+        .NETFramework,Version=v4.7.2.AssemblyAttributes.cs
+        Books.csproj.FileListAbsolute.txt
+      App.config
+      Book.cs
+      Program.cs
+  Calculator/ (~32121 tokens)
+    .vs/Calculator/ (~14995 tokens)
+      v17/ (~12702 tokens)
+        DocumentLayout.backup.json
+        DocumentLayout.json
+    Calculator/ (~16872 tokens)
+      Properties/ (~452 tokens)
+        AssemblyInfo.cs
+      bin/Debug/ (~6831 tokens)
+        Calculator.exe.config
+      obj/Debug/ (~8601 tokens)
+        .NETFramework,Version=v4.7.2.AssemblyAttributes.cs
+        Calculator.csproj.FileListAbsolute.txt
+      App.config
+      Program.cs
+  IsOdd/ (~29071 tokens)
+    .vs/IsOdd/ (~13534 tokens)
+      v17/ (~11635 tokens)
+        DocumentLayout.backup.json
+        DocumentLayout.json
+    IsOdd/ (~15287 tokens)
+      Properties/ (~449 tokens)
+        AssemblyInfo.cs
+      bin/Debug/ (~6191 tokens)
+        IsOdd.exe.config
+      obj/Debug/ (~7902 tokens)
+        .NETFramework,Version=v4.7.2.AssemblyAttributes.cs
+        IsOdd.csproj.FileListAbsolute.txt
+      App.config
+      Program.cs
+  Loading/ (~33650 tokens)
+    .vs/Loading/ (~14987 tokens)
+      v17/ (~13058 tokens)
+        DocumentLayout.backup.json
+        DocumentLayout.json
+    Loading/ (~18411 tokens)
+      Properties/ (~450 tokens)
+        AssemblyInfo.cs
+      bin/Debug/ (~7727 tokens)
+        Loading.exe.config
+      obj/Debug/ (~9347 tokens)
+        .NETFramework,Version=v4.7.2.AssemblyAttributes.cs
+        Loading.csproj.FileListAbsolute.txt
+      App.config
+      Program.cs
+  MasSum/ (~25616 tokens)
+    .vs/MasSum/ (~7544 tokens)
+      v17/ (~5568 tokens)
+        DocumentLayout.backup.json
+        DocumentLayout.json
+    MasSum/ (~17821 tokens)
+      .vs/ (~736 tokens)
+        MasSum.csproj.dtbcache.json
+      Properties/ (~450 tokens)
+        AssemblyInfo.cs
+      bin/Debug/ (~6831 tokens)
+        MasSum.exe.config
+      obj/Debug/ (~8590 tokens)
+        .NETFramework,Version=v4.7.2.AssemblyAttributes.cs
+        MasSum.csproj.FileListAbsolute.txt
+      App.config
+      Program.cs
+  MaxValue/ (~31034 tokens)
+    .vs/MaxValue/ (~13864 tokens)
+      v17/ (~11784 tokens)
+        DocumentLayout.backup.json
+        DocumentLayout.json
+    MaxValue/ (~16918 tokens)
+      Properties/ (~451 tokens)
+        AssemblyInfo.cs
+      bin/Debug/ (~6959 tokens)
+        MaxValue.exe.config
+      obj/Debug/ (~8705 tokens)
+        .NETFramework,Version=v4.7.2.AssemblyAttributes.cs
+        MaxValue.csproj.FileListAbsolute.txt
+      App.config
+      Program.cs
+  PasswordGenerator/ (~31384 tokens)
+    .vs/PasswordGenerator/ (~14171 tokens)
+      v17/ (~11976 tokens)
+        DocumentLayout.backup.json
+        DocumentLayout.json
+    PasswordGenerator/ (~16953 tokens)
+      Properties/ (~455 tokens)
+        AssemblyInfo.cs
+      bin/Debug/ (~6831 tokens)
+        PasswordGenerator.exe.config
+      obj/Debug/ (~8683 tokens)
+        .NETFramework,Version=v4.7.2.AssemblyAttributes.cs
+        PasswordGenerator.csproj.FileListAbsolute.txt
+      App.config
+      Program.cs
+  PersonSays/ (~33160 tokens)
+    .vs/PersonSays/ (~15140 tokens)
+      v17/ (~13003 tokens)
+        DocumentLayout.backup.json
+        DocumentLayout.json
+    PersonSays/ (~17766 tokens)
+      Properties/ (~452 tokens)
+        AssemblyInfo.cs
+      bin/Debug/ (~7343 tokens)
+        PersonSays.exe.config
+      obj/Debug/ (~9113 tokens)
+        .NETFramework,Version=v4.7.2.AssemblyAttributes.cs
+        PersonSays.csproj.FileListAbsolute.txt
+      App.config
+      Person.cs
+      Program.cs
+  Ready/ (~33967 tokens)
+    .vs/Ready/ (~14995 tokens)
+      v17/ (~13044 tokens)
+        DocumentLayout.backup.json
+        DocumentLayout.json
+    Ready/ (~18722 tokens)
+      Properties/ (~449 tokens)
+        AssemblyInfo.cs
+      bin/Debug/ (~7855 tokens)
+        Ready.exe.config
+      obj/Debug/ (~9461 tokens)
+        .NETFramework,Version=v4.7.2.AssemblyAttributes.cs
+        Ready.csproj.FileListAbsolute.txt
+      App.config
+      Program.cs
+  TextFileReader/ (~36786 tokens)
+    .vs/TextFileReader/ (~17676 tokens)
+      v17/ (~15009 tokens)
+        DocumentLayout.backup.json
+        DocumentLayout.json
+    TextFileReader/ (~18852 tokens)
+      Properties/ (~454 tokens)
+        AssemblyInfo.cs
+      bin/Debug/ (~7855 tokens)
+        TextFileReader.exe.config
+      obj/Debug/ (~9522 tokens)
+        .NETFramework,Version=v4.7.2.AssemblyAttributes.cs
+        TextFileReader.csproj.FileListAbsolute.txt
+      App.config
+      FileReader.cs
+      Program.cs
+  ThreeDividingNumbers/ (~30330 tokens)
+    .vs/ThreeDividingNumbers/ (~14071 tokens)
+      v17/ (~12125 tokens)
+        DocumentLayout.backup.json
+        DocumentLayout.json
+    ThreeDividingNumbers/ (~15997 tokens)
+      Properties/ (~457 tokens)
+        AssemblyInfo.cs
+      bin/Debug/ (~6447 tokens)
+        ThreeDividingNumbers.exe.config
+      obj/Debug/ (~8334 tokens)
+        .NETFramework,Version=v4.7.2.AssemblyAttributes.cs
+        ThreeDividingNumbers.csproj.FileListAbsolute.txt
+      App.config
+      Program.cs
+  ZereDividingCheck/ (~31945 tokens)
+    .vs/ZereDividingCheck/ (~15015 tokens)
+      v17/ (~13000 tokens)
+        DocumentLayout.backup.json
+        DocumentLayout.json
+    ZereDividingCheck/ (~16671 tokens)
+      Properties/ (~455 tokens)
+        AssemblyInfo.cs
+      bin/Debug/ (~6831 tokens)
+        ZereDividingCheck.exe.config
+      obj/Debug/ (~8518 tokens)
+        .NETFramework,Version=v4.7.2.AssemblyAttributes.cs
+        ZereDividingCheck.csproj.FileListAbsolute.txt
+      App.config
+      Program.cs
+Releases/TaskManager/ (~180694 tokens)
+  file
+Second_week/ (~65872508 tokens)
+  MyFirstApi/ (~206127 tokens)
+    Properties/ (~161 tokens)
+      launchSettings.json
+    bin/Debug/net9.0/ (~152784 tokens)
+      MyFirstApi.deps.json
+      MyFirstApi.runtimeconfig.json
+      MyFirstApi.staticwebassets.endpoints.json
+      appsettings.Development.json
+      appsettings.json
+    obj/ (~52449 tokens)
+      Debug/net9.0/ (~50100 tokens)
+        .NETCoreApp,Version=v9.0.AssemblyAttributes.cs
+        MyFirstApi.AssemblyInfo.cs
+        MyFirstApi.GlobalUsings.g.cs
+        MyFirstApi.MvcApplicationPartsAssemblyInfo.cs
+        MyFirstApi.csproj.FileListAbsolute.txt
+        MyFirstApi.csproj.Up2Date
+        staticwebassets.build.endpoints.json
+        staticwebassets.build.json
+      MyFirstApi.csproj.nuget.dgspec.json
+      project.assets.json
+    Program.cs
+    appsettings.Development.json
+    appsettings.json
+  TaskManager/ (~18917635 tokens)
+    .vs/ (~1104351 tokens)
+      TaskManager/ (~477572 tokens)
+      TaskManagerTraining/ (~517473 tokens)
+        config/ (~21511 tokens)
+          applicationhost.config
+        v17/ (~26311 tokens)
+          DocumentLayout.backup.json
+          DocumentLayout.json
+    TaskManager/ (~17813030 tokens)
+      Controllers/ (~983 tokens)
+        HomeController.cs
+        TaskController.cs
+      Data/ (~57 tokens)
+        AppDbContext.cs
+      Migrations/ (~2319 tokens)
+        [7 files: *.cs]
+      Models/ (~136 tokens)
+        ErrorViewModel.cs
+        MyTask.cs
+      Properties/ (~258 tokens)
+        launchSettings.json
+      Services/ (~648 tokens)
+        AuthOptions.cs
+        TokenService.cs
+      Views/ (~1223 tokens)
+        Home/ (~96 tokens)
+          Index.cshtml
+          Privacy.cshtml
+        Shared/ (~1092 tokens)
+          Error.cshtml
+          _Layout.cshtml
+          _Layout.cshtml.css
+          _ValidationScriptsPartial.cshtml
+        _ViewImports.cshtml
+        _ViewStart.cshtml
+      bin/Debug/net8.0/ (~15547602 tokens)
+        runtimes/ (~7484808 tokens)
+        TaskManager.deps.json
+        TaskManager.runtimeconfig.json
+        TaskManager.staticwebassets.runtime.json
+        appsettings.Development.json
+        appsettings.json
+      obj/ (~192490 tokens)
+        Debug/ (~139288 tokens)
+          net7.0/ (~1990 tokens)
+            .NETCoreApp,Version=v7.0.AssemblyAttributes.cs
+            TaskManager.AssemblyInfo.cs
+            TaskManager.GlobalUsings.g.cs
+            TaskManager.RazorAssemblyInfo.cs
+          net8.0/ (~137298 tokens)
+            scopedcss/ (~830 tokens)
+              Views/Shared/ (~265 tokens)
+                _Layout.cshtml.rz.scp.css
+              bundle/ (~282 tokens)
+                TaskManager.styles.css
+              projectbundle/ (~282 tokens)
+                TaskManager.bundle.scp.css
+            .NETCoreApp,Version=v8.0.AssemblyAttributes.cs
+            ApiEndpoints.json
+            TaskMana.F3FB485A.Up2Date
+            TaskManager.AssemblyInfo.cs
+            TaskManager.GlobalUsings.g.cs
+            TaskManager.RazorAssemblyInfo.cs
+            TaskManager.csproj.BuildWithSkipAnalyzers
+            TaskManager.csproj.FileListAbsolute.txt
+            TaskManager.sourcelink.json
+            staticwebassets.build.json
+            staticwebassets.development.json
+            staticwebassets.pack.json
+            staticwebassets.references.upToDateCheck.txt
+            staticwebassets.removed.txt
+        TaskManager.csproj.nuget.dgspec.json
+        project.assets.json
+      wwwroot/ (~2051594 tokens)
+        css/ (~90 tokens)
+          site.css
+        js/ (~57 tokens)
+          site.js
+        lib/ (~2050088 tokens)
+          bootstrap/dist/ (~1872663 tokens)
+            css/ (~1249444 tokens)
+              [16 files: *.css]
+            js/ (~623218 tokens)
+              [6 files: *.js]
+          jquery/ (~132013 tokens)
+            dist/ (~131734 tokens)
+              jquery.js
+              jquery.min.js
+            LICENSE.txt
+          jquery-validation/dist/ (~38147 tokens)
+            additional-methods.js
+            additional-methods.min.js
+            jquery.validate.js
+            jquery.validate.min.js
+          jquery-validation-unobtrusive/ (~6697 tokens)
+            LICENSE.txt
+            jquery.validate.unobtrusive.js
+            jquery.validate.unobtrusive.min.js
+      Person.cs
+      Program.cs
+      appsettings.Development.json
+      appsettings.json
+  TaskManagerV2.0/ (~46748396 tokens)
+    .vs/ (~183686 tokens)
+      TaskManagerV2.0/ (~108017 tokens)
+        config/ (~20916 tokens)
+          applicationhost.config
+        v17/ (~30560 tokens)
+          DocumentLayout.backup.json
+          DocumentLayout.json
+    Controllers/ (~1532 tokens)
+      TasksController.cs
+      TestController.cs
+      UsersController.cs
+    Data/ (~169 tokens)
+      AppDbContext.cs
+    Migrations/ (~3966 tokens)
+      [7 files: *.cs]
+    Models/ (~531 tokens)
+      MyTask.cs
+      User.cs
+    Properties/ (~626 tokens)
+      launchSettings.json
+    bin/ (~37485493 tokens)
+      Debug/net8.0/ (~14325031 tokens)
+        Properties/ (~279 tokens)
+          launchSettings.json
+        runtimes/ (~6322300 tokens)
+        TaskManagerV2.0.deps.json
+        TaskManagerV2.0.runtimeconfig.json
+        TaskManagerV2.0.staticwebassets.endpoints.json
+        appsettings.Development.json
+      Release/net8.0/ (~23155866 tokens)
+        Properties/ (~279 tokens)
+          launchSettings.json
+        publish/ (~8830870 tokens)
+          runtimes/ (~6322300 tokens)
+          TaskManagerV2.0.deps.json
+          TaskManagerV2.0.runtimeconfig.json
+          TaskManagerV2.0.staticwebassets.endpoints.json
+          appsettings.Development.json
+          appsettings.json
+          web.config
+        runtimes/ (~6322300 tokens)
+        [6 files: *.json]
+    obj/ (~9055876 tokens)
+      Debug/net8.0/ (~86089 tokens)
+        EndpointInfo/ (~1123 tokens)
+          TaskManagerV2.0.json
+        .NETCoreApp,Version=v8.0.AssemblyAttributes.cs
+        ApiEndpoints.json
+        TaskMana.050FEC7B.Up2Date
+        TaskManagerV2.0.AssemblyInfo.cs
+        TaskManagerV2.0.GlobalUsings.g.cs
+        TaskManagerV2.0.MvcApplicationPartsAssemblyInfo.cs
+        TaskManagerV2.0.csproj.BuildWithSkipAnalyzers
+        TaskManagerV2.0.csproj.FileListAbsolute.txt
+        TaskManagerV2.0.sourcelink.json
+        staticwebassets.build.endpoints.json
+        staticwebassets.build.json
+        staticwebassets.references.upToDateCheck.txt
+        staticwebassets.removed.txt
+      Release/net8.0/ (~8924038 tokens)
+        PubTmp/Out/ (~8830861 tokens)
+          runtimes/ (~6322300 tokens)
+          TaskManagerV2.0.deps.json
+          TaskManagerV2.0.runtimeconfig.json
+          TaskManagerV2.0.staticwebassets.endpoints.json
+          appsettings.Development.json
+          appsettings.json
+          web.config
+        .NETCoreApp,Version=v8.0.AssemblyAttributes.cs
+        PublishOutputs.94f3d1e7fd.txt
+        PublishOutputs.9b546c4744.txt
+        TaskMana.050FEC7B.Up2Date
+        TaskManagerV2.0.AssemblyInfo.cs
+        TaskManagerV2.0.GlobalUsings.g.cs
+        TaskManagerV2.0.MvcApplicationPartsAssemblyInfo.cs
+        TaskManagerV2.0.csproj.FileListAbsolute.txt
+        [6 files: *.json]
+        staticwebassets.references.upToDateCheck.txt
+        staticwebassets.removed.txt
+      TaskManagerV2.0.csproj.nuget.dgspec.json
+      project.assets.json
+    Program.cs
+    appsettings.Development.json
+TODOLIst/ (~3640127 tokens)
+  .vs/TODOLIst/ (~21820 tokens)
+    v17/ (~16259 tokens)
+      DocumentLayout.backup.json
+      DocumentLayout.json
+  TODOLIst/ (~385191 tokens)
+    Properties/ (~451 tokens)
+      AssemblyInfo.cs
+    bin/Debug/ (~367792 tokens)
+      TODOLIst.exe.config
+      file
+      file.json
+      file.txt
+    obj/Debug/ (~13377 tokens)
+      .NETFramework,Version=v4.7.2.AssemblyAttributes.cs
+      TODOLIst.csproj.FileListAbsolute.txt
+      TODOLIst.csproj.Up2Date
+    App.config
+    App.cs
+    Program.cs
+    Task.cs
+    packages.config
+  packages/Newtonsoft.Json.13.0.3/lib/ (~2613241 tokens)
+Trash/ (~550 tokens)
+  TasksController.cs
+  TasksData.cs
+obj/ (~1645 tokens)
+  .Net.csproj.nuget.dgspec.json
+  project.assets.json
+compressedcontext.txt
+
+--------------------------------------------------
+[RESPONSE]:
+На основе предоставленного дерева папок и оценки количества токенов, я могу помочь определить папки и файлы, которые можно исключить из анализа.
+
+**Исключение артефактов сборки и кэша**
+
+* `.vs/`
+* `bin/`
+* `obj/`
+
+**Исключение внешних библиотек**
+
+* `packages/`
+
+**Исключение папок с большим количеством токенов, но не несущих уникальной бизнес-логики**
+
+* `Releases/TaskManager/` (очень большой размер, вероятно, бинарные файлы)
+* `Second_week/TaskManagerV2.0/bin/` (очень большой размер, вероятно, бинарные файлы)
+* `First_week/Projects/TODOLIst/packages/Newtonsoft.Json.13.0.3/lib/` (внешняя библиотека)
+
+**Шаблоны для .aiignore**
+
+```
+.vs/
+bin/
+obj/
+packages/
+Releases/TaskManager/*
+Second_week/TaskManagerV2.0/bin/*
+First_week/Projects/TODOLIst/packages/Newtonsoft.Json.13.0.3/lib/*
+TODOLIst/packages/Newtonsoft.Json.13.0.3/lib/*
+```
+==================================================
+
+==================================================
+NEW REQUEST | Model: meta-llama/llama-4-scout-17b-16e-instruct | Tokens: 408
+--------------------------------------------------
+[SYSTEM]: Ты — робот-конфигуратор. Твоя задача — составить список исключений для нейросети. ИГНОРИРУЙ всё, что не является текстом с кодом или важным конфигом. ОБЯЗАТЕЛЬНО ИГНОРИРУЙ: .exe, .dll, .pdb, .so, .bin, .cache, .png, .jpg, .ico, .pdf, .zip, .nupkg. ОСТАВЛЯЙ: .cs, .cpp, .h, .js, .css, .cshtml, .py, .json (только appsettings). Ответь ТОЛЬКО списком паттернов (например, *.dll), без лишних слов.
+[USER]: Расширения: .db, .user, .css, .targets, .md, .config, .dll, .filters, .pdf, .http, .ico, .db-shm, .dylib, .ipch, .pdb, .nupkg, .png, .editorconfig, .up2date, .cpp, .sln, .nuspec, .db-wal, .vcxproj, .a, .map, .cs, .cache, .csproj, .vsidx, .buildwithskipanalyzers, .exe, .js, .so, .props, .bin, .pubxml, .v2, .cshtml, .xml, .txt, .json, .p7s
+Файлы без расширения: file, .aiignore, .gitattributes, LICENSE, .suo, .gitignore
+
+--------------------------------------------------
+[RESPONSE]:
+*.db
+*.user
+*.css
+*.targets
+*.md
+*.config
+*.dll
+*.filters
+*.pdf
+*.http
+*.ico
+*.db-shm
+*.dylib
+*.ipch
+*.pdb
+*.nupkg
+*.png
+.editorconfig
+*.up2date
+*.cpp
+*.sln
+*.nuspec
+*.db-wal
+*.vcxproj
+*.a
+*.map
+*.cs
+*.cache
+*.csproj
+*.vsidx
+*.buildwithskipanalyzers
+*.exe
+*.js
+*.so
+*.props
+*.bin
+*.pubxml
+*.v2
+*.cshtml
+*.xml
+*.txt
+*.json
+*.p7s
+file
+.aiignore
+.gitattributes
+LICENSE
+.suo
+.gitignore
+==================================================
+
+==================================================
+NEW REQUEST | Model: meta-llama/llama-4-scout-17b-16e-instruct | Tokens: 1882
+--------------------------------------------------
+[SYSTEM]: Ты — оптимизатор контекста. Перед тобой дерево папок с оценкой количества токенов. Твой лимит на весь проект — 100,000 токенов. Твоя задача: безжалостно выкинуть папки, которые:1. Содержат внешние библиотеки (даже если они называются не packages/ или node_modules/).2. Являются артефактами сборки или кэшем.3. Содержат слишком много токенов, но не несут уникальной бизнес-логики (картинки, огромные JSON-даты).Выдай ТОЛЬКО список паттернов для .aiignore.
+[USER]: 1Task/ (~30573 tokens)
+  .vs/1Task/ (~15100 tokens)
+  1Task/ (~15193 tokens)
+2Task/ (~30512 tokens)
+  .vs/2Task/ (~15046 tokens)
+  2Task/ (~15185 tokens)
+5Task/ (~32960 tokens)
+  .vs/5Task/ (~15457 tokens)
+  5Task/ (~17223 tokens)
+6Task/ (~31520 tokens)
+  .vs/6Task/ (~14521 tokens)
+  6Task/ (~16718 tokens)
+7Task/ (~34672 tokens)
+  .vs/7Task/ (~16101 tokens)
+  7Task/ (~18290 tokens)
+Burley/ (~32209 tokens)
+  .vs/Burley/ (~15179 tokens)
+  Burley/ (~16748 tokens)
+CorrectDays/ (~33155 tokens)
+  .vs/CorrectDays/ (~15448 tokens)
+  CorrectDays/ (~17421 tokens)
+First_week/ (~4276351 tokens)
+  Projects/ (~4060430 tokens)
+    Books/ (~35297 tokens)
+      .vs/Books/ (~15180 tokens)
+      Books/ (~19867 tokens)
+    Calculator/ (~32121 tokens)
+      .vs/Calculator/ (~14995 tokens)
+      Calculator/ (~16872 tokens)
+    IsOdd/ (~29071 tokens)
+      .vs/IsOdd/ (~13534 tokens)
+      IsOdd/ (~15287 tokens)
+    Loading/ (~33650 tokens)
+      .vs/Loading/ (~14987 tokens)
+      Loading/ (~18411 tokens)
+    MasSum/ (~25616 tokens)
+      .vs/MasSum/ (~7544 tokens)
+      MasSum/ (~17821 tokens)
+    MaxValue/ (~31034 tokens)
+      .vs/MaxValue/ (~13864 tokens)
+      MaxValue/ (~16918 tokens)
+    PasswordGenerator/ (~31384 tokens)
+      .vs/PasswordGenerator/ (~14171 tokens)
+      PasswordGenerator/ (~16953 tokens)
+    PersonSays/ (~33160 tokens)
+      .vs/PersonSays/ (~15140 tokens)
+      PersonSays/ (~17766 tokens)
+    Ready/ (~33967 tokens)
+      .vs/Ready/ (~14995 tokens)
+      Ready/ (~18722 tokens)
+    TODOLIst/ (~3640127 tokens)
+      .vs/TODOLIst/ (~21820 tokens)
+      TODOLIst/ (~385191 tokens)
+        obj/Debug/ (~13377 tokens)
+          TODOLIst.csproj.Up2Date
+      packages/Newtonsoft.Json.13.0.3/lib/ (~2613241 tokens)
+    TextFileReader/ (~37009 tokens)
+      .vs/TextFileReader/ (~17911 tokens)
+      TextFileReader/ (~18841 tokens)
+    ThreeDividingNumbers/ (~30330 tokens)
+      .vs/ThreeDividingNumbers/ (~14071 tokens)
+      ThreeDividingNumbers/ (~15997 tokens)
+    UserData/ (~35363 tokens)
+      .vs/UserData/ (~16666 tokens)
+      UserData/ (~18444 tokens)
+    ZereDividingCheck/ (~32296 tokens)
+      .vs/ZereDividingCheck/ (~15374 tokens)
+      ZereDividingCheck/ (~16663 tokens)
+ProgTask/ (~15228318 tokens)
+  .vs/ProgTask/ (~15225994 tokens)
+Projects/ (~384365 tokens)
+  Books/ (~35297 tokens)
+    .vs/Books/ (~15180 tokens)
+    Books/ (~19867 tokens)
+  Calculator/ (~32121 tokens)
+    .vs/Calculator/ (~14995 tokens)
+    Calculator/ (~16872 tokens)
+  IsOdd/ (~29071 tokens)
+    .vs/IsOdd/ (~13534 tokens)
+    IsOdd/ (~15287 tokens)
+  Loading/ (~33650 tokens)
+    .vs/Loading/ (~14987 tokens)
+    Loading/ (~18411 tokens)
+  MasSum/ (~25616 tokens)
+    .vs/MasSum/ (~7544 tokens)
+    MasSum/ (~17821 tokens)
+  MaxValue/ (~31034 tokens)
+    .vs/MaxValue/ (~13864 tokens)
+    MaxValue/ (~16918 tokens)
+  PasswordGenerator/ (~31384 tokens)
+    .vs/PasswordGenerator/ (~14171 tokens)
+    PasswordGenerator/ (~16953 tokens)
+  PersonSays/ (~33160 tokens)
+    .vs/PersonSays/ (~15140 tokens)
+    PersonSays/ (~17766 tokens)
+  Ready/ (~33967 tokens)
+    .vs/Ready/ (~14995 tokens)
+    Ready/ (~18722 tokens)
+  TextFileReader/ (~36786 tokens)
+    .vs/TextFileReader/ (~17676 tokens)
+    TextFileReader/ (~18852 tokens)
+  ThreeDividingNumbers/ (~30330 tokens)
+    .vs/ThreeDividingNumbers/ (~14071 tokens)
+    ThreeDividingNumbers/ (~15997 tokens)
+  ZereDividingCheck/ (~31945 tokens)
+    .vs/ZereDividingCheck/ (~15015 tokens)
+    ZereDividingCheck/ (~16671 tokens)
+Second_week/ (~65872508 tokens)
+  MyFirstApi/ (~206127 tokens)
+    obj/Debug/net9.0/ (~50100 tokens)
+      MyFirstApi.GeneratedMSBuildEditorConfig.editorconfig
+      MyFirstApi.csproj.Up2Date
+  TaskManager/ (~18917635 tokens)
+    .vs/ (~1104351 tokens)
+      TaskManager/ (~477572 tokens)
+      TaskManagerTraining/ (~517473 tokens)
+    TaskManager/ (~17813030 tokens)
+      Views/ (~1223 tokens)
+      bin/Debug/net8.0/ (~15547602 tokens)
+        runtimes/ (~7484808 tokens)
+      obj/Debug/ (~139288 tokens)
+        net7.0/ (~1990 tokens)
+          TaskManager.GeneratedMSBuildEditorConfig.editorconfig
+        net8.0/ (~137298 tokens)
+          scopedcss/ (~830 tokens)
+          TaskMana.F3FB485A.Up2Date
+          TaskManager.GeneratedMSBuildEditorConfig.editorconfig
+          TaskManager.csproj.BuildWithSkipAnalyzers
+      wwwroot/ (~2051594 tokens)
+        lib/ (~2050088 tokens)
+          bootstrap/dist/ (~1872663 tokens)
+  TaskManagerV2.0/ (~46748396 tokens)
+    .vs/ (~183686 tokens)
+      TaskManagerV2.0/ (~108017 tokens)
+    bin/ (~37485493 tokens)
+      Debug/net8.0/ (~14325031 tokens)
+        runtimes/ (~6322300 tokens)
+      Release/net8.0/ (~23155866 tokens)
+        publish/runtimes/ (~6322300 tokens)
+        runtimes/ (~6322300 tokens)
+    obj/ (~9055876 tokens)
+      Debug/net8.0/ (~86089 tokens)
+        TaskMana.050FEC7B.Up2Date
+        TaskManagerV2.0.GeneratedMSBuildEditorConfig.editorconfig
+        TaskManagerV2.0.csproj.BuildWithSkipAnalyzers
+      Release/net8.0/ (~8924038 tokens)
+        PubTmp/Out/runtimes/ (~6322300 tokens)
+        TaskMana.050FEC7B.Up2Date
+        TaskManagerV2.0.GeneratedMSBuildEditorConfig.editorconfig
+TODOLIst/ (~3640127 tokens)
+  .vs/TODOLIst/ (~21820 tokens)
+  TODOLIst/ (~385191 tokens)
+    obj/Debug/ (~13377 tokens)
+      TODOLIst.csproj.Up2Date
+  packages/Newtonsoft.Json.13.0.3/lib/ (~2613241 tokens)
+
+--------------------------------------------------
+[RESPONSE]:
+Чтобы оптимизировать использование токенов и не превысить лимит в 100,000 токенов, необходимо исключить из рассмотрения папки, которые содержат внешние библиотеки, являются артефактами сборки или кэшем, или содержат слишком много токенов без уникальной бизнес-логики.
+
+На основе предоставленной информации следующие папки могут быть исключены:
+
+1. Содержащие внешние библиотеки:
+   - `packages/` (и любые другие папки, содержащие сторонние библиотеки)
+
+2. Являющиеся артефактами сборки или кэшем:
+   - `.vs/` (и любые другие папки, связанные с Visual Studio)
+   - `obj/` (и подпапки)
+   - `bin/` (и подпапки)
+
+3. Содержащие слишком много токенов, но не несущие уникальной бизнес-логики:
+   - `TODOLIst/packages/Newtonsoft.Json.13.0.3/lib/` (содержит большое количество токенов, вероятно, библиотека)
+   - Любые другие папки с большим количеством токенов, которые можно отнести к артефактам или данным
+
+Соответственно, паттерны для `.aiignore` могут включать:
+
+```
+.vs/
+obj/
+bin/
+packages/
+TODOLIst/packages/
+**/*.csproj.Up2Date
+**/*.editorconfig
+**/runtimes/
+**/scopedcss/
+**/PubTmp/
+**/lib/bootstrap/dist/
+**/wwwroot/lib/
+```
+==================================================
+
+==================================================
+NEW REQUEST | Model: meta-llama/llama-4-scout-17b-16e-instruct | Tokens: 408
+--------------------------------------------------
+[SYSTEM]: Ты — робот-конфигуратор. Твоя задача — составить список исключений для нейросети. ИГНОРИРУЙ всё, что не является текстом с кодом или важным конфигом. ОБЯЗАТЕЛЬНО ИГНОРИРУЙ: .exe, .dll, .pdb, .so, .bin, .cache, .png, .jpg, .ico, .pdf, .zip, .nupkg. ОСТАВЛЯЙ: .cs, .cpp, .h, .js, .css, .cshtml, .py, .json (только appsettings). Ответь ТОЛЬКО списком паттернов (например, *.dll), без лишних слов.
+[USER]: Расширения: .dll, .editorconfig, .targets, .config, .props, .v2, .sln, .p7s, .pdb, .bin, .ico, .db-shm, .css, .csproj, .exe, .cache, .up2date, .md, .pubxml, .js, .pdf, .vcxproj, .xml, .http, .so, .png, .nuspec, .cpp, .db-wal, .db, .txt, .json, .dylib, .cshtml, .map, .user, .ipch, .a, .buildwithskipanalyzers, .nupkg, .cs, .vsidx, .filters
+Файлы без расширения: .gitattributes, file, .aiignore, LICENSE, .suo, .gitignore
+
