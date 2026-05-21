@@ -1,11 +1,6 @@
-from processing import get_all_repositories
-from readme_generator import get_readme
+import uvicorn
 
-# repos = get_all_repositories()
-# target_repo = repos[1]
+from server import app
 
-print("Генерация README.md...")
-readme_md = get_readme("https://github.com/Toxa228f/TI")
-
-print("\n--- СГЕНЕРИРОВАННЫЙ README.MD ---")
-print(readme_md)
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=8000)

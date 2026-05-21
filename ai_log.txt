@@ -2493,3 +2493,1200 @@ Each laboratory work has its own solution file (.sln) and project file (.csproj)
 *   Save the encrypted file using the "Save File" button.
 ==================================================
 
+==================================================
+NEW REQUEST | URL: https://api.groq.com/openai/v1/ | Model: meta-llama/llama-4-scout-17b-16e-instruct
+--------------------------------------------------
+[SYSTEM]: You are a strict code context optimizer. Analyze the provided directory tree and token counts.
+Your goal is to generate .aiignore patterns to exclude build artifacts, cache, generated code, and heavy non-business assets, while retaining project structure.
+
+CRITICAL RULES:
+1. ALWAYS IGNORE: Build and IDE folders (.vs/, bin/, obj/, .git/, .idea/).
+2. ALWAYS IGNORE heavy text data, assets, and binaries: *.txt, *.log, *.dll, *.exe, *.pdb, *.cache, *.png, *.jpg, *.zip.
+3. ALWAYS IGNORE automatically generated UI code and resources: *.Designer.cs, *.resx.
+4. NEVER IGNORE critical project structure and config files: DO NOT ignore *.csproj, *.sln, *.json, .gitignore.
+5. KEEP source code files intact (*.cs, *.py, *.js).
+
+OUTPUT FORMAT:
+Output ONLY valid wildcard patterns (one per line). Strictly NO explanations, NO markdown formatting, NO introduction, NO bullet points. Just raw text patterns.
+[USER]: Project/
+  .vs/ (~15000 tokens)
+  bin/Debug/ (~8000 tokens)
+  src/ (~2000 tokens)
+[ASSISTANT]: .vs/
+bin/
+obj/
+[USER]: Расширения: .cs, .csproj, .docx, .md, .mp3, .png, .resx, .sln, .txt, .xlsx
+Файлы без расширения: .aiignore, .gitignore
+
+--------------------------------------------------
+[RESPONSE]:
+.vs/
+bin/
+obj/
+*.txt
+*.log
+*.dll
+*.exe
+*.pdb
+*.cache
+*.png
+*.jpg
+*.zip
+*.Designer.cs
+*.resx
+*.docx
+*.mp3
+*.md 
+*.xlsx
+==================================================
+
+==================================================
+NEW REQUEST | URL: https://api.groq.com/openai/v1/ | Model: meta-llama/llama-4-scout-17b-16e-instruct
+--------------------------------------------------
+[SYSTEM]: You are a strict code context optimizer. Analyze the provided directory tree and token counts.
+Your goal is to generate .aiignore patterns to exclude build artifacts (.vs, bin, obj), cache, binaries, and heavy temporary test files, WHILE KEEPING structural configuration files.
+
+CRITICAL RULES:
+1. NEVER IGNORE project structure and build configuration files: DO NOT add *.csproj or *.sln to the ignore list.
+2. ALWAYS IGNORE build and IDE artifacts: .vs/, bin/, obj/, .git/.
+3. ALWAYS IGNORE compiled binaries and logs: *.dll, *.exe, *.pdb, *.log, *.cache.
+
+OUTPUT FORMAT:
+Output ONLY valid wildcard patterns, one per line. Strictly NO explanations, NO markdown formatting (do not use blocks like ```), NO introduction, and NO bullet points. Just raw text patterns.
+[USER]: Project/
+  .vs/ (~15000 tokens)
+  bin/Debug/ (~8000 tokens)
+  src/ (~2000 tokens)
+[ASSISTANT]: .vs/
+bin/
+obj/
+[USER]: Lab1/ (~4124 tokens)
+  Lab1/ (~3843 tokens)
+    Form1.cs
+    Lab1.csproj
+    Program.cs
+  Lab1.sln
+Lab2/ (~1410 tokens)
+  Lab2/ (~1129 tokens)
+    Form1.cs
+    Lab2.csproj
+    Program.cs
+  Lab2.sln
+Lab3/ (~2508 tokens)
+  Lab3/ (~2227 tokens)
+    Form1.cs
+    Lab3.csproj
+    Program.cs
+  Lab3.sln
+.gitignore
+
+--------------------------------------------------
+[RESPONSE]:
+.vs/
+bin/
+obj/
+*.dll
+*.exe
+*.pdb
+*.log
+*.cache
+*.suo
+==================================================
+
+==================================================
+NEW REQUEST | URL: https://api.groq.com/openai/v1/ | Model: meta-llama/llama-4-scout-17b-16e-instruct
+--------------------------------------------------
+[SYSTEM]: You are a codebase architect CLI tool. Your task is to select files containing application logic for comprehensive analysis.
+
+CRITICAL CONSTRAINT: Select as many relevant files as possible, maximizing information density without exceeding the strict budget of 25000 tokens total. Stop adding files only when the next file would violate this limit.
+
+SELECTION PRIORITY:
+- High Priority: Source code files (.cs, .py, .js, .ts, .go, etc.), including entry points, services, controllers, models, and UI logic code.
+- Medium Priority: Project files (*.csproj, *.sln).
+- DO NOT SELECT: .gitignore, build artifacts, binary assets, or test-only scaffolding unless no source code exists.
+
+You receive a flat list where each line is a FULL relative path from repository root (POSIX /), followed by (~N tokens).
+Copy paths EXACTLY as shown — do not shorten or guess nested folders.
+
+OUTPUT FORMAT RULES:
+1. Output ONLY a flat list of relative file paths (one per line, use /).
+2. Strictly NO numbered lists.
+3. Strictly NO introduction, NO Markdown code blocks, NO conclusion text, and NO human commentary.
+4. Output must be raw plain text paths only.
+[USER]: Lab1/Lab1/Program.cs (~125 tokens)
+Lab1/Lab1/Form1.cs (~3645 tokens)
+Lab1/Lab1.csproj (~73 tokens)
+[ASSISTANT]: Lab1/Lab1/Program.cs
+Lab1/Lab1/Form1.cs
+Lab1/Lab1.csproj
+[USER]: .gitignore (~1947 tokens)
+Lab1/Lab1.sln (~281 tokens)
+Lab1/Lab1/Form1.cs (~3645 tokens)
+Lab1/Lab1/Lab1.csproj (~73 tokens)
+Lab1/Lab1/Program.cs (~125 tokens)
+Lab2/Lab2.sln (~281 tokens)
+Lab2/Lab2/Form1.cs (~928 tokens)
+Lab2/Lab2/Lab2.csproj (~76 tokens)
+Lab2/Lab2/Program.cs (~125 tokens)
+Lab3/Lab3.sln (~281 tokens)
+Lab3/Lab3/Form1.cs (~2026 tokens)
+Lab3/Lab3/Lab3.csproj (~76 tokens)
+Lab3/Lab3/Program.cs (~125 tokens)
+
+--------------------------------------------------
+[RESPONSE]:
+Lab1/Lab1/Program.cs
+Lab1/Lab1/Form1.cs
+Lab1/Lab1.csproj
+Lab1/Lab1.sln
+Lab2/Lab2/Program.cs
+Lab2/Lab2/Form1.cs
+Lab2/Lab2.csproj
+Lab2/Lab2.sln
+Lab3/Lab3/Program.cs
+Lab3/Lab3/Form1.cs
+Lab3/Lab3.csproj
+Lab3/Lab3.sln
+==================================================
+
+==================================================
+NEW REQUEST | URL: https://api.groq.com/openai/v1/ | Model: meta-llama/llama-4-scout-17b-16e-instruct
+--------------------------------------------------
+[SYSTEM]: You are an expert technical writer and senior software architect.
+Your task is to analyze the provided source code context and generate a professional, comprehensive README.md for the repository.
+
+THE README MUST INCLUDE:
+1. Project Title & Clear Description (What is this project, its purpose, and core problem solved).
+2. Key Features (Bullet points highlighting main architectural components and business logic).
+3. Tech Stack (Languages, frameworks, and core dependencies identified from the code).
+4. Project Structure Overview (Brief technical map of the main modules).
+5. Getting Started / Basic Usage guide based on the entry points found.
+
+OUTPUT FORMAT RULES:
+- Output ONLY valid Markdown content. Do NOT wrap the entire response in ```markdown blocks.
+- Do NOT write introduction text like 'Here is your README' or concluding remarks.
+- Keep it highly professional, technical, clean, and developer-friendly.
+[USER]: REPOSITORY NAME: TI
+
+SOURCE CODE CONTEXT:
+=== Selected Repository Context for: TI ===
+Budget Limit: 25000 tokens
+
+--- File: Lab1/Lab1/Program.cs (~125 tokens) ---
+namespace Lab1
+{
+    internal static class Program
+    {
+        /// <summary>
+        ///  The main entry point for the application.
+        /// </summary>
+        [STAThread]
+        static void Main()
+        {
+            // To customize application configuration such as set high DPI settings or default font,
+            // see https://aka.ms/applicationconfiguration.
+            ApplicationConfiguration.Initialize();
+            Application.Run(new Form1());
+        }
+    }
+}
+----------------------------------------
+
+--- File: Lab1/Lab1/Form1.cs (~3645 tokens) ---
+using System;
+using System.Collections.Frozen;
+using System.Reflection;
+using System.Windows.Forms;
+
+namespace Lab1
+{
+    public partial class Form1 : Form
+    {
+        public static readonly int LenOfAlfavit = 33;
+
+        public static readonly FrozenDictionary<char, long> LetterToIndex = new Dictionary<char, long>()
+        { {'�', 0 }, {'�', 1 }, {'�', 2 }, {'�', 3 }, {'�', 4 }, {'�', 5 }, {'�', 6 }, {'�', 7 },
+          {'�', 8 }, {'�', 9 }, {'�', 10 },{'�', 11 },{'�', 12 },{'�', 13 },{'�', 14 },{'�', 15 },
+          {'�', 16 },{'�', 17 },{'�', 18 },{'�', 19 },{'�', 20 },{'�', 21 },{'�', 22 },{'�', 23 },
+          {'�', 24 },{'�', 25 },{'�', 26 },{'�', 27 },{'�', 28 },{'�',29 }, {'�', 30 },{'�', 31 },
+          {'�', 32 }}.ToFrozenDictionary();
+
+        public static readonly string IndexToLetter = "��������������������������������";
+
+        public enum ShipherType
+        {
+            Decimazii,
+            Vijener
+        }
+        public enum ShipherFunction
+        {
+            Shipher,
+            DeShipher
+        }
+
+        private ShipherType SelectedShipherType { get; set; } = ShipherType.Decimazii;
+        private ShipherFunction SelectedShipherFunction { get; set; } = ShipherFunction.Shipher;
+
+
+        #region ����� ���������
+        public bool CheckDezimaziiKey(long value)
+        {
+            long k = value;
+            long l = LenOfAlfavit;
+
+            while (l != 0 && k != 0)
+            {
+                if (k > l) k %= l;
+                else l %= k;
+            }
+            return (k + l) == 1;
+        }
+
+        public string EncryptDezimaziiText(string str, long key)
+        {
+            textDataGridView.Columns.Add("clearColumn", "�������� ������");
+            textDataGridView.Rows.Add();
+            textDataGridView.Rows[0].Cells[0].Value = "���������� ������";
+            textDataGridView.Rows.Add();
+            textDataGridView.Rows[1].Cells[0].Value = "�������� ������";
+
+            string shiphroText = ""; int indexData = 0;
+            for (int i = 0; i < str.Length; i++)
+            {
+                if (LetterToIndex.ContainsKey(char.ToLower(str[i])))
+                {
+                    long? index = (LetterToIndex[char.ToLower(str[i])] * key) % LenOfAlfavit;
+                    shiphroText += IndexToLetter[(int)index];
+
+                    textDataGridView.Columns.Add((str[i] + i).ToString(), str[i].ToString());
+                    textDataGridView.Rows[0].Cells[indexData + 1].Value = LetterToIndex[char.ToLower(str[i])] +
+                        "*" + key + "%" + LenOfAlfavit + "=" + index;
+                    textDataGridView.Rows[1].Cells[indexData + 1].Value = shiphroText[^1];
+                    indexData++;
+                }
+                else if (!char.IsLetter(str[i]))
+                {
+                    shiphroText += str[i];
+                }
+            }
+
+            foreach (DataGridViewColumn column in textDataGridView.Columns)
+            {
+                column.SortMode = DataGridViewColumnSortMode.NotSortable;
+            }
+
+            return shiphroText;
+        }
+
+        public long InverseKey(long k)
+        {
+            k %= LenOfAlfavit;
+            for (int x = 1; x < LenOfAlfavit; x++)
+            {
+                if ((k * x) % LenOfAlfavit == 1)
+                    return x;
+            }
+            return 0;
+        }
+
+        public string DecryptDezimaziiText(string str, long key)
+        {
+            textDataGridView.Columns.Add("clearColumn", "�������� ������");
+            textDataGridView.Rows.Add();
+            textDataGridView.Rows[0].Cells[0].Value = "���������� ������";
+            textDataGridView.Rows.Add();
+            textDataGridView.Rows[1].Cells[0].Value = "�������� ������";
+
+
+            string plainText = ""; int indexData = 0;
+            for (int i = 0; i < str.Length; i++)
+            {
+                if (LetterToIndex.ContainsKey(char.ToLower(str[i])))
+                {
+                    long? index = (LetterToIndex[char.ToLower(str[i])] * InverseKey(key)) % LenOfAlfavit;
+                    plainText += IndexToLetter[(int)index];
+
+                    textDataGridView.Columns.Add((str[i] + i).ToString(), str[i].ToString());
+                    textDataGridView.Rows[0].Cells[indexData + 1].Value = LetterToIndex[char.ToLower(str[i])] +
+                        "*" + InverseKey(key) + "%" + LenOfAlfavit + "=" + index;
+                    textDataGridView.Rows[1].Cells[indexData + 1].Value = plainText[^1];
+                    indexData++;
+                }
+                else if (!char.IsLetter(str[i]))
+                {
+                    plainText += str[i];
+                }
+            }
+
+            foreach (DataGridViewColumn column in textDataGridView.Columns)
+            {
+                column.SortMode = DataGridViewColumnSortMode.NotSortable;
+            }
+            return plainText;
+        }
+        #endregion
+
+
+        #region �������
+        public string EncryptVijenerText(string str, string secretKey)
+        {
+            textDataGridView.Columns.Add("clearColumn", "�������� ������");
+            textDataGridView.Rows.Add();
+            textDataGridView.Rows[0].Cells[0].Value = "����� �����";
+            textDataGridView.Rows.Add();
+            textDataGridView.Rows[1].Cells[0].Value = "�������� ������";
+
+            string fullKey = (secretKey + str).ToLower().Replace('\n', ' ').Replace('\t', ' ').Replace(" ", "");
+            string shiphroText = "";
+            int keyPointer = 0;
+            int indexData = 1;
+
+            for (int i = 0; i < str.Length; i++)
+            {
+                if (LetterToIndex.ContainsKey(char.ToLower(str[i])))
+                {
+                    char kChar = fullKey[keyPointer];
+                    while (!LetterToIndex.ContainsKey(kChar))
+                    {
+                        keyPointer++;
+                        kChar = fullKey[keyPointer];
+                    }
+                    long m = LetterToIndex[char.ToLower(str[i])];
+                    long k = LetterToIndex[kChar];
+
+                    long cipherIndex = (m + k) % LenOfAlfavit;
+                    char cipherChar = IndexToLetter[(int)cipherIndex];
+
+                    shiphroText += cipherChar;
+
+                    textDataGridView.Columns.Add((str[i] + i).ToString(), str[i].ToString());
+                    textDataGridView.Rows[0].Cells[indexData].Value = fullKey[keyPointer];
+                    textDataGridView.Rows[1].Cells[indexData].Value = shiphroText[^1];
+
+                    keyPointer++;
+                    indexData++;
+                }
+                else if (!char.IsLetter(str[i]))
+                {
+                    shiphroText += str[i];
+                }
+            }
+
+            return shiphroText;
+        }
+
+        public string DecryptVijenerText(string str, string secretKey)
+        {
+            textDataGridView.Columns.Add("clearColumn", "�������� ������");
+            textDataGridView.Rows.Add();
+            textDataGridView.Rows[0].Cells[0].Value = "����� �����";
+            textDataGridView.Rows.Add();
+            textDataGridView.Rows[1].Cells[0].Value = "�������� ������";
+
+            string shiphroText = "";
+            int keyPointer = 0;
+            int indexData = 1;
+
+            for (int i = 0; i < str.Length; i++)
+            {
+
+                if (LetterToIndex.ContainsKey(char.ToLower(str[i])))
+                {
+                    char kChar = (keyPointer < secretKey.Length)
+                                 ? char.ToLower(secretKey[keyPointer])
+                                 : char.ToLower(shiphroText[keyPointer - secretKey.Length]);
+                    while (!LetterToIndex.ContainsKey(kChar))
+                    {
+                        keyPointer++;
+                        kChar = (keyPointer < secretKey.Length)
+                                 ? char.ToLower(secretKey[keyPointer])
+                                 : char.ToLower(shiphroText[keyPointer - secretKey.Length]);
+                    }
+
+                    long m = LetterToIndex[char.ToLower(str[i])];
+                    long k = LetterToIndex[kChar];
+
+                    long cipherIndex = (m - k + LenOfAlfavit) % LenOfAlfavit;
+                    char cipherChar = IndexToLetter[(int)cipherIndex];
+
+                    shiphroText += cipherChar;
+
+                    textDataGridView.Columns.Add((str[i] + i).ToString(), str[i].ToString());
+                    textDataGridView.Rows[0].Cells[indexData].Value = kChar;
+                    textDataGridView.Rows[1].Cells[indexData].Value = shiphroText[^1];
+
+                    keyPointer++;
+                    indexData++;
+                }
+                else if (!char.IsLetter(str[i]))
+                {
+                    shiphroText += str[i];
+                }
+            }
+            return shiphroText;
+        }
+        #endregion
+
+        public Form1()
+        {
+            InitializeComponent();
+            shipherFunctionComboBox.SelectedIndex = shipherMetodComboBox.SelectedIndex = 0;
+            openFileDialog1.Multiselect = false;
+            saveFileDialog1.Filter = openFileDialog1.Filter = "��������� �����|*.txt|��� �����|*.*";
+        }
+
+        private void ShipherTypeComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            SelectedShipherType = (ShipherType)shipherMetodComboBox.SelectedIndex;
+            StartProcessing();
+        }
+
+        private void shipherFunctionComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            SelectedShipherFunction = (ShipherFunction)shipherFunctionComboBox.SelectedIndex;
+            StartProcessing();
+        }
+
+        #region ������ � �������
+        private void saveButton_Click(object sender, EventArgs e)
+        {
+            saveFileDialog1.FileName = "ShiphredText.txt";
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                using (FileStream file = new(saveFileDialog1.FileName, FileMode.Create, FileAccess.ReadWrite))
+                {
+                    using (StreamWriter wr = new(file))
+                    {
+                        wr.Write(finalTextBox.Text?.Length > 0 ? finalTextBox.Text : " ");
+                    }
+                }
+            }
+        }
+
+        private void openButton_Click(object sender, EventArgs e)
+        {
+            openFileDialog1.FileName = "";
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                using (FileStream file = new(openFileDialog1.FileName, FileMode.Open, FileAccess.Read))
+                {
+                    using (StreamReader wr = new(file))
+                    {
+                        startTextBox.Text = wr.ReadToEnd();
+                    }
+                }
+            }
+        }
+        #endregion
+
+
+        private void startTextBox_TextChanged(object sender, EventArgs e)
+        {
+            StartProcessing();
+        }
+        private void keyTextBox_TextChanged(object sender, EventArgs e)
+        {
+            StartProcessing();
+        }
+
+        private void StartProcessing()
+        {
+            textDataGridView.Columns.Clear();
+            textDataGridView.Rows.Clear();
+            if (keyTextBox.Text?.Length > 0 && startTextBox.Text?.Length > 0)
+            {
+                switch (SelectedShipherType)
+                {
+                    case ShipherType.Decimazii:
+                        long dkey;
+                        string normalKey = "";
+                        for (int i = 0; i < keyTextBox.Text.Length; i++)
+                        {
+                            if (char.IsDigit(keyTextBox.Text[i]))
+                            {
+                                normalKey += keyTextBox.Text[i];
+                            }
+                        }
+                        if (long.TryParse(normalKey, out dkey))
+                        {
+                            errorKeyLabel.Text = "";
+                            if (!CheckDezimaziiKey(dkey))
+                            {
+                                errorKeyLabel.Text = "���� ������� �� �������"; return;
+                            }
+                        }
+                        else
+                        {
+                            errorKeyLabel.Text = "������������ ����� �����";
+                        }
+
+                        switch (SelectedShipherFunction)
+                        {
+                            case ShipherFunction.Shipher:
+                                finalTextBox.Text = EncryptDezimaziiText(startTextBox.Text, dkey);
+                                break;
+                            case ShipherFunction.DeShipher:
+                                finalTextBox.Text = DecryptDezimaziiText(startTextBox.Text, dkey);
+                                break;
+                        }
+
+                        break;
+                    case ShipherType.Vijener:
+                        normalKey = "";
+                        for (int i = 0; i < keyTextBox.Text.Length; i++)
+                        {
+                            if (LetterToIndex.ContainsKey(char.ToLower(keyTextBox.Text[i])))
+                            {
+                                normalKey += keyTextBox.Text[i];
+                            }
+                        }
+                        if (normalKey?.Length <= 0)
+                        {
+                            errorKeyLabel.Text = "���� ������"; return;
+                        }
+
+                        switch (SelectedShipherFunction)
+                        {
+                            case ShipherFunction.Shipher:
+                                finalTextBox.Text = EncryptVijenerText(startTextBox.Text, normalKey);
+                                break;
+                            case ShipherFunction.DeShipher:
+                                finalTextBox.Text = DecryptVijenerText(startTextBox.Text, normalKey);
+                                break;
+                        }
+                        break;
+                }
+
+
+            }
+        }
+
+        private void textDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+    }
+}
+
+----------------------------------------
+
+--- File: Lab1/Lab1/Lab1.csproj (~73 tokens) ---
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>net8.0-windows</TargetFramework>
+		<Nullable>enable</Nullable>
+		<UseWindowsForms>true</UseWindowsForms>
+		<ImplicitUsings>enable</ImplicitUsings>
+	</PropertyGroup>
+
+</Project>
+----------------------------------------
+
+--- File: Lab1/Lab1.sln (~281 tokens) ---
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36908.2 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lab1", "Lab1\Lab1.csproj", "{E46EB2C7-8650-4E8C-882A-D7F40EB5DA6F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E46EB2C7-8650-4E8C-882A-D7F40EB5DA6F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E46EB2C7-8650-4E8C-882A-D7F40EB5DA6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E46EB2C7-8650-4E8C-882A-D7F40EB5DA6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E46EB2C7-8650-4E8C-882A-D7F40EB5DA6F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5D117190-B995-414B-A832-EA7B1430A9D0}
+	EndGlobalSection
+EndGlobal
+
+----------------------------------------
+
+--- File: Lab2/Lab2/Program.cs (~125 tokens) ---
+namespace Lab2
+{
+    internal static class Program
+    {
+        /// <summary>
+        ///  The main entry point for the application.
+        /// </summary>
+        [STAThread]
+        static void Main()
+        {
+            // To customize application configuration such as set high DPI settings or default font,
+            // see https://aka.ms/applicationconfiguration.
+            ApplicationConfiguration.Initialize();
+            Application.Run(new Form1());
+        }
+    }
+}
+----------------------------------------
+
+--- File: Lab2/Lab2/Form1.cs (~928 tokens) ---
+using System.Text;
+
+namespace Lab2
+{
+    public partial class Form1 : Form
+    {
+        //������� 7, ������� 29
+
+        private byte[] _fileBytes;
+        private int[] _resultInt;
+        private const int Degree = 29;
+
+        public Form1()
+        {
+            InitializeComponent();
+            openFileDialog1.Multiselect = false;
+            saveFileDialog1.Filter = openFileDialog1.Filter = "��� �����|*.*";
+
+        }
+
+        #region ������ � �������
+        private void saveFileButton_Click(object sender, EventArgs e)
+        {
+            if (_resultInt == null)
+            {
+                MessageBox.Show("��� ������ ��� ����������.");
+                return;
+            }
+            saveFileDialog1.FileName = "";
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                File.WriteAllBytes(saveFileDialog1.FileName, _resultInt);
+                MessageBox.Show("���� ������� ��������.");
+            }
+        }
+
+        private void openFileButton_Click(object sender, EventArgs e)
+        {
+            openFileDialog1.FileName = "";
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                _fileBytes = File.ReadAllBytes(openFileDialog1.FileName);
+                startListBox.Items.Clear();
+                foreach (byte b in _fileBytes)
+                {
+                    startListBox.Items.Add(Convert.ToString(b, 2).PadLeft(8, '0'));
+                    finalListBox.Text = "";
+                    keyListBox.Text = "";
+                }
+            }
+        }
+        #endregion
+
+        private void ProcessEncryption()
+        {
+            if (_fileBytes == null)
+            {
+                MessageBox.Show("������� �������� ����!");
+                return;
+            }
+
+            string seedStr = "";
+            for (int i = 0; i < startRegisterTextBox.Text.Length; i++)
+            {
+                if (startRegisterTextBox.Text[i] == '0' || startRegisterTextBox.Text[i] == '1')
+                {
+                    seedStr += startRegisterTextBox.Text[i];
+                }
+            }
+            if (seedStr.Length < Degree)
+            {
+                MessageBox.Show($"������� ��������� ��������� (������� {Degree} ���)!");
+                return;
+            }
+
+            uint register = 0;
+            for (int i = 0; i < Degree; i++)
+            {
+                if (seedStr[i] == '1')
+                    register |= (1u << (Degree - 1 - i));
+            }
+
+            _resultBytes = new byte[_fileBytes.Length];
+            keyListBox.Clear();
+            finalListBox.Items.Clear();
+
+            StringBuilder keyVisualizer = new StringBuilder();
+
+            for (int i = 0; i < _fileBytes.Length; i++)
+            {
+                byte keyByte = 0;
+
+                for (int bit = 0; bit < 8; bit++)
+                {
+                    uint Ki = (register >> 28) & 1; 
+                    keyByte = (byte)((keyByte << 1) | Ki); 
+                    uint fb = ((register >> 28) ^ (register >> 1)) & 1;
+                    register = ((register << 1) & 0x1FFFFFFF) | fb;
+
+                    keyVisualizer.Append(Ki);
+                }
+                keyVisualizer.Append("\n");
+                _resultBytes[i] = (byte)(_fileBytes[i] ^ keyByte);
+
+                finalListBox.Items.Add(Convert.ToString(_resultBytes[i], 2).PadLeft(8, '0'));
+            }
+            keyListBox.Text = (keyVisualizer.ToString());
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            ProcessEncryption();
+        }
+    }
+}
+
+----------------------------------------
+
+--- File: Lab2/Lab2/Lab2.csproj (~76 tokens) ---
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+</Project>
+----------------------------------------
+
+--- File: Lab2/Lab2.sln (~281 tokens) ---
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.37012.4 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lab2", "Lab2\Lab2.csproj", "{AC2FF46B-A655-4B7B-B8A3-4821B2F3E04F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AC2FF46B-A655-4B7B-B8A3-4821B2F3E04F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC2FF46B-A655-4B7B-B8A3-4821B2F3E04F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC2FF46B-A655-4B7B-B8A3-4821B2F3E04F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC2FF46B-A655-4B7B-B8A3-4821B2F3E04F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {824648AF-B987-4DB9-A0F1-C220ACFAD92E}
+	EndGlobalSection
+EndGlobal
+
+----------------------------------------
+
+--- File: Lab3/Lab3/Program.cs (~125 tokens) ---
+namespace Lab3
+{
+    internal static class Program
+    {
+        /// <summary>
+        ///  The main entry point for the application.
+        /// </summary>
+        [STAThread]
+        static void Main()
+        {
+            // To customize application configuration such as set high DPI settings or default font,
+            // see https://aka.ms/applicationconfiguration.
+            ApplicationConfiguration.Initialize();
+            Application.Run(new Form1());
+        }
+    }
+}
+----------------------------------------
+
+--- File: Lab3/Lab3/Form1.cs (~2026 tokens) ---
+using System.Runtime.InteropServices;
+
+namespace Lab3
+{
+    public partial class Form1 : Form
+    {
+        private byte[] _fileBytes;
+        private byte[] _resultbyte;
+        public Form1()
+        {
+            InitializeComponent();
+            openFileDialog1.Multiselect = false;
+            saveFileDialog1.Filter = openFileDialog1.Filter = "��� �����|*.*";
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            openFileDialog1.FileName = "";
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                _fileBytes = File.ReadAllBytes(openFileDialog1.FileName);
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (_resultbyte == null)
+            {
+                MessageBox.Show("��� ������ ��� ����������.");
+                return;
+            }
+            saveFileDialog1.FileName = "";
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                File.WriteAllBytes(saveFileDialog1.FileName, _resultbyte);
+                MessageBox.Show("���� ������� ��������.");
+            }
+        }
+
+        bool CheckNumSimple(int num)
+        {
+            if (num <= 1) return false;
+            if (num <= 3) return true;
+            if (num % 2 == 0 || num % 3 == 0) return false;
+
+            for (int i = 5; i * i <= num; i += 6)
+            {
+                if (num % i == 0 || num % (i + 2) == 0)
+                    return false;
+            }
+
+            return true;
+        }
+
+        bool CheckNumsChipher(ref int p, ref int q, ref int k)
+        {
+            if (!int.TryParse(pTextBox.Text, out p))
+            {
+                MessageBox.Show("p �� �����");
+                return false;
+            }
+            if (!CheckNumSimple(p))
+            {
+                MessageBox.Show("p �� �������");
+                return false;
+            }
+            if (!int.TryParse(qTextBox.Text, out q))
+            {
+                MessageBox.Show("q �� �����");
+                return false;
+            }
+            if (!CheckNumSimple(q))
+            {
+                MessageBox.Show("q �� �������");
+                return false;
+            }
+            if (p==q)
+            {
+                MessageBox.Show("q � p ������ ���� �������");
+                return false;
+            }
+            if (!int.TryParse(kTextBox.Text, out k))
+            {
+                MessageBox.Show("Kc �� �����");
+                return false;
+            }
+            return true;
+        }
+
+        bool CheckNumsDeChipher(ref int r, ref int k)
+        {
+            if (!int.TryParse(rTextBox.Text, out r))
+            {
+                MessageBox.Show("r �� �����");
+                return false;
+            }
+            if (!int.TryParse(kTextBox.Text, out k))
+            {
+                MessageBox.Show("Kc �� �����");
+                return false;
+            }
+            return true;
+        }
+
+        public int EvclidEx(int d, int fr)
+        {
+            int m0 = fr, t, q;
+            int x0 = 0, x1 = 1;
+
+            if (fr == 1) return 0;
+
+            while (d > 1)
+            {
+                if (fr == 0) break;
+                q = d / fr;
+                t = fr;
+                fr = d % fr;
+                d = t;
+                t = x0;
+                x0 = x1 - q * x0;
+                x1 = t;
+            }
+
+            if (d != 1) return -1;
+
+            if (x1 < 0) x1 += m0;
+            return x1;
+        }
+
+        public int FastPower(int a, int b, int n)
+        {
+            long res = 1;
+            long baseNum = a % n;
+            while (b > 0)
+            {
+                if (b % 2 == 1) res = (res * baseNum) % n;
+                baseNum = (baseNum * baseNum) % n;
+                b /= 2;
+            }
+            return (int)res;
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            if (_fileBytes != null)
+            {
+                int p = 0, q = 0, k = 0, r = 0, fr = 0, Ke = 0;
+                if (pTextBox.Text?.Length > 0 && qTextBox.Text?.Length > 0 && kTextBox.Text?.Length > 0)
+                {
+                    if (CheckNumsChipher(ref p, ref q, ref k))
+                    {
+                        r = p * q;
+                        fr = (p - 1) * (q - 1);
+                        rTextBox.Text = r.ToString();
+                        if (r < 256 || r > 65_536)
+                        {
+                            MessageBox.Show("p � q ���� � ������������ ����� ������ ����� ��� ������ ����");
+                            return;
+                        }
+                        if (k <= 1 || k > fr)
+                        {
+                            MessageBox.Show("Kc �� ���������� �����");
+                            return;
+                        }
+
+                        Ke = EvclidEx(k, fr);
+                        if (Ke != -1)
+                        {
+                            MessageBox.Show($"�������� ����: {Ke}");
+
+                            ushort[] encryptedData = new ushort[_fileBytes.Length];
+                            System.Text.StringBuilder sb = new System.Text.StringBuilder();
+
+                            for (int i = 0; i < _fileBytes.Length; i++)
+                            {
+                                encryptedData[i] = (ushort)FastPower(_fileBytes[i], Ke, r);
+                                sb.Append(encryptedData[i].ToString() + " ");
+                            }
+
+                            richTextBox1.Text = sb.ToString();
+                            _resultbyte = MemoryMarshal.AsBytes(encryptedData.AsSpan()).ToArray();
+
+                            MessageBox.Show("���������� ���������");
+                        }
+                        else
+                        {
+                            MessageBox.Show("KC � f(r) �� ������� �������. �������� ������ Kc");
+                        }
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("������� p, q � Kc");
+                }
+            }
+            else
+            {
+                MessageBox.Show("�� ������ ����");
+            }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            if (_fileBytes != null)
+            {
+                int r = 0, k = 0;
+                if (rTextBox.Text?.Length > 0 && kTextBox.Text?.Length > 0)
+                {
+                    if (CheckNumsDeChipher(ref r, ref k))
+                    {
+                        try
+                        {
+                            ReadOnlySpan<ushort> encryptedData = MemoryMarshal.Cast<byte, ushort>(_fileBytes);
+
+                            byte[] decryptedBytes = new byte[encryptedData.Length];
+                            richTextBox1.Clear();
+                            System.Text.StringBuilder sb = new System.Text.StringBuilder();
+
+                            for (int i = 0; i < encryptedData.Length; i++)
+                            {
+                                decryptedBytes[i] = (byte)FastPower(encryptedData[i], k, r);
+
+                                sb.Append(decryptedBytes[i] + " ");
+                            }
+
+                            richTextBox1.Text = sb.ToString();
+                            _resultbyte = decryptedBytes;
+
+                            MessageBox.Show("������������� ��������� �������!");
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("������: ��������� ����� ��� ����������� �����.");
+                        }
+                    }
+                }
+                else MessageBox.Show("������� r � Kc");
+            }
+            else MessageBox.Show("�� ������ ����");
+        }
+    }
+}
+
+----------------------------------------
+
+--- File: Lab3/Lab3/Lab3.csproj (~76 tokens) ---
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+</Project>
+----------------------------------------
+
+--- File: Lab3/Lab3.sln (~281 tokens) ---
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.37012.4 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lab3", "Lab3\Lab3.csproj", "{25A8198D-09B2-482C-8D84-75702BC1FDC4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{25A8198D-09B2-482C-8D84-75702BC1FDC4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{25A8198D-09B2-482C-8D84-75702BC1FDC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{25A8198D-09B2-482C-8D84-75702BC1FDC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{25A8198D-09B2-482C-8D84-75702BC1FDC4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8991F36C-1F05-4A73-9537-6AC13489E0C3}
+	EndGlobalSection
+EndGlobal
+
+----------------------------------------
+
+=== End of Context. Total Collected Tokens: ~8042 ===
+
+--------------------------------------------------
+[RESPONSE]:
+# TI
+## Project Title & Clear Description
+The TI project appears to be a collection of cryptographic tools and applications, specifically focusing on various encryption and decryption techniques. The project is divided into three main laboratory exercises (Lab1, Lab2, Lab3), each implementing different cryptographic methods.
+
+## Key Features
+*   **Lab1: Caesar Cipher and Vigenère Cipher**
+    *   Implementation of the Caesar cipher and Vigenère cipher for text encryption and decryption
+    *   Support for custom keys and shift values
+    *   Visualization of the encryption and decryption process
+*   **Lab2: LFSR (Linear Feedback Shift Register) Encryption**
+    *   Implementation of LFSR-based encryption and decryption
+    *   Support for custom seed values and register lengths
+    *   Visualization of the encryption and decryption process
+*   **Lab3: RSA Encryption**
+    *   Implementation of the RSA encryption algorithm
+    *   Support for custom key pairs (p, q, Kc)
+    *   Encryption and decryption of files using the RSA algorithm
+
+## Tech Stack
+*   **Programming Language:** C#
+*   **Framework:** .NET 8.0
+*   **UI Framework:** Windows Forms
+*   **Project Structure:** Multiple projects within a solution, each representing a laboratory exercise
+
+## Project Structure Overview
+The project consists of three main laboratory exercises:
+
+*   **Lab1:** Caesar cipher and Vigenère cipher implementation
+*   **Lab2:** LFSR-based encryption and decryption
+*   **Lab3:** RSA encryption algorithm implementation
+
+Each laboratory exercise has its own project file (.csproj) and solution file (.sln), containing the necessary code and configurations.
+
+## Getting Started / Basic Usage Guide
+1.  Open the solution file (.sln) for the desired laboratory exercise in Visual Studio.
+2.  Build and run the project to launch the application.
+3.  Follow the on-screen instructions to use the cryptographic tools.
+
+### Lab1 Usage
+*   Select the cipher type (Caesar or Vigenère) and function (encryption or decryption).
+*   Enter the input text and key (if required).
+*   The encrypted or decrypted text will be displayed.
+
+### Lab2 Usage
+*   Open a file containing the data to be encrypted.
+*   Enter the seed value and register length.
+*   Click the "Encrypt" button to generate the encrypted data.
+*   Save the encrypted data to a file.
+
+### Lab3 Usage
+*   Open a file containing the data to be encrypted.
+*   Enter the public key pair (p, q) and Kc value.
+*   Click the "Encrypt" button to generate the encrypted data.
+*   Enter the private key pair (r) and Kc value for decryption.
+*   Click the "Decrypt" button to retrieve the decrypted data.
+==================================================
+
+==================================================
+NEW REQUEST | URL: https://api.groq.com/openai/v1/ | Model: meta-llama/llama-4-scout-17b-16e-instruct
+--------------------------------------------------
+[SYSTEM]: You are a strict code context optimizer. Analyze the provided directory tree and token counts.
+Your goal is to generate .aiignore patterns to exclude build artifacts, cache, generated code, and heavy non-business assets, while retaining project structure.
+
+CRITICAL RULES:
+1. ALWAYS IGNORE: Build and IDE folders (.vs/, bin/, obj/, .git/, .idea/).
+2. ALWAYS IGNORE heavy text data, assets, and binaries: *.txt, *.log, *.dll, *.exe, *.pdb, *.cache, *.png, *.jpg, *.zip.
+3. ALWAYS IGNORE automatically generated UI code and resources: *.Designer.cs, *.resx.
+4. NEVER IGNORE critical project structure and config files: DO NOT ignore *.csproj, *.sln, *.json, .gitignore.
+5. KEEP source code files intact (*.cs, *.py, *.js).
+
+OUTPUT FORMAT:
+Output ONLY valid wildcard patterns (one per line). Strictly NO explanations, NO markdown formatting, NO introduction, NO bullet points. Just raw text patterns.
+[USER]: Project/
+  .vs/ (~15000 tokens)
+  bin/Debug/ (~8000 tokens)
+  src/ (~2000 tokens)
+[ASSISTANT]: .vs/
+bin/
+obj/
+[USER]: Расширения: .cs, .csproj, .docx, .md, .mp3, .png, .resx, .sln, .txt, .xlsx
+Файлы без расширения: .aiignore, .gitignore
+

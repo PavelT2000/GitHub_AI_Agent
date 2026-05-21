@@ -12,7 +12,7 @@ class Config:
     AI_API_KEY = str(os.getenv("AI_API_KEY"))
     AI_BASE_URL = str(os.getenv("AI_BASE_URL"))
     AI_MODEL = str(os.getenv("AI_MODEL"))
-    AI_DEBUG = bool(os.getenv("AI_DEBUG"))
+    AI_DEBUG = bool(os.getenv("AI_DEBUG")=="1")
     MAX_TOKENS = int(os.getenv("MAX_TOKENS", "20000"))
 
     if not AI_API_KEY:
