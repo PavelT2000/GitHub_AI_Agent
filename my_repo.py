@@ -5,6 +5,7 @@ class MyRepo(Repository):
         self.__dict__.update(repo.__dict__)
         self._requester = repo._requester
         self.downloaded: bool = False
+        self.ai_ignore: bool =False
 
     def __repr__(self):
-        return f"<MyRepo {self.full_name} downloaded={self.downloaded}>"
+        return f"<MyRepo {self.full_name} downloaded={self.downloaded} ai_ignore={self.ai_ignore}>"
