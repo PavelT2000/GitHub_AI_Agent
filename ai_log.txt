@@ -1,619 +1,302 @@
-==================================================
-NEW REQUEST | Model: meta-llama/llama-4-scout-17b-16e-instruct | Tokens: 408
---------------------------------------------------
-[SYSTEM]: Ты — робот-конфигуратор. Твоя задача — составить список исключений для нейросети. ИГНОРИРУЙ всё, что не является текстом с кодом или важным конфигом. ОБЯЗАТЕЛЬНО ИГНОРИРУЙ: .exe, .dll, .pdb, .so, .bin, .cache, .png, .jpg, .ico, .pdf, .zip, .nupkg. ОСТАВЛЯЙ: .cs, .cpp, .h, .js, .css, .cshtml, .py, .json (только appsettings). Ответь ТОЛЬКО списком паттернов (например, *.dll), без лишних слов.
-[USER]: Расширения: .txt, .ico, .dll, .pubxml, .xml, .db, .vcxproj, .map, .csproj, .exe, .cshtml, .pdf, .editorconfig, .a, .db-shm, .vsidx, .config, .css, .js, .cs, .http, .up2date, .dylib, .nuspec, .bin, .user, .targets, .pdb, .sln, .json, .p7s, .cpp, .filters, .v2, .png, .buildwithskipanalyzers, .nupkg, .cache, .ipch, .so, .props, .md, .db-wal
-Файлы без расширения: .gitattributes, file, LICENSE, .aiignore, .gitignore, .suo
-
 --------------------------------------------------
 [RESPONSE]:
-*.exe
-*.dll
-*.pdb
-*.so
-*.bin
-*.cache
-*.png
-*.jpg
-*.ico
-*.pdf
-*.zip
-*.nupkg
-*.db-shm
-*.db-wal
-*.ipch
-*.dylib
-*.vcxproj
-*.csproj
-*.sln
-*.targets
-*.nuspec
-*.up2date
-*.user
-*.suo
-*.gitattributes
-*.gitignore
-*.aiignore
-LICENSE
-*.pubxml
-*.xml
-*.db
-*.map
-*.http
-*.editorconfig
-*.v2
-*.buildwithskipanalyzers
-*.vsidx
-*.p7s
-*.a
-*.filters
-*.props
-*.md
+Second_week/TaskManagerV2.0/Program.cs
+Second_week/TaskManagerV2.0/Controllers/TasksController.cs
+Second_week/TaskManagerV2.0/Controllers/UsersController.cs
+Second_week/TaskManagerV2.0/Data/AppDbContext.cs
+Second_week/TaskManagerV2.0/Models/MyTask.cs
+Second_week/TaskManagerV2.0/Models/User.cs
+Second_week/TaskManager/TaskManager/Program.cs
+Second_week/TaskManager/TaskManager/Controllers/TaskController.cs
+Second_week/TaskManager/TaskManager/Data/AppDbContext.cs
+Second_week/TaskManager/TaskManager/Models/MyTask.cs
+TODOLIst/TODOLIst/App.cs
+TODOLIst/TODOLIst/Program.cs
+TODOLIst/TODOLIst/Task.cs
 ==================================================
 
 ==================================================
-NEW REQUEST | Model: meta-llama/llama-4-scout-17b-16e-instruct | Tokens: 6539
+NEW REQUEST | URL: https://api.groq.com/openai/v1/ | Model: meta-llama/llama-4-scout-17b-16e-instruct
 --------------------------------------------------
-[SYSTEM]: Ты — оптимизатор контекста. Перед тобой дерево папок с оценкой количества токенов. Твой лимит на весь проект — 100,000 токенов. Твоя задача: безжалостно выкинуть папки, которые:1. Содержат внешние библиотеки (даже если они называются не packages/ или node_modules/).2. Являются артефактами сборки или кэшем.3. Содержат слишком много токенов, но не несут уникальной бизнес-логики (картинки, огромные JSON-даты).Выдай ТОЛЬКО список паттернов для .aiignore.
-[USER]: 1Task/ (~30573 tokens)
-  .vs/1Task/ (~15100 tokens)
-    v17/ (~13151 tokens)
-      DocumentLayout.backup.json
-      DocumentLayout.json
+[SYSTEM]: You are a strict codebase architect CLI tool. Your task is to select the most critical project files for logic analysis.
+
+CRITICAL CONSTRAINT: The total token weight of selected files MUST NOT exceed 40000 tokens.
+Select only core business logic files (entry points, controllers, services, models, data contexts).
+Ignore tests, build artifacts, migrations, and UI assets.
+
+OUTPUT FORMAT RULES:
+1. Output ONLY a flat list of relative file paths (one path per line).
+2. Strictly NO numbered lists (do not use 1, 2, 3).
+3. Strictly NO introduction, NO Markdown code blocks, NO conclusion text, and NO human commentary.
+4. Output must be raw plain text paths only.
+[USER]: STRUCTURE:
+Folder/App.cs (~4000 tokens)
+Folder/Test.cs (~2000 tokens)
+FILES REGISTRY WITH WEIGHTS:
+Folder/App.cs (4000 tokens)
+Folder/Test.cs (2000 tokens)
+[ASSISTANT]: Folder/App.cs
+[USER]: STRUCTURE:
+1Task/ (~30573 tokens)
   1Task/ (~15193 tokens)
     Properties/ (~449 tokens)
       AssemblyInfo.cs
-    bin/Debug/ (~6191 tokens)
-      1Task.exe.config
-    obj/Debug/ (~7775 tokens)
-      .NETFramework,Version=v4.7.2.AssemblyAttributes.cs
-      1Task.csproj.FileListAbsolute.txt
-    App.config
+    1Task.csproj
     Program.cs
+  1Task.sln
 2Task/ (~30512 tokens)
-  .vs/2Task/ (~15046 tokens)
-    v17/ (~13152 tokens)
-      DocumentLayout.backup.json
-      DocumentLayout.json
   2Task/ (~15185 tokens)
     Properties/ (~449 tokens)
       AssemblyInfo.cs
-    bin/Debug/ (~6191 tokens)
-      2Task.exe.config
-    obj/Debug/ (~7775 tokens)
-      .NETFramework,Version=v4.7.2.AssemblyAttributes.cs
-      2Task.csproj.FileListAbsolute.txt
-    App.config
+    2Task.csproj
     Program.cs
+  2Task.sln
 5Task/ (~32960 tokens)
-  .vs/5Task/ (~15457 tokens)
-    v17/ (~13151 tokens)
-      DocumentLayout.backup.json
-      DocumentLayout.json
   5Task/ (~17223 tokens)
     Properties/ (~449 tokens)
       AssemblyInfo.cs
-    bin/Debug/ (~6959 tokens)
-      5Task.exe.config
-    obj/Debug/ (~8543 tokens)
-      .NETFramework,Version=v4.7.2.AssemblyAttributes.cs
-      5Task.csproj.FileListAbsolute.txt
-    App.config
+    5Task.csproj
     Program.cs
+  5Task.sln
 6Task/ (~31520 tokens)
-  .vs/6Task/ (~14521 tokens)
-    v17/ (~12256 tokens)
-      DocumentLayout.backup.json
-      DocumentLayout.json
   6Task/ (~16718 tokens)
     Properties/ (~449 tokens)
       AssemblyInfo.cs
-    bin/Debug/ (~6831 tokens)
-      6Task.exe.config
-    obj/Debug/ (~8466 tokens)
-      .NETFramework,Version=v4.7.2.AssemblyAttributes.cs
-      6Task.csproj.FileListAbsolute.txt
-    App.config
+    6Task.csproj
     Program.cs
+  6Task.sln
 7Task/ (~34672 tokens)
-  .vs/7Task/ (~16101 tokens)
-    v17/ (~13664 tokens)
-      DocumentLayout.backup.json
-      DocumentLayout.json
   7Task/ (~18290 tokens)
     Properties/ (~449 tokens)
       AssemblyInfo.cs
-    bin/Debug/ (~7599 tokens)
-      7Task.exe.config
-    obj/Debug/ (~9183 tokens)
-      .NETFramework,Version=v4.7.2.AssemblyAttributes.cs
-      7Task.csproj.FileListAbsolute.txt
-    App.config
+    7Task.csproj
     Program.cs
+  7Task.sln
 Burley/ (~32209 tokens)
-  .vs/Burley/ (~15179 tokens)
-    v17/ (~13159 tokens)
-      DocumentLayout.backup.json
-      DocumentLayout.json
   Burley/ (~16748 tokens)
     Properties/ (~450 tokens)
       AssemblyInfo.cs
-    bin/Debug/ (~6831 tokens)
-      Burley.exe.config
-    obj/Debug/ (~8421 tokens)
-      .NETFramework,Version=v4.7.2.AssemblyAttributes.cs
-      Burley.csproj.FileListAbsolute.txt
-    App.config
+    Burley.csproj
     Program.cs
+  Burley.sln
 CorrectDays/ (~33155 tokens)
-  .vs/CorrectDays/ (~15448 tokens)
-    v17/ (~13066 tokens)
-      DocumentLayout.backup.json
-      DocumentLayout.json
   CorrectDays/ (~17421 tokens)
     Properties/ (~452 tokens)
       AssemblyInfo.cs
-    bin/Debug/ (~7087 tokens)
-      CorrectDays.exe.config
-    obj/Debug/ (~8711 tokens)
-      .NETFramework,Version=v4.7.2.AssemblyAttributes.cs
-      CorrectDays.csproj.FileListAbsolute.txt
-    App.config
+    CorrectDays.csproj
     Program.cs
+  CorrectDays.sln
 First_week/ (~4276351 tokens)
   Projects/ (~4060430 tokens)
     Books/ (~35297 tokens)
-      .vs/Books/ (~15180 tokens)
-        v17/ (~11887 tokens)
-          DocumentLayout.backup.json
-          DocumentLayout.json
       Books/ (~19867 tokens)
         Properties/ (~449 tokens)
           AssemblyInfo.cs
-        bin/Debug/ (~8239 tokens)
-          Books.exe.config
-        obj/Debug/ (~9945 tokens)
-          .NETFramework,Version=v4.7.2.AssemblyAttributes.cs
-          Books.csproj.FileListAbsolute.txt
-        App.config
         Book.cs
+        Books.csproj
         Program.cs
+      Books.sln
     Calculator/ (~32121 tokens)
-      .vs/Calculator/ (~14995 tokens)
-        v17/ (~12702 tokens)
-          DocumentLayout.backup.json
-          DocumentLayout.json
       Calculator/ (~16872 tokens)
         Properties/ (~452 tokens)
           AssemblyInfo.cs
-        bin/Debug/ (~6831 tokens)
-          Calculator.exe.config
-        obj/Debug/ (~8601 tokens)
-          .NETFramework,Version=v4.7.2.AssemblyAttributes.cs
-          Calculator.csproj.FileListAbsolute.txt
-        App.config
+        Calculator.csproj
         Program.cs
+      Calculator.sln
     IsOdd/ (~29071 tokens)
-      .vs/IsOdd/ (~13534 tokens)
-        v17/ (~11635 tokens)
-          DocumentLayout.backup.json
-          DocumentLayout.json
       IsOdd/ (~15287 tokens)
         Properties/ (~449 tokens)
           AssemblyInfo.cs
-        bin/Debug/ (~6191 tokens)
-          IsOdd.exe.config
-        obj/Debug/ (~7902 tokens)
-          .NETFramework,Version=v4.7.2.AssemblyAttributes.cs
-          IsOdd.csproj.FileListAbsolute.txt
-        App.config
+        IsOdd.csproj
         Program.cs
+      IsOdd.sln
     Loading/ (~33650 tokens)
-      .vs/Loading/ (~14987 tokens)
-        v17/ (~13058 tokens)
-          DocumentLayout.backup.json
-          DocumentLayout.json
       Loading/ (~18411 tokens)
         Properties/ (~450 tokens)
           AssemblyInfo.cs
-        bin/Debug/ (~7727 tokens)
-          Loading.exe.config
-        obj/Debug/ (~9347 tokens)
-          .NETFramework,Version=v4.7.2.AssemblyAttributes.cs
-          Loading.csproj.FileListAbsolute.txt
-        App.config
+        Loading.csproj
         Program.cs
+      Loading.sln
     MasSum/ (~25616 tokens)
-      .vs/MasSum/ (~7544 tokens)
-        v17/ (~5568 tokens)
-          DocumentLayout.backup.json
-          DocumentLayout.json
       MasSum/ (~17821 tokens)
-        .vs/ (~736 tokens)
-          MasSum.csproj.dtbcache.json
         Properties/ (~450 tokens)
           AssemblyInfo.cs
-        bin/Debug/ (~6831 tokens)
-          MasSum.exe.config
-        obj/Debug/ (~8590 tokens)
-          .NETFramework,Version=v4.7.2.AssemblyAttributes.cs
-          MasSum.csproj.FileListAbsolute.txt
-        App.config
+        MasSum.csproj
         Program.cs
+      MasSum.sln
     MaxValue/ (~31034 tokens)
-      .vs/MaxValue/ (~13864 tokens)
-        v17/ (~11784 tokens)
-          DocumentLayout.backup.json
-          DocumentLayout.json
       MaxValue/ (~16918 tokens)
         Properties/ (~451 tokens)
           AssemblyInfo.cs
-        bin/Debug/ (~6959 tokens)
-          MaxValue.exe.config
-        obj/Debug/ (~8705 tokens)
-          .NETFramework,Version=v4.7.2.AssemblyAttributes.cs
-          MaxValue.csproj.FileListAbsolute.txt
-        App.config
+        MaxValue.csproj
         Program.cs
+      MaxValue.sln
     PasswordGenerator/ (~31384 tokens)
-      .vs/PasswordGenerator/ (~14171 tokens)
-        v17/ (~11976 tokens)
-          DocumentLayout.backup.json
-          DocumentLayout.json
       PasswordGenerator/ (~16953 tokens)
         Properties/ (~455 tokens)
           AssemblyInfo.cs
-        bin/Debug/ (~6831 tokens)
-          PasswordGenerator.exe.config
-        obj/Debug/ (~8683 tokens)
-          .NETFramework,Version=v4.7.2.AssemblyAttributes.cs
-          PasswordGenerator.csproj.FileListAbsolute.txt
-        App.config
+        PasswordGenerator.csproj
         Program.cs
+      PasswordGenerator.sln
     PersonSays/ (~33160 tokens)
-      .vs/PersonSays/ (~15140 tokens)
-        v17/ (~13003 tokens)
-          DocumentLayout.backup.json
-          DocumentLayout.json
       PersonSays/ (~17766 tokens)
         Properties/ (~452 tokens)
           AssemblyInfo.cs
-        bin/Debug/ (~7343 tokens)
-          PersonSays.exe.config
-        obj/Debug/ (~9113 tokens)
-          .NETFramework,Version=v4.7.2.AssemblyAttributes.cs
-          PersonSays.csproj.FileListAbsolute.txt
-        App.config
         Person.cs
+        PersonSays.csproj
         Program.cs
+      PersonSays.sln
     Ready/ (~33967 tokens)
-      .vs/Ready/ (~14995 tokens)
-        v17/ (~13044 tokens)
-          DocumentLayout.backup.json
-          DocumentLayout.json
       Ready/ (~18722 tokens)
         Properties/ (~449 tokens)
           AssemblyInfo.cs
-        bin/Debug/ (~7855 tokens)
-          Ready.exe.config
-        obj/Debug/ (~9461 tokens)
-          .NETFramework,Version=v4.7.2.AssemblyAttributes.cs
-          Ready.csproj.FileListAbsolute.txt
-        App.config
         Program.cs
+        Ready.csproj
+      Ready.sln
     TODOLIst/ (~3640127 tokens)
-      .vs/TODOLIst/ (~21820 tokens)
-        v17/ (~16259 tokens)
-          DocumentLayout.backup.json
-          DocumentLayout.json
       TODOLIst/ (~385191 tokens)
         Properties/ (~451 tokens)
           AssemblyInfo.cs
         bin/Debug/ (~367792 tokens)
-          TODOLIst.exe.config
           file
-          file.json
-          file.txt
-        obj/Debug/ (~13377 tokens)
-          .NETFramework,Version=v4.7.2.AssemblyAttributes.cs
-          TODOLIst.csproj.FileListAbsolute.txt
-          TODOLIst.csproj.Up2Date
-        App.config
         App.cs
         Program.cs
+        TODOLIst.csproj
         Task.cs
-        packages.config
-      packages/Newtonsoft.Json.13.0.3/lib/ (~2613241 tokens)
+      TODOLIst.sln
     TextFileReader/ (~37009 tokens)
-      .vs/TextFileReader/ (~17911 tokens)
-        v17/ (~15265 tokens)
-          DocumentLayout.backup.json
-          DocumentLayout.json
       TextFileReader/ (~18841 tokens)
         Properties/ (~454 tokens)
           AssemblyInfo.cs
-        bin/Debug/ (~7855 tokens)
-          TextFileReader.exe.config
-        obj/Debug/ (~9522 tokens)
-          .NETFramework,Version=v4.7.2.AssemblyAttributes.cs
-          TextFileReader.csproj.FileListAbsolute.txt
-        App.config
         FileReader.cs
         Program.cs
+        TextFileReader.csproj
+      TextFileReader.sln
     ThreeDividingNumbers/ (~30330 tokens)
-      .vs/ThreeDividingNumbers/ (~14071 tokens)
-        v17/ (~12125 tokens)
-          DocumentLayout.backup.json
-          DocumentLayout.json
       ThreeDividingNumbers/ (~15997 tokens)
         Properties/ (~457 tokens)
           AssemblyInfo.cs
-        bin/Debug/ (~6447 tokens)
-          ThreeDividingNumbers.exe.config
-        obj/Debug/ (~8334 tokens)
-          .NETFramework,Version=v4.7.2.AssemblyAttributes.cs
-          ThreeDividingNumbers.csproj.FileListAbsolute.txt
-        App.config
         Program.cs
+        ThreeDividingNumbers.csproj
+      ThreeDividingNumbers.sln
     UserData/ (~35363 tokens)
-      .vs/UserData/ (~16666 tokens)
-        v17/ (~13711 tokens)
-          DocumentLayout.backup.json
-          DocumentLayout.json
       UserData/ (~18444 tokens)
         Properties/ (~451 tokens)
           AssemblyInfo.cs
-        bin/Debug/ (~7599 tokens)
-          UserData.exe.config
-        obj/Debug/ (~9203 tokens)
-          .NETFramework,Version=v4.7.2.AssemblyAttributes.cs
-          UserData.csproj.FileListAbsolute.txt
-        App.config
         Program.cs
         User.cs
+        UserData.csproj
+      UserData.sln
     ZereDividingCheck/ (~32296 tokens)
-      .vs/ZereDividingCheck/ (~15374 tokens)
-        v17/ (~13384 tokens)
-          DocumentLayout.backup.json
-          DocumentLayout.json
       ZereDividingCheck/ (~16663 tokens)
         Properties/ (~455 tokens)
           AssemblyInfo.cs
-        bin/Debug/ (~6831 tokens)
-          ZereDividingCheck.exe.config
-        obj/Debug/ (~8518 tokens)
-          .NETFramework,Version=v4.7.2.AssemblyAttributes.cs
-          ZereDividingCheck.csproj.FileListAbsolute.txt
-        App.config
         Program.cs
+        ZereDividingCheck.csproj
+      ZereDividingCheck.sln
 ProgTask/ (~15228318 tokens)
-  .vs/ProgTask/ (~15225994 tokens)
-    v17/ (~15223806 tokens)
-      DocumentLayout.json
   ProgTask/ (~1993 tokens)
     ProgTask.cpp
+    ProgTask.vcxproj
+    ProgTask.vcxproj.filters
+  ProgTask.sln
 Projects/ (~384365 tokens)
   Books/ (~35297 tokens)
-    .vs/Books/ (~15180 tokens)
-      v17/ (~11887 tokens)
-        DocumentLayout.backup.json
-        DocumentLayout.json
     Books/ (~19867 tokens)
       Properties/ (~449 tokens)
         AssemblyInfo.cs
-      bin/Debug/ (~8239 tokens)
-        Books.exe.config
-      obj/Debug/ (~9945 tokens)
-        .NETFramework,Version=v4.7.2.AssemblyAttributes.cs
-        Books.csproj.FileListAbsolute.txt
-      App.config
       Book.cs
+      Books.csproj
       Program.cs
+    Books.sln
   Calculator/ (~32121 tokens)
-    .vs/Calculator/ (~14995 tokens)
-      v17/ (~12702 tokens)
-        DocumentLayout.backup.json
-        DocumentLayout.json
     Calculator/ (~16872 tokens)
       Properties/ (~452 tokens)
         AssemblyInfo.cs
-      bin/Debug/ (~6831 tokens)
-        Calculator.exe.config
-      obj/Debug/ (~8601 tokens)
-        .NETFramework,Version=v4.7.2.AssemblyAttributes.cs
-        Calculator.csproj.FileListAbsolute.txt
-      App.config
+      Calculator.csproj
       Program.cs
+    Calculator.sln
   IsOdd/ (~29071 tokens)
-    .vs/IsOdd/ (~13534 tokens)
-      v17/ (~11635 tokens)
-        DocumentLayout.backup.json
-        DocumentLayout.json
     IsOdd/ (~15287 tokens)
       Properties/ (~449 tokens)
         AssemblyInfo.cs
-      bin/Debug/ (~6191 tokens)
-        IsOdd.exe.config
-      obj/Debug/ (~7902 tokens)
-        .NETFramework,Version=v4.7.2.AssemblyAttributes.cs
-        IsOdd.csproj.FileListAbsolute.txt
-      App.config
+      IsOdd.csproj
       Program.cs
+    IsOdd.sln
   Loading/ (~33650 tokens)
-    .vs/Loading/ (~14987 tokens)
-      v17/ (~13058 tokens)
-        DocumentLayout.backup.json
-        DocumentLayout.json
     Loading/ (~18411 tokens)
       Properties/ (~450 tokens)
         AssemblyInfo.cs
-      bin/Debug/ (~7727 tokens)
-        Loading.exe.config
-      obj/Debug/ (~9347 tokens)
-        .NETFramework,Version=v4.7.2.AssemblyAttributes.cs
-        Loading.csproj.FileListAbsolute.txt
-      App.config
+      Loading.csproj
       Program.cs
+    Loading.sln
   MasSum/ (~25616 tokens)
-    .vs/MasSum/ (~7544 tokens)
-      v17/ (~5568 tokens)
-        DocumentLayout.backup.json
-        DocumentLayout.json
     MasSum/ (~17821 tokens)
-      .vs/ (~736 tokens)
-        MasSum.csproj.dtbcache.json
       Properties/ (~450 tokens)
         AssemblyInfo.cs
-      bin/Debug/ (~6831 tokens)
-        MasSum.exe.config
-      obj/Debug/ (~8590 tokens)
-        .NETFramework,Version=v4.7.2.AssemblyAttributes.cs
-        MasSum.csproj.FileListAbsolute.txt
-      App.config
+      MasSum.csproj
       Program.cs
+    MasSum.sln
   MaxValue/ (~31034 tokens)
-    .vs/MaxValue/ (~13864 tokens)
-      v17/ (~11784 tokens)
-        DocumentLayout.backup.json
-        DocumentLayout.json
     MaxValue/ (~16918 tokens)
       Properties/ (~451 tokens)
         AssemblyInfo.cs
-      bin/Debug/ (~6959 tokens)
-        MaxValue.exe.config
-      obj/Debug/ (~8705 tokens)
-        .NETFramework,Version=v4.7.2.AssemblyAttributes.cs
-        MaxValue.csproj.FileListAbsolute.txt
-      App.config
+      MaxValue.csproj
       Program.cs
+    MaxValue.sln
   PasswordGenerator/ (~31384 tokens)
-    .vs/PasswordGenerator/ (~14171 tokens)
-      v17/ (~11976 tokens)
-        DocumentLayout.backup.json
-        DocumentLayout.json
     PasswordGenerator/ (~16953 tokens)
       Properties/ (~455 tokens)
         AssemblyInfo.cs
-      bin/Debug/ (~6831 tokens)
-        PasswordGenerator.exe.config
-      obj/Debug/ (~8683 tokens)
-        .NETFramework,Version=v4.7.2.AssemblyAttributes.cs
-        PasswordGenerator.csproj.FileListAbsolute.txt
-      App.config
+      PasswordGenerator.csproj
       Program.cs
+    PasswordGenerator.sln
   PersonSays/ (~33160 tokens)
-    .vs/PersonSays/ (~15140 tokens)
-      v17/ (~13003 tokens)
-        DocumentLayout.backup.json
-        DocumentLayout.json
     PersonSays/ (~17766 tokens)
       Properties/ (~452 tokens)
         AssemblyInfo.cs
-      bin/Debug/ (~7343 tokens)
-        PersonSays.exe.config
-      obj/Debug/ (~9113 tokens)
-        .NETFramework,Version=v4.7.2.AssemblyAttributes.cs
-        PersonSays.csproj.FileListAbsolute.txt
-      App.config
       Person.cs
+      PersonSays.csproj
       Program.cs
+    PersonSays.sln
   Ready/ (~33967 tokens)
-    .vs/Ready/ (~14995 tokens)
-      v17/ (~13044 tokens)
-        DocumentLayout.backup.json
-        DocumentLayout.json
     Ready/ (~18722 tokens)
       Properties/ (~449 tokens)
         AssemblyInfo.cs
-      bin/Debug/ (~7855 tokens)
-        Ready.exe.config
-      obj/Debug/ (~9461 tokens)
-        .NETFramework,Version=v4.7.2.AssemblyAttributes.cs
-        Ready.csproj.FileListAbsolute.txt
-      App.config
       Program.cs
+      Ready.csproj
+    Ready.sln
   TextFileReader/ (~36786 tokens)
-    .vs/TextFileReader/ (~17676 tokens)
-      v17/ (~15009 tokens)
-        DocumentLayout.backup.json
-        DocumentLayout.json
     TextFileReader/ (~18852 tokens)
       Properties/ (~454 tokens)
         AssemblyInfo.cs
-      bin/Debug/ (~7855 tokens)
-        TextFileReader.exe.config
-      obj/Debug/ (~9522 tokens)
-        .NETFramework,Version=v4.7.2.AssemblyAttributes.cs
-        TextFileReader.csproj.FileListAbsolute.txt
-      App.config
       FileReader.cs
       Program.cs
+      TextFileReader.csproj
+    TextFileReader.sln
   ThreeDividingNumbers/ (~30330 tokens)
-    .vs/ThreeDividingNumbers/ (~14071 tokens)
-      v17/ (~12125 tokens)
-        DocumentLayout.backup.json
-        DocumentLayout.json
     ThreeDividingNumbers/ (~15997 tokens)
       Properties/ (~457 tokens)
         AssemblyInfo.cs
-      bin/Debug/ (~6447 tokens)
-        ThreeDividingNumbers.exe.config
-      obj/Debug/ (~8334 tokens)
-        .NETFramework,Version=v4.7.2.AssemblyAttributes.cs
-        ThreeDividingNumbers.csproj.FileListAbsolute.txt
-      App.config
       Program.cs
+      ThreeDividingNumbers.csproj
+    ThreeDividingNumbers.sln
   ZereDividingCheck/ (~31945 tokens)
-    .vs/ZereDividingCheck/ (~15015 tokens)
-      v17/ (~13000 tokens)
-        DocumentLayout.backup.json
-        DocumentLayout.json
     ZereDividingCheck/ (~16671 tokens)
       Properties/ (~455 tokens)
         AssemblyInfo.cs
-      bin/Debug/ (~6831 tokens)
-        ZereDividingCheck.exe.config
-      obj/Debug/ (~8518 tokens)
-        .NETFramework,Version=v4.7.2.AssemblyAttributes.cs
-        ZereDividingCheck.csproj.FileListAbsolute.txt
-      App.config
       Program.cs
+      ZereDividingCheck.csproj
+    ZereDividingCheck.sln
 Releases/TaskManager/ (~180694 tokens)
   file
 Second_week/ (~65872508 tokens)
   MyFirstApi/ (~206127 tokens)
-    Properties/ (~161 tokens)
-      launchSettings.json
-    bin/Debug/net9.0/ (~152784 tokens)
-      MyFirstApi.deps.json
-      MyFirstApi.runtimeconfig.json
-      MyFirstApi.staticwebassets.endpoints.json
-      appsettings.Development.json
-      appsettings.json
-    obj/ (~52449 tokens)
-      Debug/net9.0/ (~50100 tokens)
-        .NETCoreApp,Version=v9.0.AssemblyAttributes.cs
-        MyFirstApi.AssemblyInfo.cs
-        MyFirstApi.GlobalUsings.g.cs
-        MyFirstApi.MvcApplicationPartsAssemblyInfo.cs
-        MyFirstApi.csproj.FileListAbsolute.txt
-        MyFirstApi.csproj.Up2Date
-        staticwebassets.build.endpoints.json
-        staticwebassets.build.json
-      MyFirstApi.csproj.nuget.dgspec.json
-      project.assets.json
+    MyFirstApi.csproj
+    MyFirstApi.http
+    MyFirstApi.sln
     Program.cs
-    appsettings.Development.json
-    appsettings.json
   TaskManager/ (~18917635 tokens)
-    .vs/ (~1104351 tokens)
-      TaskManager/ (~477572 tokens)
-      TaskManagerTraining/ (~517473 tokens)
-        config/ (~21511 tokens)
-          applicationhost.config
-        v17/ (~26311 tokens)
-          DocumentLayout.backup.json
-          DocumentLayout.json
     TaskManager/ (~17813030 tokens)
       Controllers/ (~983 tokens)
         HomeController.cs
@@ -625,8 +308,6 @@ Second_week/ (~65872508 tokens)
       Models/ (~136 tokens)
         ErrorViewModel.cs
         MyTask.cs
-      Properties/ (~258 tokens)
-        launchSettings.json
       Services/ (~648 tokens)
         AuthOptions.cs
         TokenService.cs
@@ -642,80 +323,36 @@ Second_week/ (~65872508 tokens)
         _ViewImports.cshtml
         _ViewStart.cshtml
       bin/Debug/net8.0/ (~15547602 tokens)
-        runtimes/ (~7484808 tokens)
-        TaskManager.deps.json
-        TaskManager.runtimeconfig.json
-        TaskManager.staticwebassets.runtime.json
-        appsettings.Development.json
-        appsettings.json
-      obj/ (~192490 tokens)
-        Debug/ (~139288 tokens)
-          net7.0/ (~1990 tokens)
-            .NETCoreApp,Version=v7.0.AssemblyAttributes.cs
-            TaskManager.AssemblyInfo.cs
-            TaskManager.GlobalUsings.g.cs
-            TaskManager.RazorAssemblyInfo.cs
-          net8.0/ (~137298 tokens)
-            scopedcss/ (~830 tokens)
-              Views/Shared/ (~265 tokens)
-                _Layout.cshtml.rz.scp.css
-              bundle/ (~282 tokens)
-                TaskManager.styles.css
-              projectbundle/ (~282 tokens)
-                TaskManager.bundle.scp.css
-            .NETCoreApp,Version=v8.0.AssemblyAttributes.cs
-            ApiEndpoints.json
-            TaskMana.F3FB485A.Up2Date
-            TaskManager.AssemblyInfo.cs
-            TaskManager.GlobalUsings.g.cs
-            TaskManager.RazorAssemblyInfo.cs
-            TaskManager.csproj.BuildWithSkipAnalyzers
-            TaskManager.csproj.FileListAbsolute.txt
-            TaskManager.sourcelink.json
-            staticwebassets.build.json
-            staticwebassets.development.json
-            staticwebassets.pack.json
-            staticwebassets.references.upToDateCheck.txt
-            staticwebassets.removed.txt
-        TaskManager.csproj.nuget.dgspec.json
-        project.assets.json
       wwwroot/ (~2051594 tokens)
         css/ (~90 tokens)
           site.css
         js/ (~57 tokens)
           site.js
         lib/ (~2050088 tokens)
-          bootstrap/dist/ (~1872663 tokens)
-            css/ (~1249444 tokens)
-              [16 files: *.css]
-            js/ (~623218 tokens)
-              [6 files: *.js]
-          jquery/ (~132013 tokens)
-            dist/ (~131734 tokens)
-              jquery.js
-              jquery.min.js
-            LICENSE.txt
+          bootstrap/ (~1872951 tokens)
+            dist/ (~1872663 tokens)
+              css/ (~1249444 tokens)
+                [16 files: *.css]
+              js/ (~623218 tokens)
+                [6 files: *.js]
+            LICENSE
+          jquery/dist/ (~131734 tokens)
+            jquery.js
+            jquery.min.js
           jquery-validation/dist/ (~38147 tokens)
             additional-methods.js
             additional-methods.min.js
             jquery.validate.js
             jquery.validate.min.js
           jquery-validation-unobtrusive/ (~6697 tokens)
-            LICENSE.txt
             jquery.validate.unobtrusive.js
             jquery.validate.unobtrusive.min.js
       Person.cs
       Program.cs
-      appsettings.Development.json
-      appsettings.json
+      TaskManager.csproj
+      tasks.db
+    TaskManagerTraining.sln
   TaskManagerV2.0/ (~46748396 tokens)
-    .vs/ (~183686 tokens)
-      TaskManagerV2.0/ (~108017 tokens)
-        config/ (~20916 tokens)
-          applicationhost.config
-        v17/ (~30560 tokens)
-          DocumentLayout.backup.json
-          DocumentLayout.json
     Controllers/ (~1532 tokens)
       TasksController.cs
       TestController.cs
@@ -727,396 +364,1279 @@ Second_week/ (~65872508 tokens)
     Models/ (~531 tokens)
       MyTask.cs
       User.cs
-    Properties/ (~626 tokens)
-      launchSettings.json
+    Properties/PublishProfiles/ (~347 tokens)
+      IISProfile.pubxml
     bin/ (~37485493 tokens)
       Debug/net8.0/ (~14325031 tokens)
-        Properties/ (~279 tokens)
-          launchSettings.json
-        runtimes/ (~6322300 tokens)
-        TaskManagerV2.0.deps.json
-        TaskManagerV2.0.runtimeconfig.json
-        TaskManagerV2.0.staticwebassets.endpoints.json
-        appsettings.Development.json
       Release/net8.0/ (~23155866 tokens)
-        Properties/ (~279 tokens)
-          launchSettings.json
-        publish/ (~8830870 tokens)
-          runtimes/ (~6322300 tokens)
-          TaskManagerV2.0.deps.json
-          TaskManagerV2.0.runtimeconfig.json
-          TaskManagerV2.0.staticwebassets.endpoints.json
-          appsettings.Development.json
-          appsettings.json
-          web.config
-        runtimes/ (~6322300 tokens)
-        [6 files: *.json]
-    obj/ (~9055876 tokens)
-      Debug/net8.0/ (~86089 tokens)
-        EndpointInfo/ (~1123 tokens)
-          TaskManagerV2.0.json
-        .NETCoreApp,Version=v8.0.AssemblyAttributes.cs
-        ApiEndpoints.json
-        TaskMana.050FEC7B.Up2Date
-        TaskManagerV2.0.AssemblyInfo.cs
-        TaskManagerV2.0.GlobalUsings.g.cs
-        TaskManagerV2.0.MvcApplicationPartsAssemblyInfo.cs
-        TaskManagerV2.0.csproj.BuildWithSkipAnalyzers
-        TaskManagerV2.0.csproj.FileListAbsolute.txt
-        TaskManagerV2.0.sourcelink.json
-        staticwebassets.build.endpoints.json
-        staticwebassets.build.json
-        staticwebassets.references.upToDateCheck.txt
-        staticwebassets.removed.txt
-      Release/net8.0/ (~8924038 tokens)
-        PubTmp/Out/ (~8830861 tokens)
-          runtimes/ (~6322300 tokens)
-          TaskManagerV2.0.deps.json
-          TaskManagerV2.0.runtimeconfig.json
-          TaskManagerV2.0.staticwebassets.endpoints.json
-          appsettings.Development.json
-          appsettings.json
-          web.config
-        .NETCoreApp,Version=v8.0.AssemblyAttributes.cs
-        PublishOutputs.94f3d1e7fd.txt
-        PublishOutputs.9b546c4744.txt
-        TaskMana.050FEC7B.Up2Date
-        TaskManagerV2.0.AssemblyInfo.cs
-        TaskManagerV2.0.GlobalUsings.g.cs
-        TaskManagerV2.0.MvcApplicationPartsAssemblyInfo.cs
-        TaskManagerV2.0.csproj.FileListAbsolute.txt
-        [6 files: *.json]
-        staticwebassets.references.upToDateCheck.txt
-        staticwebassets.removed.txt
-      TaskManagerV2.0.csproj.nuget.dgspec.json
-      project.assets.json
     Program.cs
-    appsettings.Development.json
+    TaskManagerV2.0.csproj
+    TaskManagerV2.0.http
+    TaskManagerV2.0.sln
+    tasks.db
 TODOLIst/ (~3640127 tokens)
-  .vs/TODOLIst/ (~21820 tokens)
-    v17/ (~16259 tokens)
-      DocumentLayout.backup.json
-      DocumentLayout.json
   TODOLIst/ (~385191 tokens)
     Properties/ (~451 tokens)
       AssemblyInfo.cs
     bin/Debug/ (~367792 tokens)
-      TODOLIst.exe.config
       file
-      file.json
-      file.txt
-    obj/Debug/ (~13377 tokens)
-      .NETFramework,Version=v4.7.2.AssemblyAttributes.cs
-      TODOLIst.csproj.FileListAbsolute.txt
-      TODOLIst.csproj.Up2Date
-    App.config
     App.cs
     Program.cs
+    TODOLIst.csproj
     Task.cs
-    packages.config
-  packages/Newtonsoft.Json.13.0.3/lib/ (~2613241 tokens)
+  TODOLIst.sln
 Trash/ (~550 tokens)
   TasksController.cs
   TasksData.cs
-obj/ (~1645 tokens)
-  .Net.csproj.nuget.dgspec.json
-  project.assets.json
-compressedcontext.txt
-
---------------------------------------------------
-[RESPONSE]:
-На основе предоставленного дерева папок и оценки количества токенов, я могу помочь определить папки и файлы, которые можно исключить из анализа.
-
-**Исключение артефактов сборки и кэша**
-
-* `.vs/`
-* `bin/`
-* `obj/`
-
-**Исключение внешних библиотек**
-
-* `packages/`
-
-**Исключение папок с большим количеством токенов, но не несущих уникальной бизнес-логики**
-
-* `Releases/TaskManager/` (очень большой размер, вероятно, бинарные файлы)
-* `Second_week/TaskManagerV2.0/bin/` (очень большой размер, вероятно, бинарные файлы)
-* `First_week/Projects/TODOLIst/packages/Newtonsoft.Json.13.0.3/lib/` (внешняя библиотека)
-
-**Шаблоны для .aiignore**
-
-```
-.vs/
-bin/
-obj/
-packages/
-Releases/TaskManager/*
-Second_week/TaskManagerV2.0/bin/*
-First_week/Projects/TODOLIst/packages/Newtonsoft.Json.13.0.3/lib/*
-TODOLIst/packages/Newtonsoft.Json.13.0.3/lib/*
-```
-==================================================
-
-==================================================
-NEW REQUEST | Model: meta-llama/llama-4-scout-17b-16e-instruct | Tokens: 408
---------------------------------------------------
-[SYSTEM]: Ты — робот-конфигуратор. Твоя задача — составить список исключений для нейросети. ИГНОРИРУЙ всё, что не является текстом с кодом или важным конфигом. ОБЯЗАТЕЛЬНО ИГНОРИРУЙ: .exe, .dll, .pdb, .so, .bin, .cache, .png, .jpg, .ico, .pdf, .zip, .nupkg. ОСТАВЛЯЙ: .cs, .cpp, .h, .js, .css, .cshtml, .py, .json (только appsettings). Ответь ТОЛЬКО списком паттернов (например, *.dll), без лишних слов.
-[USER]: Расширения: .db, .user, .css, .targets, .md, .config, .dll, .filters, .pdf, .http, .ico, .db-shm, .dylib, .ipch, .pdb, .nupkg, .png, .editorconfig, .up2date, .cpp, .sln, .nuspec, .db-wal, .vcxproj, .a, .map, .cs, .cache, .csproj, .vsidx, .buildwithskipanalyzers, .exe, .js, .so, .props, .bin, .pubxml, .v2, .cshtml, .xml, .txt, .json, .p7s
-Файлы без расширения: file, .aiignore, .gitattributes, LICENSE, .suo, .gitignore
-
---------------------------------------------------
-[RESPONSE]:
-*.db
-*.user
-*.css
-*.targets
-*.md
-*.config
-*.dll
-*.filters
-*.pdf
-*.http
-*.ico
-*.db-shm
-*.dylib
-*.ipch
-*.pdb
-*.nupkg
-*.png
-.editorconfig
-*.up2date
-*.cpp
-*.sln
-*.nuspec
-*.db-wal
-*.vcxproj
-*.a
-*.map
-*.cs
-*.cache
-*.csproj
-*.vsidx
-*.buildwithskipanalyzers
-*.exe
-*.js
-*.so
-*.props
-*.bin
-*.pubxml
-*.v2
-*.cshtml
-*.xml
-*.txt
-*.json
-*.p7s
-file
 .aiignore
-.gitattributes
-LICENSE
-.suo
-.gitignore
-==================================================
 
-==================================================
-NEW REQUEST | Model: meta-llama/llama-4-scout-17b-16e-instruct | Tokens: 1882
---------------------------------------------------
-[SYSTEM]: Ты — оптимизатор контекста. Перед тобой дерево папок с оценкой количества токенов. Твой лимит на весь проект — 100,000 токенов. Твоя задача: безжалостно выкинуть папки, которые:1. Содержат внешние библиотеки (даже если они называются не packages/ или node_modules/).2. Являются артефактами сборки или кэшем.3. Содержат слишком много токенов, но не несут уникальной бизнес-логики (картинки, огромные JSON-даты).Выдай ТОЛЬКО список паттернов для .aiignore.
-[USER]: 1Task/ (~30573 tokens)
-  .vs/1Task/ (~15100 tokens)
-  1Task/ (~15193 tokens)
-2Task/ (~30512 tokens)
-  .vs/2Task/ (~15046 tokens)
-  2Task/ (~15185 tokens)
-5Task/ (~32960 tokens)
-  .vs/5Task/ (~15457 tokens)
-  5Task/ (~17223 tokens)
-6Task/ (~31520 tokens)
-  .vs/6Task/ (~14521 tokens)
-  6Task/ (~16718 tokens)
-7Task/ (~34672 tokens)
-  .vs/7Task/ (~16101 tokens)
-  7Task/ (~18290 tokens)
-Burley/ (~32209 tokens)
-  .vs/Burley/ (~15179 tokens)
-  Burley/ (~16748 tokens)
-CorrectDays/ (~33155 tokens)
-  .vs/CorrectDays/ (~15448 tokens)
-  CorrectDays/ (~17421 tokens)
-First_week/ (~4276351 tokens)
-  Projects/ (~4060430 tokens)
-    Books/ (~35297 tokens)
-      .vs/Books/ (~15180 tokens)
-      Books/ (~19867 tokens)
-    Calculator/ (~32121 tokens)
-      .vs/Calculator/ (~14995 tokens)
-      Calculator/ (~16872 tokens)
-    IsOdd/ (~29071 tokens)
-      .vs/IsOdd/ (~13534 tokens)
-      IsOdd/ (~15287 tokens)
-    Loading/ (~33650 tokens)
-      .vs/Loading/ (~14987 tokens)
-      Loading/ (~18411 tokens)
-    MasSum/ (~25616 tokens)
-      .vs/MasSum/ (~7544 tokens)
-      MasSum/ (~17821 tokens)
-    MaxValue/ (~31034 tokens)
-      .vs/MaxValue/ (~13864 tokens)
-      MaxValue/ (~16918 tokens)
-    PasswordGenerator/ (~31384 tokens)
-      .vs/PasswordGenerator/ (~14171 tokens)
-      PasswordGenerator/ (~16953 tokens)
-    PersonSays/ (~33160 tokens)
-      .vs/PersonSays/ (~15140 tokens)
-      PersonSays/ (~17766 tokens)
-    Ready/ (~33967 tokens)
-      .vs/Ready/ (~14995 tokens)
-      Ready/ (~18722 tokens)
-    TODOLIst/ (~3640127 tokens)
-      .vs/TODOLIst/ (~21820 tokens)
-      TODOLIst/ (~385191 tokens)
-        obj/Debug/ (~13377 tokens)
-          TODOLIst.csproj.Up2Date
-      packages/Newtonsoft.Json.13.0.3/lib/ (~2613241 tokens)
-    TextFileReader/ (~37009 tokens)
-      .vs/TextFileReader/ (~17911 tokens)
-      TextFileReader/ (~18841 tokens)
-    ThreeDividingNumbers/ (~30330 tokens)
-      .vs/ThreeDividingNumbers/ (~14071 tokens)
-      ThreeDividingNumbers/ (~15997 tokens)
-    UserData/ (~35363 tokens)
-      .vs/UserData/ (~16666 tokens)
-      UserData/ (~18444 tokens)
-    ZereDividingCheck/ (~32296 tokens)
-      .vs/ZereDividingCheck/ (~15374 tokens)
-      ZereDividingCheck/ (~16663 tokens)
-ProgTask/ (~15228318 tokens)
-  .vs/ProgTask/ (~15225994 tokens)
-Projects/ (~384365 tokens)
-  Books/ (~35297 tokens)
-    .vs/Books/ (~15180 tokens)
-    Books/ (~19867 tokens)
-  Calculator/ (~32121 tokens)
-    .vs/Calculator/ (~14995 tokens)
-    Calculator/ (~16872 tokens)
-  IsOdd/ (~29071 tokens)
-    .vs/IsOdd/ (~13534 tokens)
-    IsOdd/ (~15287 tokens)
-  Loading/ (~33650 tokens)
-    .vs/Loading/ (~14987 tokens)
-    Loading/ (~18411 tokens)
-  MasSum/ (~25616 tokens)
-    .vs/MasSum/ (~7544 tokens)
-    MasSum/ (~17821 tokens)
-  MaxValue/ (~31034 tokens)
-    .vs/MaxValue/ (~13864 tokens)
-    MaxValue/ (~16918 tokens)
-  PasswordGenerator/ (~31384 tokens)
-    .vs/PasswordGenerator/ (~14171 tokens)
-    PasswordGenerator/ (~16953 tokens)
-  PersonSays/ (~33160 tokens)
-    .vs/PersonSays/ (~15140 tokens)
-    PersonSays/ (~17766 tokens)
-  Ready/ (~33967 tokens)
-    .vs/Ready/ (~14995 tokens)
-    Ready/ (~18722 tokens)
-  TextFileReader/ (~36786 tokens)
-    .vs/TextFileReader/ (~17676 tokens)
-    TextFileReader/ (~18852 tokens)
-  ThreeDividingNumbers/ (~30330 tokens)
-    .vs/ThreeDividingNumbers/ (~14071 tokens)
-    ThreeDividingNumbers/ (~15997 tokens)
-  ZereDividingCheck/ (~31945 tokens)
-    .vs/ZereDividingCheck/ (~15015 tokens)
-    ZereDividingCheck/ (~16671 tokens)
-Second_week/ (~65872508 tokens)
-  MyFirstApi/ (~206127 tokens)
-    obj/Debug/net9.0/ (~50100 tokens)
-      MyFirstApi.GeneratedMSBuildEditorConfig.editorconfig
-      MyFirstApi.csproj.Up2Date
-  TaskManager/ (~18917635 tokens)
-    .vs/ (~1104351 tokens)
-      TaskManager/ (~477572 tokens)
-      TaskManagerTraining/ (~517473 tokens)
-    TaskManager/ (~17813030 tokens)
-      Views/ (~1223 tokens)
-      bin/Debug/net8.0/ (~15547602 tokens)
-        runtimes/ (~7484808 tokens)
-      obj/Debug/ (~139288 tokens)
-        net7.0/ (~1990 tokens)
-          TaskManager.GeneratedMSBuildEditorConfig.editorconfig
-        net8.0/ (~137298 tokens)
-          scopedcss/ (~830 tokens)
-          TaskMana.F3FB485A.Up2Date
-          TaskManager.GeneratedMSBuildEditorConfig.editorconfig
-          TaskManager.csproj.BuildWithSkipAnalyzers
-      wwwroot/ (~2051594 tokens)
-        lib/ (~2050088 tokens)
-          bootstrap/dist/ (~1872663 tokens)
-  TaskManagerV2.0/ (~46748396 tokens)
-    .vs/ (~183686 tokens)
-      TaskManagerV2.0/ (~108017 tokens)
-    bin/ (~37485493 tokens)
-      Debug/net8.0/ (~14325031 tokens)
-        runtimes/ (~6322300 tokens)
-      Release/net8.0/ (~23155866 tokens)
-        publish/runtimes/ (~6322300 tokens)
-        runtimes/ (~6322300 tokens)
-    obj/ (~9055876 tokens)
-      Debug/net8.0/ (~86089 tokens)
-        TaskMana.050FEC7B.Up2Date
-        TaskManagerV2.0.GeneratedMSBuildEditorConfig.editorconfig
-        TaskManagerV2.0.csproj.BuildWithSkipAnalyzers
-      Release/net8.0/ (~8924038 tokens)
-        PubTmp/Out/runtimes/ (~6322300 tokens)
-        TaskMana.050FEC7B.Up2Date
-        TaskManagerV2.0.GeneratedMSBuildEditorConfig.editorconfig
-TODOLIst/ (~3640127 tokens)
-  .vs/TODOLIst/ (~21820 tokens)
-  TODOLIst/ (~385191 tokens)
-    obj/Debug/ (~13377 tokens)
-      TODOLIst.csproj.Up2Date
-  packages/Newtonsoft.Json.13.0.3/lib/ (~2613241 tokens)
+FILES REGISTRY WITH WEIGHTS:
+.aiignore (219 tokens)
+1Task/1Task.sln (280 tokens)
+2Task/2Task.sln (280 tokens)
+5Task/5Task.sln (280 tokens)
+6Task/6Task.sln (280 tokens)
+7Task/7Task.sln (280 tokens)
+Burley/Burley.sln (281 tokens)
+CorrectDays/CorrectDays.sln (285 tokens)
+ProgTask/ProgTask.sln (331 tokens)
+TODOLIst/TODOLIst.sln (252 tokens)
+Trash/TasksController.cs (187 tokens)
+Trash/TasksData.cs (363 tokens)
+TODOLIst/TODOLIst/App.cs (2379 tokens)
+TODOLIst/TODOLIst/Program.cs (91 tokens)
+TODOLIst/TODOLIst/Task.cs (336 tokens)
+TODOLIst/TODOLIst/TODOLIst.csproj (680 tokens)
+TODOLIst/TODOLIst/Properties/AssemblyInfo.cs (451 tokens)
+TODOLIst/TODOLIst/bin/Debug/file (38 tokens)
+Second_week/MyFirstApi/MyFirstApi.csproj (83 tokens)
+Second_week/MyFirstApi/MyFirstApi.http (33 tokens)
+Second_week/MyFirstApi/MyFirstApi.sln (280 tokens)
+Second_week/MyFirstApi/Program.cs (266 tokens)
+Second_week/TaskManager/TaskManagerTraining.sln (252 tokens)
+Second_week/TaskManagerV2.0/Program.cs (373 tokens)
+Second_week/TaskManagerV2.0/TaskManagerV2.0.csproj (272 tokens)
+Second_week/TaskManagerV2.0/TaskManagerV2.0.http (36 tokens)
+Second_week/TaskManagerV2.0/TaskManagerV2.0.sln (284 tokens)
+Second_week/TaskManagerV2.0/tasks.db (7168 tokens)
+Second_week/TaskManagerV2.0/Controllers/TasksController.cs (587 tokens)
+Second_week/TaskManagerV2.0/Controllers/TestController.cs (102 tokens)
+Second_week/TaskManagerV2.0/Controllers/UsersController.cs (841 tokens)
+Second_week/TaskManagerV2.0/Data/AppDbContext.cs (169 tokens)
+Second_week/TaskManagerV2.0/Migrations/20250102085113_InitialCreate.cs (650 tokens)
+Second_week/TaskManagerV2.0/Migrations/20250102085113_InitialCreate.Designer.cs (760 tokens)
+Second_week/TaskManagerV2.0/Migrations/20250102095219_Update1.cs (190 tokens)
+Second_week/TaskManagerV2.0/Migrations/20250102095219_Update1.Designer.cs (758 tokens)
+Second_week/TaskManagerV2.0/Migrations/20250102095928_Update2.cs (113 tokens)
+Second_week/TaskManagerV2.0/Migrations/20250102095928_Update2.Designer.cs (758 tokens)
+Second_week/TaskManagerV2.0/Migrations/AppDbContextModelSnapshot.cs (735 tokens)
+Second_week/TaskManagerV2.0/Models/MyTask.cs (285 tokens)
+Second_week/TaskManagerV2.0/Models/User.cs (246 tokens)
+Second_week/TaskManagerV2.0/Properties/PublishProfiles/IISProfile.pubxml (264 tokens)
+Second_week/TaskManager/TaskManager/Person.cs (77 tokens)
+Second_week/TaskManager/TaskManager/Program.cs (865 tokens)
+Second_week/TaskManager/TaskManager/TaskManager.csproj (191 tokens)
+Second_week/TaskManager/TaskManager/tasks.db (6144 tokens)
+Second_week/TaskManager/TaskManager/Controllers/HomeController.cs (204 tokens)
+Second_week/TaskManager/TaskManager/Controllers/TaskController.cs (778 tokens)
+Second_week/TaskManager/TaskManager/Data/AppDbContext.cs (57 tokens)
+Second_week/TaskManager/TaskManager/Migrations/20241229081953_InitialCreate.cs (283 tokens)
+Second_week/TaskManager/TaskManager/Migrations/20241229081953_InitialCreate.Designer.cs (312 tokens)
+Second_week/TaskManager/TaskManager/Migrations/20241229174228_2Create.cs (413 tokens)
+Second_week/TaskManager/TaskManager/Migrations/20241229174228_2Create.Designer.cs (251 tokens)
+Second_week/TaskManager/TaskManager/Migrations/20241230111629_MyTaskV2Add.cs (382 tokens)
+Second_week/TaskManager/TaskManager/Migrations/20241230111629_MyTaskV2Add.Designer.cs (351 tokens)
+Second_week/TaskManager/TaskManager/Migrations/AppDbContextModelSnapshot.cs (326 tokens)
+Second_week/TaskManager/TaskManager/Models/ErrorViewModel.cs (51 tokens)
+Second_week/TaskManager/TaskManager/Models/MyTask.cs (85 tokens)
+Second_week/TaskManager/TaskManager/Services/AuthOptions.cs (144 tokens)
+Second_week/TaskManager/TaskManager/Services/TokenService.cs (504 tokens)
+Second_week/TaskManager/TaskManager/Views/_ViewImports.cshtml (26 tokens)
+Second_week/TaskManager/TaskManager/Views/_ViewStart.cshtml (8 tokens)
+Second_week/TaskManager/TaskManager/wwwroot/css/site.css (90 tokens)
+Second_week/TaskManager/TaskManager/wwwroot/js/site.js (57 tokens)
+Second_week/TaskManager/TaskManager/wwwroot/lib/bootstrap/LICENSE (288 tokens)
+Second_week/TaskManager/TaskManager/wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js (4955 tokens)
+Second_week/TaskManager/TaskManager/wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js (1457 tokens)
+Second_week/TaskManager/TaskManager/wwwroot/lib/jquery-validation/dist/additional-methods.js (13244 tokens)
+Second_week/TaskManager/TaskManager/wwwroot/lib/jquery-validation/dist/additional-methods.min.js (5544 tokens)
+Second_week/TaskManager/TaskManager/wwwroot/lib/jquery-validation/dist/jquery.validate.js (13207 tokens)
+Second_week/TaskManager/TaskManager/wwwroot/lib/jquery-validation/dist/jquery.validate.min.js (6151 tokens)
+Second_week/TaskManager/TaskManager/wwwroot/lib/jquery/dist/jquery.js (74865 tokens)
+Second_week/TaskManager/TaskManager/wwwroot/lib/jquery/dist/jquery.min.js (22375 tokens)
+Second_week/TaskManager/TaskManager/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.css (18883 tokens)
+Second_week/TaskManager/TaskManager/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.min.css (12831 tokens)
+Second_week/TaskManager/TaskManager/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.css (18901 tokens)
+Second_week/TaskManager/TaskManager/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css (12850 tokens)
+Second_week/TaskManager/TaskManager/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.css (1569 tokens)
+Second_week/TaskManager/TaskManager/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.min.css (1163 tokens)
+Second_week/TaskManager/TaskManager/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.css (1562 tokens)
+Second_week/TaskManager/TaskManager/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css (1181 tokens)
+Second_week/TaskManager/TaskManager/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.css (19112 tokens)
+Second_week/TaskManager/TaskManager/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.min.css (13371 tokens)
+Second_week/TaskManager/TaskManager/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.css (19076 tokens)
+Second_week/TaskManager/TaskManager/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css (13353 tokens)
+Second_week/TaskManager/TaskManager/wwwroot/lib/bootstrap/dist/css/bootstrap.css (53839 tokens)
+Second_week/TaskManager/TaskManager/wwwroot/lib/bootstrap/dist/css/bootstrap.min.css (40681 tokens)
+Second_week/TaskManager/TaskManager/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.css (53749 tokens)
+Second_week/TaskManager/TaskManager/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.min.css (40707 tokens)
+Second_week/TaskManager/TaskManager/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.js (53818 tokens)
+Second_week/TaskManager/TaskManager/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.min.js (19618 tokens)
+Second_week/TaskManager/TaskManager/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.js (35999 tokens)
+Second_week/TaskManager/TaskManager/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.min.js (18005 tokens)
+Second_week/TaskManager/TaskManager/wwwroot/lib/bootstrap/dist/js/bootstrap.js (38298 tokens)
+Second_week/TaskManager/TaskManager/wwwroot/lib/bootstrap/dist/js/bootstrap.min.js (14879 tokens)
+Second_week/TaskManager/TaskManager/Views/Home/Index.cshtml (60 tokens)
+Second_week/TaskManager/TaskManager/Views/Home/Privacy.cshtml (36 tokens)
+Second_week/TaskManager/TaskManager/Views/Shared/Error.cshtml (221 tokens)
+Second_week/TaskManager/TaskManager/Views/Shared/_Layout.cshtml (596 tokens)
+Second_week/TaskManager/TaskManager/Views/Shared/_Layout.cshtml.css (231 tokens)
+Second_week/TaskManager/TaskManager/Views/Shared/_ValidationScriptsPartial.cshtml (44 tokens)
+Releases/TaskManager/file (18 tokens)
+Projects/Books/Books.sln (250 tokens)
+Projects/Calculator/Calculator.sln (253 tokens)
+Projects/IsOdd/IsOdd.sln (250 tokens)
+Projects/Loading/Loading.sln (251 tokens)
+Projects/MasSum/MasSum.sln (250 tokens)
+Projects/MaxValue/MaxValue.sln (252 tokens)
+Projects/PasswordGenerator/PasswordGenerator.sln (259 tokens)
+Projects/PersonSays/PersonSays.sln (253 tokens)
+Projects/Ready/Ready.sln (250 tokens)
+Projects/TextFileReader/TextFileReader.sln (256 tokens)
+Projects/ThreeDividingNumbers/ThreeDividingNumbers.sln (261 tokens)
+Projects/ZereDividingCheck/ZereDividingCheck.sln (259 tokens)
+Projects/ZereDividingCheck/ZereDividingCheck/Program.cs (223 tokens)
+Projects/ZereDividingCheck/ZereDividingCheck/ZereDividingCheck.csproj (595 tokens)
+Projects/ZereDividingCheck/ZereDividingCheck/Properties/AssemblyInfo.cs (455 tokens)
+Projects/ThreeDividingNumbers/ThreeDividingNumbers/Program.cs (114 tokens)
+Projects/ThreeDividingNumbers/ThreeDividingNumbers/ThreeDividingNumbers.csproj (596 tokens)
+Projects/ThreeDividingNumbers/ThreeDividingNumbers/Properties/AssemblyInfo.cs (457 tokens)
+Projects/TextFileReader/TextFileReader/FileReader.cs (148 tokens)
+Projects/TextFileReader/TextFileReader/Program.cs (221 tokens)
+Projects/TextFileReader/TextFileReader/TextFileReader.csproj (604 tokens)
+Projects/TextFileReader/TextFileReader/Properties/AssemblyInfo.cs (454 tokens)
+Projects/Ready/Ready/Program.cs (319 tokens)
+Projects/Ready/Ready/Ready.csproj (589 tokens)
+Projects/Ready/Ready/Properties/AssemblyInfo.cs (449 tokens)
+Projects/PersonSays/PersonSays/Person.cs (140 tokens)
+Projects/PersonSays/PersonSays/PersonSays.csproj (601 tokens)
+Projects/PersonSays/PersonSays/Program.cs (69 tokens)
+Projects/PersonSays/PersonSays/Properties/AssemblyInfo.cs (452 tokens)
+Projects/PasswordGenerator/PasswordGenerator/PasswordGenerator.csproj (595 tokens)
+Projects/PasswordGenerator/PasswordGenerator/Program.cs (340 tokens)
+Projects/PasswordGenerator/PasswordGenerator/Properties/AssemblyInfo.cs (455 tokens)
+Projects/MaxValue/MaxValue/MaxValue.csproj (590 tokens)
+Projects/MaxValue/MaxValue/Program.cs (164 tokens)
+Projects/MaxValue/MaxValue/Properties/AssemblyInfo.cs (451 tokens)
+Projects/MasSum/MasSum/MasSum.csproj (884 tokens)
+Projects/MasSum/MasSum/Program.cs (161 tokens)
+Projects/MasSum/MasSum/Properties/AssemblyInfo.cs (450 tokens)
+Projects/Loading/Loading/Loading.csproj (590 tokens)
+Projects/Loading/Loading/Program.cs (248 tokens)
+Projects/Loading/Loading/Properties/AssemblyInfo.cs (450 tokens)
+Projects/IsOdd/IsOdd/IsOdd.csproj (589 tokens)
+Projects/IsOdd/IsOdd/Program.cs (108 tokens)
+Projects/IsOdd/IsOdd/Properties/AssemblyInfo.cs (449 tokens)
+Projects/Calculator/Calculator/Calculator.csproj (591 tokens)
+Projects/Calculator/Calculator/Program.cs (348 tokens)
+Projects/Calculator/Calculator/Properties/AssemblyInfo.cs (452 tokens)
+Projects/Books/Books/Book.cs (299 tokens)
+Projects/Books/Books/Books.csproj (598 tokens)
+Projects/Books/Books/Program.cs (288 tokens)
+Projects/Books/Books/Properties/AssemblyInfo.cs (449 tokens)
+ProgTask/ProgTask/ProgTask.cpp (34 tokens)
+ProgTask/ProgTask/ProgTask.vcxproj (1656 tokens)
+ProgTask/ProgTask/ProgTask.vcxproj.filters (260 tokens)
+First_week/Projects/Books/Books.sln (250 tokens)
+First_week/Projects/Calculator/Calculator.sln (253 tokens)
+First_week/Projects/IsOdd/IsOdd.sln (250 tokens)
+First_week/Projects/Loading/Loading.sln (251 tokens)
+First_week/Projects/MasSum/MasSum.sln (250 tokens)
+First_week/Projects/MaxValue/MaxValue.sln (252 tokens)
+First_week/Projects/PasswordGenerator/PasswordGenerator.sln (259 tokens)
+First_week/Projects/PersonSays/PersonSays.sln (253 tokens)
+First_week/Projects/Ready/Ready.sln (250 tokens)
+First_week/Projects/TextFileReader/TextFileReader.sln (256 tokens)
+First_week/Projects/ThreeDividingNumbers/ThreeDividingNumbers.sln (261 tokens)
+First_week/Projects/TODOLIst/TODOLIst.sln (252 tokens)
+First_week/Projects/UserData/UserData.sln (252 tokens)
+First_week/Projects/ZereDividingCheck/ZereDividingCheck.sln (259 tokens)
+First_week/Projects/ZereDividingCheck/ZereDividingCheck/Program.cs (215 tokens)
+First_week/Projects/ZereDividingCheck/ZereDividingCheck/ZereDividingCheck.csproj (595 tokens)
+First_week/Projects/ZereDividingCheck/ZereDividingCheck/Properties/AssemblyInfo.cs (455 tokens)
+First_week/Projects/UserData/UserData/Program.cs (286 tokens)
+First_week/Projects/UserData/UserData/User.cs (257 tokens)
+First_week/Projects/UserData/UserData/UserData.csproj (599 tokens)
+First_week/Projects/UserData/UserData/Properties/AssemblyInfo.cs (451 tokens)
+First_week/Projects/TODOLIst/TODOLIst/App.cs (2379 tokens)
+First_week/Projects/TODOLIst/TODOLIst/Program.cs (91 tokens)
+First_week/Projects/TODOLIst/TODOLIst/Task.cs (336 tokens)
+First_week/Projects/TODOLIst/TODOLIst/TODOLIst.csproj (680 tokens)
+First_week/Projects/TODOLIst/TODOLIst/Properties/AssemblyInfo.cs (451 tokens)
+First_week/Projects/TODOLIst/TODOLIst/bin/Debug/file (38 tokens)
+First_week/Projects/ThreeDividingNumbers/ThreeDividingNumbers/Program.cs (114 tokens)
+First_week/Projects/ThreeDividingNumbers/ThreeDividingNumbers/ThreeDividingNumbers.csproj (596 tokens)
+First_week/Projects/ThreeDividingNumbers/ThreeDividingNumbers/Properties/AssemblyInfo.cs (457 tokens)
+First_week/Projects/TextFileReader/TextFileReader/FileReader.cs (148 tokens)
+First_week/Projects/TextFileReader/TextFileReader/Program.cs (209 tokens)
+First_week/Projects/TextFileReader/TextFileReader/TextFileReader.csproj (604 tokens)
+First_week/Projects/TextFileReader/TextFileReader/Properties/AssemblyInfo.cs (454 tokens)
+First_week/Projects/Ready/Ready/Program.cs (319 tokens)
+First_week/Projects/Ready/Ready/Ready.csproj (589 tokens)
+First_week/Projects/Ready/Ready/Properties/AssemblyInfo.cs (449 tokens)
+First_week/Projects/PersonSays/PersonSays/Person.cs (140 tokens)
+First_week/Projects/PersonSays/PersonSays/PersonSays.csproj (601 tokens)
+First_week/Projects/PersonSays/PersonSays/Program.cs (69 tokens)
+First_week/Projects/PersonSays/PersonSays/Properties/AssemblyInfo.cs (452 tokens)
+First_week/Projects/PasswordGenerator/PasswordGenerator/PasswordGenerator.csproj (595 tokens)
+First_week/Projects/PasswordGenerator/PasswordGenerator/Program.cs (340 tokens)
+First_week/Projects/PasswordGenerator/PasswordGenerator/Properties/AssemblyInfo.cs (455 tokens)
+First_week/Projects/MaxValue/MaxValue/MaxValue.csproj (590 tokens)
+First_week/Projects/MaxValue/MaxValue/Program.cs (164 tokens)
+First_week/Projects/MaxValue/MaxValue/Properties/AssemblyInfo.cs (451 tokens)
+First_week/Projects/MasSum/MasSum/MasSum.csproj (884 tokens)
+First_week/Projects/MasSum/MasSum/Program.cs (161 tokens)
+First_week/Projects/MasSum/MasSum/Properties/AssemblyInfo.cs (450 tokens)
+First_week/Projects/Loading/Loading/Loading.csproj (590 tokens)
+First_week/Projects/Loading/Loading/Program.cs (248 tokens)
+First_week/Projects/Loading/Loading/Properties/AssemblyInfo.cs (450 tokens)
+First_week/Projects/IsOdd/IsOdd/IsOdd.csproj (589 tokens)
+First_week/Projects/IsOdd/IsOdd/Program.cs (108 tokens)
+First_week/Projects/IsOdd/IsOdd/Properties/AssemblyInfo.cs (449 tokens)
+First_week/Projects/Calculator/Calculator/Calculator.csproj (591 tokens)
+First_week/Projects/Calculator/Calculator/Program.cs (348 tokens)
+First_week/Projects/Calculator/Calculator/Properties/AssemblyInfo.cs (452 tokens)
+First_week/Projects/Books/Books/Book.cs (299 tokens)
+First_week/Projects/Books/Books/Books.csproj (598 tokens)
+First_week/Projects/Books/Books/Program.cs (288 tokens)
+First_week/Projects/Books/Books/Properties/AssemblyInfo.cs (449 tokens)
+CorrectDays/CorrectDays/CorrectDays.csproj (593 tokens)
+CorrectDays/CorrectDays/Program.cs (530 tokens)
+CorrectDays/CorrectDays/Properties/AssemblyInfo.cs (452 tokens)
+Burley/Burley/Burley.csproj (590 tokens)
+Burley/Burley/Program.cs (407 tokens)
+Burley/Burley/Properties/AssemblyInfo.cs (450 tokens)
+7Task/7Task/7Task.csproj (590 tokens)
+7Task/7Task/Program.cs (420 tokens)
+7Task/7Task/Properties/AssemblyInfo.cs (449 tokens)
+6Task/6Task/6Task.csproj (590 tokens)
+6Task/6Task/Program.cs (333 tokens)
+6Task/6Task/Properties/AssemblyInfo.cs (449 tokens)
+5Task/5Task/5Task.csproj (590 tokens)
+5Task/5Task/Program.cs (633 tokens)
+5Task/5Task/Properties/AssemblyInfo.cs (449 tokens)
+2Task/2Task/2Task.csproj (590 tokens)
+2Task/2Task/Program.cs (132 tokens)
+2Task/2Task/Properties/AssemblyInfo.cs (449 tokens)
+1Task/1Task/1Task.csproj (590 tokens)
+1Task/1Task/Program.cs (139 tokens)
+1Task/1Task/Properties/AssemblyInfo.cs (449 tokens)
 
 --------------------------------------------------
 [RESPONSE]:
-Чтобы оптимизировать использование токенов и не превысить лимит в 100,000 токенов, необходимо исключить из рассмотрения папки, которые содержат внешние библиотеки, являются артефактами сборки или кэшем, или содержат слишком много токенов без уникальной бизнес-логики.
-
-На основе предоставленной информации следующие папки могут быть исключены:
-
-1. Содержащие внешние библиотеки:
-   - `packages/` (и любые другие папки, содержащие сторонние библиотеки)
-
-2. Являющиеся артефактами сборки или кэшем:
-   - `.vs/` (и любые другие папки, связанные с Visual Studio)
-   - `obj/` (и подпапки)
-   - `bin/` (и подпапки)
-
-3. Содержащие слишком много токенов, но не несущие уникальной бизнес-логики:
-   - `TODOLIst/packages/Newtonsoft.Json.13.0.3/lib/` (содержит большое количество токенов, вероятно, библиотека)
-   - Любые другие папки с большим количеством токенов, которые можно отнести к артефактам или данным
-
-Соответственно, паттерны для `.aiignore` могут включать:
-
-```
-.vs/
-obj/
-bin/
-packages/
-TODOLIst/packages/
-**/*.csproj.Up2Date
-**/*.editorconfig
-**/runtimes/
-**/scopedcss/
-**/PubTmp/
-**/lib/bootstrap/dist/
-**/wwwroot/lib/
-```
+Second_week/TaskManagerV2.0/Program.cs
+Second_week/TaskManagerV2.0/Controllers/TasksController.cs
+Second_week/TaskManagerV2.0/Controllers/UsersController.cs
+Second_week/TaskManagerV2.0/Data/AppDbContext.cs
+Second_week/TaskManagerV2.0/Models/MyTask.cs
+Second_week/TaskManagerV2.0/Models/User.cs
+Second_week/TaskManager/TaskManager/Program.cs
+Second_week/TaskManager/TaskManager/Controllers/TaskController.cs
+Second_week/TaskManager/TaskManager/Data/AppDbContext.cs
+Second_week/TaskManager/TaskManager/Models/MyTask.cs
+TODOLIst/TODOLIst/App.cs
+TODOLIst/TODOLIst/Program.cs
+TODOLIst/TODOLIst/Task.cs
 ==================================================
 
 ==================================================
-NEW REQUEST | Model: meta-llama/llama-4-scout-17b-16e-instruct | Tokens: 408
+NEW REQUEST | URL: https://api.groq.com/openai/v1/ | Model: meta-llama/llama-4-scout-17b-16e-instruct
 --------------------------------------------------
-[SYSTEM]: Ты — робот-конфигуратор. Твоя задача — составить список исключений для нейросети. ИГНОРИРУЙ всё, что не является текстом с кодом или важным конфигом. ОБЯЗАТЕЛЬНО ИГНОРИРУЙ: .exe, .dll, .pdb, .so, .bin, .cache, .png, .jpg, .ico, .pdf, .zip, .nupkg. ОСТАВЛЯЙ: .cs, .cpp, .h, .js, .css, .cshtml, .py, .json (только appsettings). Ответь ТОЛЬКО списком паттернов (например, *.dll), без лишних слов.
-[USER]: Расширения: .dll, .editorconfig, .targets, .config, .props, .v2, .sln, .p7s, .pdb, .bin, .ico, .db-shm, .css, .csproj, .exe, .cache, .up2date, .md, .pubxml, .js, .pdf, .vcxproj, .xml, .http, .so, .png, .nuspec, .cpp, .db-wal, .db, .txt, .json, .dylib, .cshtml, .map, .user, .ipch, .a, .buildwithskipanalyzers, .nupkg, .cs, .vsidx, .filters
-Файлы без расширения: .gitattributes, file, .aiignore, LICENSE, .suo, .gitignore
+[SYSTEM]: You are an expert technical writer and senior software architect.
+Your task is to analyze the provided source code context and generate a professional, comprehensive README.md for the repository.
+
+THE README MUST INCLUDE:
+1. Project Title & Clear Description (What is this project, its purpose, and core problem solved).
+2. Key Features (Bullet points highlighting main architectural components and business logic).
+3. Tech Stack (Languages, frameworks, and core dependencies identified from the code).
+4. Project Structure Overview (Brief technical map of the main modules).
+5. Getting Started / Basic Usage guide based on the entry points found.
+
+OUTPUT FORMAT RULES:
+- Output ONLY valid Markdown content. Do NOT wrap the entire response in ```markdown blocks.
+- Do NOT write introduction text like 'Here is your README' or concluding remarks.
+- Keep it highly professional, technical, clean, and developer-friendly.
+[USER]: REPOSITORY NAME: .Net
+
+SOURCE CODE CONTEXT:
+=== Selected Repository Context for: .Net ===
+Budget Limit: 40000 tokens
+
+--- File: Second_week/TaskManagerV2.0/Program.cs (~373 tokens) ---
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using TaskManagerV2._0.Data;
+
+
+
+var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddAuthorization();
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+
+})
+.AddJwtBearer(options =>
+{
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"].ToString())),
+        ValidateIssuer = false,
+        ValidateAudience = false
+    };
+});
+
+builder.Services.AddDbContext<AppDbContext>(options =>
+options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddControllers();
+
+
+
+// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
+var app = builder.Build();
+
+// Configure the HTTP request pipeline.
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
+app.UseAuthentication();
+app.UseAuthorization();
+
+app.UseHttpsRedirection();
+app.MapControllers();
+
+
+
+app.Run();
+
+
+----------------------------------------
+
+--- File: Second_week/TaskManagerV2.0/Controllers/TasksController.cs (~587 tokens) ---
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
+using System.Security.Claims;
+using TaskManagerV2._0.Data;
+using TaskManagerV2._0.Models;
+
+[ApiController]
+[Route("api/[controller]")]
+public class TasksController : ControllerBase
+{
+    private readonly AppDbContext _context;
+
+    public TasksController(AppDbContext context)
+    {
+        _context = context;
+    }
+
+    // Получить список задач пользователя
+    [HttpGet("user")]
+    [Authorize]
+    public IActionResult GetTasksByUserId()
+    {
+        var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+        var user = _context.Users.Include(u => u.Tasks).FirstOrDefault(u => u.Id == userId);
+        if (user == null)
+            return NotFound("Пользователь не найден.");
+
+        return Ok(user.Tasks);
+    }
+
+   
+    [HttpPost("add")]
+    [Authorize]
+    public IActionResult AddTask([FromBody] MyTaskDTO taskRequest)
+    {
+        var task = new MyTask();
+        task.Title = taskRequest.name;
+        task.Description = taskRequest.description;
+      
+        var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+
+        var user = _context.Users.Include(u => u.Tasks).FirstOrDefault(u => u.Id == userId);
+        if (user == null)
+            return Unauthorized("Пользователь не найден.");
+
+        task.UserId = userId; 
+        task.UserId = userId;
+        task.User = user;
+        _context.Tasks.Add(task);
+        _context.SaveChanges();
+
+        return Ok("Успещно добавлено");
+    }
+    [Authorize]
+    [HttpDelete("Delete/{Id}")]
+    public IActionResult RemoveTask(int Id)
+    {
+        var task =_context.Tasks.Find(Id);
+        var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+
+        if (task == null || task.UserId!=userId) return NotFound("Задача не найдена");
+        
+        _context.Tasks.Remove(task);
+        _context.SaveChanges();
+        return Ok("Задача удалена");
+
+    }
+
+    public class MyTaskDTO
+    {
+        public string name { get; set; }
+        public string description { get; set; }
+        
+    }
+}
+
+----------------------------------------
+
+--- File: Second_week/TaskManagerV2.0/Controllers/UsersController.cs (~841 tokens) ---
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
+using Microsoft.IdentityModel.Tokens;
+using TaskManagerV2._0.Data;
+
+namespace TaskManager.Controllers
+{
+    [ApiController]
+    [Route("api/[controller]")]
+    public class UsersController : ControllerBase
+    {
+        private readonly AppDbContext _context;
+        private readonly string _jwtSecret;
+
+        public UsersController(AppDbContext context, IConfiguration configuration)
+        {
+            _context = context;
+            _jwtSecret = configuration["Jwt:Key"];
+        }
+
+        [HttpPost("register")]
+        public async Task<IActionResult> Register([FromBody] UserRegisterDto request)
+        {
+            if (await _context.Users.AnyAsync(u => u.Email == request.Email))
+            {
+                return BadRequest("Пользователь с таким email уже существует.");
+            }
+
+            var user = new User
+            {
+                Email = request.Email,
+                Username = request.Username,
+                PasswordHash = BCrypt.Net.BCrypt.HashPassword(request.Password)
+            };
+
+            _context.Users.Add(user);
+            await _context.SaveChangesAsync();
+
+            return Ok("Пользователь успешно зарегистрирован.");
+        }
+
+        [HttpPost("login")]
+        public async Task<IActionResult> Login([FromBody] UserLoginDto request)
+        {
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == request.Email);
+
+            if (user == null || !BCrypt.Net.BCrypt.Verify(request.Password, user.PasswordHash))
+            {
+                return Unauthorized("Неверный email или пароль.");
+            }
+
+            var token = GenerateJwtToken(user);
+            return Ok(new { Token = token });
+        }
+
+        
+        private string GenerateJwtToken(User user)
+        {
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var key = Encoding.UTF8.GetBytes(_jwtSecret);
+
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(new[]
+                {
+                    new Claim(ClaimTypes.Name, user.Username),
+                    new Claim(ClaimTypes.Email, user.Email),
+                    new Claim(ClaimTypes.NameIdentifier, user.Id.ToString())
+                }),
+                Expires = DateTime.UtcNow.AddHours(1),
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+            };
+
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+            return tokenHandler.WriteToken(token);
+        }
+    }
+
+    // DTO для регистрации пользователя
+    public class UserRegisterDto
+    {
+        public string Username { get; set; }
+        public string Email { get; set; }
+        public string Password { get; set; }
+    }
+
+    // DTO для входа пользователя
+    public class UserLoginDto
+    {
+        public string Email { get; set; }
+        public string Password { get; set; }
+    }
+}
+
+----------------------------------------
+
+--- File: Second_week/TaskManagerV2.0/Data/AppDbContext.cs (~169 tokens) ---
+﻿using Microsoft.EntityFrameworkCore;
+using TaskManagerV2._0.Models;
+
+namespace TaskManagerV2._0.Data
+{
+    public class AppDbContext: DbContext
+    {
+        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
+        public DbSet<User> Users { get; set; }
+        public DbSet<MyTask> Tasks { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<MyTask>()
+                .HasOne(t => t.User)
+                .WithMany(u => u.Tasks)
+                .HasForeignKey(t => t.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
+        }
+    }
+}
+
+----------------------------------------
+
+--- File: Second_week/TaskManagerV2.0/Models/MyTask.cs (~285 tokens) ---
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace TaskManagerV2._0.Models
+{
+    public class MyTask
+    {
+        [Key] // Указывает, что это поле является первичным ключом
+        public int Id { get; set; }
+
+        [Required(ErrorMessage = "Название задачи обязательно.")]
+        [StringLength(100, ErrorMessage = "Название задачи не должно превышать 100 символов.")]
+        public string Title { get; set; }
+
+        [StringLength(500, ErrorMessage = "Описание задачи не должно превышать 500 символов.")]
+        public string Description { get; set; }
+
+        [Required]
+        public bool IsCompleted { get; set; } = false; // По умолчанию задача не выполнена
+
+        // Внешний ключ для связи с пользователем
+        public int UserId { get; set; }
+
+        // Навигационное свойство для связи с пользователем
+        public User User;
+    }
+}
+
+----------------------------------------
+
+--- File: Second_week/TaskManagerV2.0/Models/User.cs (~246 tokens) ---
+﻿using System.ComponentModel.DataAnnotations;
+using TaskManagerV2._0.Models;
+
+public class User
+{
+    [Key] 
+    public int Id { get; set; }
+
+    [Required(ErrorMessage = "Имя пользователя обязательно.")]
+    [StringLength(50, ErrorMessage = "Имя пользователя не должно превышать 50 символов.")]
+    public string Username { get; set; }
+
+    [Required(ErrorMessage = "Электронная почта обязательна.")]
+    [EmailAddress(ErrorMessage = "Некорректный формат электронной почты.")]
+    public string Email { get; set; }
+
+    [Required(ErrorMessage = "Пароль обязателен.")]
+    [StringLength(100, ErrorMessage = "Пароль должен быть от 6 до 100 символов.", MinimumLength = 6)]
+    public string PasswordHash { get; set; }
+
+    
+    public List<MyTask> Tasks { get; set; } = new List<MyTask>();
+}
+----------------------------------------
+
+--- File: Second_week/TaskManager/TaskManager/Program.cs (~865 tokens) ---
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authentication.BearerToken;
+
+using TaskManager;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using TaskManager.Services;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
+using TaskManager.Models;
+var people = new List<Person>
+{
+    new Person("bob@gmail.com","12345"),
+    new Person("tom@gmail.com","45345")
+
+
+};
+
+var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<AppDbContext>(options =>
+options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddAuthorization();
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            // ���������, ����� �� �������������� �������� ��� ��������� ������
+            ValidateIssuer = true,
+            // ������, �������������� ��������
+            ValidIssuer = AuthOptions.ISSUER,
+            // ����� �� �������������� ����������� ������
+            ValidateAudience = true,
+            // ��������� ����������� ������
+            ValidAudience = AuthOptions.AUDIENCE,
+            // ����� �� �������������� ����� �������������
+            ValidateLifetime = true,
+            // ��������� ����� ������������
+            IssuerSigningKey = AuthOptions.GetSymmetricSecurityKey(),
+            // ��������� ����� ������������
+            ValidateIssuerSigningKey = true,
+        };
+    });
+
+
+
+
+
+
+// Add services to the container.
+builder.Services.AddControllersWithViews();
+
+var app = builder.Build();
+app.UseAuthentication();
+app.UseAuthorization();
+
+
+app.Map("/data", [Authorize] () => new { message = "Hello World!" });
+app.MapPost("/login", (Person loginData) =>
+{
+    // ������� ������������ 
+    Person? person = people.FirstOrDefault(p => p.Email == loginData.Email && p.Password == loginData.Password);
+    // ���� ������������ �� ������, ���������� ��������� ��� 401
+    if (person is null) return Results.Unauthorized();
+    var claims = new List<Claim> { new Claim(ClaimTypes.Name, person.Password) };
+    var jwt = new JwtSecurityToken(
+            issuer: AuthOptions.ISSUER,
+            audience: AuthOptions.AUDIENCE,
+            claims: claims,
+            expires: DateTime.UtcNow.Add(TimeSpan.FromMinutes(10)), // ����� �������� 2 ������
+            signingCredentials: new SigningCredentials(AuthOptions.GetSymmetricSecurityKey(), SecurityAlgorithms.HmacSha256));
+    var encodedJwt = new JwtSecurityTokenHandler().WriteToken(jwt);
+    // ��������� �����
+    var response = new
+    {
+        access_token = encodedJwt,
+        username = person.Email
+    };
+
+    return Results.Json(response);
+});
+
+
+// Configure the HTTP request pipeline.
+if (!app.Environment.IsDevelopment())
+{
+    app.UseExceptionHandler("/Home/Error");
+    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+    app.UseHsts();
+}
+
+app.UseHttpsRedirection();
+app.UseStaticFiles();
+
+app.UseRouting();
+
+app.UseAuthorization();
+
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.Run();
+
+----------------------------------------
+
+--- File: Second_week/TaskManager/TaskManager/Controllers/TaskController.cs (~778 tokens) ---
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
+
+[ApiController]
+[Route("api/[controller]")]
+public class UsersController : ControllerBase
+{
+    private readonly AppDbContext _context;
+
+    public UsersController(AppDbContext context)
+    {
+        _context = context;
+    }
+
+    // Регистрация нового пользователя
+    [HttpPost("register")]
+    public IActionResult Register([FromBody] User user)
+    {
+        if (!ModelState.IsValid)
+            return BadRequest(ModelState);
+
+        // Проверка на уникальность имени пользователя
+        if (_context.Users.Any(u => u.Username == user.Username))
+            return Conflict("Пользователь с таким именем уже существует.");
+
+        // Хэширование пароля
+        user.PasswordHash = HashPassword(user.PasswordHash);
+
+        _context.Users.Add(user);
+        _context.SaveChanges();
+        return Ok("Пользователь успешно зарегистрирован.");
+    }
+
+    // Вход в систему
+    [HttpPost("login")]
+    public IActionResult Login([FromBody] LoginRequest request)
+    {
+        var user = _context.Users.SingleOrDefault(u => u.Username == request.Username);
+        if (user == null || !VerifyPassword(request.Password, user.PasswordHash))
+            return Unauthorized("Неверное имя пользователя или пароль.");
+
+        // Генерация JWT
+        var tokenHandler = new JwtSecurityTokenHandler();
+        var key = Encoding.UTF8.GetBytes("YourSuperSecretKey"); // Используйте более сложный ключ
+        var tokenDescriptor = new SecurityTokenDescriptor
+        {
+            Subject = new ClaimsIdentity(new[] {
+            new Claim(ClaimTypes.Name, user.Username),
+            new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()) // UserId
+        }),
+            Expires = DateTime.UtcNow.AddHours(1),
+            SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+        };
+
+        var token = tokenHandler.CreateToken(tokenDescriptor);
+        var tokenString = tokenHandler.WriteToken(token);
+
+        return Ok(new { Token = tokenString });
+    }
+
+    // Методы для хэширования пароля
+    private string HashPassword(string password)
+    {
+        using var sha256 = SHA256.Create();
+        var bytes = Encoding.UTF8.GetBytes(password);
+        var hash = sha256.ComputeHash(bytes);
+        return Convert.ToBase64String(hash);
+    }
+
+    private bool VerifyPassword(string password, string storedHash)
+    {
+        return HashPassword(password) == storedHash;
+    }
+}
+
+// DTO для входа
+public class LoginRequest
+{
+    [Required]
+    public string Username { get; set; }
+
+    [Required]
+    public string Password { get; set; }
+}
+
+----------------------------------------
+
+--- File: Second_week/TaskManager/TaskManager/Data/AppDbContext.cs (~57 tokens) ---
+﻿using Microsoft.EntityFrameworkCore;
+
+public class AppDbContext : DbContext
+{
+    public DbSet<MyTask> MyTasks { get; set; }
+
+    public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
+    
+}
+
+----------------------------------------
+
+--- File: Second_week/TaskManager/TaskManager/Models/MyTask.cs (~85 tokens) ---
+﻿using System.ComponentModel.DataAnnotations;
+
+public class MyTask
+{
+    public int Id { get; set; } // Номер задачи
+
+    [Required]
+    public string Name { get; set; } // Название задачи
+    public string Description { get; set; }
+
+    public DateTime DateTime { get; set; }
+
+
+    
+
+    
+
+
+
+}
+
+----------------------------------------
+
+--- File: TODOLIst/TODOLIst/App.cs (~2379 tokens) ---
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
+using static System.Net.Mime.MediaTypeNames;
+
+enum state
+{
+    menu,
+    delete,
+    change
+}
+namespace TODOLIst
+{
+    abstract class App
+    {
+        static bool isWorking;
+        static int choosedTask=-1;
+        
+        static string MainMenu =
+            "Выберите действие\n" +
+            "0. Выход\n" +
+            "1. Вывод задач\n" +
+            "2. Добавить задачу\n" +
+            "3. Выбрать задачу\n" +
+            "4. Удалить задачу\n" +
+            "5. Редактиоровать задачу\n" +
+            "6. Сохранить\n";
+        static string DeleteMenu = 
+            "1. Удалить выбранную\n" +
+            "2. Удалить все\n";
+        static string currentMenu=MainMenu;
+        static state state = state.menu;
+        static List<Task> tasks = new List<Task>();
+
+        public static void StartApp()
+        {
+            Load();
+            isWorking = true;
+            state = state.menu;
+            while (isWorking)
+            {
+                Console.Clear();
+                Console.WriteLine(currentMenu);
+                ReadInput();
+            }
+        }
+        public static void ReadInput()
+        {
+            char key = Console.ReadKey().KeyChar;
+            switch (state)
+            {
+                case state.menu:
+                    switch (key)
+                    {
+                        case '0':
+                            Exit();
+                            break;
+                        case '1':
+                            OutTasks();
+                            break;
+                        case '2':
+                            AddTask();
+                            break;
+                        case '3':
+                            ChooseTask();
+                            break;
+                        case '4':
+                            Delete();
+                            break;
+                        case '6':
+                            Save();
+                            break;
+                    }
+                    break;
+                case state.delete:
+                    switch(key)
+                    {
+                        case '1':
+                            DeleteChoosed();
+                            break;
+                        case '2':
+                            DeleteAll();
+                                break;
+                    }
+                break;
+            }
+        }
+        public static void Exit()
+        {
+            Console.Clear() ;
+            Console.WriteLine($"Вы хотите соохранить задачи");
+            Console.WriteLine("1.Да\n" +
+                "2.Нет");
+            switch (Console.ReadKey().KeyChar)
+            {
+                case '1':
+                    Save();
+                    Console.Clear ();
+                    Environment.Exit(0);
+                    break;
+                case '2':
+                    Console.Clear();
+                    Environment.Exit(0);
+                    break;
+            }
+        }
+        public static void DeleteAll()
+        {
+            Console.Clear();
+            
+                Console.WriteLine($"Вы уверены что хотите удалить все задачи");
+                Console.WriteLine("1.Да\n" +
+                    "2.Нет");
+                switch (Console.ReadKey().KeyChar)
+                {
+                    case '1':
+                        tasks.Clear();
+                    Console.Clear();
+                    Console.WriteLine("Вы всё нахуй удалили\nнажмите любую клавишу чтобы продолжить...");
+                    Console.ReadKey();
+                    break;
+                    default:
+                        Console.Clear();
+                        Console.WriteLine("Вы ничего не удалили\nнажмите любую клавишу чтобы продолжить...");
+                        Console.ReadKey();
+                        break;
+                }
+            
+            currentMenu = MainMenu;
+            state = state.menu;
+        }
+        public static void DeleteChoosed()
+        {
+            Console.Clear();
+            if (choosedTask != -1)
+            {
+                Console.WriteLine($"Вы уверены что хотите удалить задачу {choosedTask + 1}");
+                tasks[choosedTask].OutData();
+                Console.WriteLine("1.Да\n" +
+                    "2.Нет");
+                switch (Console.ReadKey().KeyChar)
+                {
+                    case '1':
+                        tasks.RemoveAt(choosedTask);
+                        Console.Clear();
+                        Console.WriteLine($"Вы удалили задачу №{choosedTask+1}\nнажмите любую клавишу чтобы продолжить...");
+                        Console.ReadKey();
+                        break;
+                    default:
+                        Console.Clear();
+                        Console.WriteLine("Вы ничего не удалили\nнажмите любую клавишу чтобы продолжить...");
+                        Console.ReadKey();
+                        break;
+                }
+            }
+            currentMenu = MainMenu;
+            state=state.menu;
+        }
+        public static void Delete()
+        {
+            state = state.delete;
+            currentMenu = DeleteMenu;
+
+        }
+
+        public static void Save()
+        {
+            Console.Clear();
+            Console.WriteLine("Сохраняем...");
+            string jsonData = JsonConvert.SerializeObject(tasks);
+            File.WriteAllText("file.json", jsonData);
+            Thread.Sleep(1000);
+            Console.Clear();
+            Console.WriteLine("Сохранено\nнажмите любую клавишу чтобы продолжить...");
+            Console.ReadKey();
+        }
+        public static void Load()
+        {
+            if (File.Exists("file.json"))
+            {
+                string jsonData = File.ReadAllText("file.json");
+                tasks = JsonConvert.DeserializeObject<List<Task>>(jsonData);
+            }
+        }
+
+        public static void ChooseTask()
+        {
+            if (tasks.Count != 0)
+            {
+                Console.Clear();
+                for (int i = 0; i < tasks.Count; i++)
+                {
+                    Console.WriteLine($"ЗАДАЧА №{i + 1}\n");
+                    tasks[i].OutData();
+                }
+                Console.WriteLine("Выберите номер задачи");
+                choosedTask = -1;
+                if (int.TryParse(Console.ReadLine(), out choosedTask))
+                {
+                    Console.WriteLine("Задача выбрана\nнажмите любую клавишу чтобы продолжить...");
+                    Console.ReadKey();
+                }
+                else
+                {
+                    Console.WriteLine("Задача не выбрана\nнажмите любую клавишу чтобы продолжить...");
+                    Console.ReadKey();
+                }
+                choosedTask = choosedTask == -1 ? -1 : choosedTask -1;
+            }
+            else
+            {
+                Console.Clear();
+                Console.WriteLine("У вас нет ни одной задачи\nнажмите любую клавишу чтобы продолжить...");
+                Console.ReadKey();
+            }
+
+
+        }
+        public static void OutTasks()
+        {
+            Console.Clear();
+            for (int i = 0; i < tasks.Count; i++)
+            {
+                Console.WriteLine($"ЗАДАЧА №{i+1}\n");
+                tasks[i].OutData();
+            }
+            Console.WriteLine("Нажмите любую клавишу чтобы продолжить...");
+            Console.ReadKey();
+        }
+        public static void AddTask()
+        {
+            Console.Clear();
+            Console.WriteLine("Введите название задачи");
+            string name = Console.ReadLine();
+            Console.WriteLine("Введите описание задачи");
+            string description = Console.ReadLine();
+            Console.WriteLine("Время в формате дд.мм.гг или просто нажмите Enter");
+            string time = Console.ReadLine();
+            DateTime timeD = DateTime.Now;
+            DateTime.TryParse(time, out timeD);
+            tasks.Add(new Task(name, description, timeD));
+            Console.WriteLine("Добавляем вашу задачу...");
+            Thread.Sleep(1000);
+            Console.Clear();
+            Console.WriteLine("Успешно добавлено\nНажмите любую клавишу чтобы продолжить...");
+            Console.ReadKey();
+        }
+    }
+}
+
+----------------------------------------
+
+--- File: TODOLIst/TODOLIst/Program.cs (~91 tokens) ---
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
+
+namespace TODOLIst
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+
+          
+          
+       
+
+            App.StartApp();
+        }
+    }
+}
+
+----------------------------------------
+
+--- File: TODOLIst/TODOLIst/Task.cs (~336 tokens) ---
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Text;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
+
+
+namespace TODOLIst
+{
+    [Serializable]
+    public class Task
+    {
+        [JsonProperty("name")]
+        private string name
+        {
+            get; set;
+        }
+        [JsonProperty("description")]
+        private string description
+        {
+            get; set;
+        }
+        [JsonProperty("date")]
+        private DateTime? date
+        {
+            get; set;
+        }
+
+        public Task()
+        {
+        }
+
+        
+        public Task(string name, string description)
+        {
+            this.name = name;
+            this.description = description;
+            date = null;
+            
+        }
+
+        public Task(string name, string description, DateTime? date)
+        {
+            this.name = name;
+            this.description = description;
+            this.date = date;
+        }
+
+        public void OutData()
+        {
+            Console.WriteLine($"Задача: {name}\nОписание:\n{description}\nДата: {date.ToString()}\n");
+            
+
+        }
+        
+    }
+    
+}
+
+----------------------------------------
+
+=== End of Context. Total Collected Tokens: ~7092 ===
+
+--------------------------------------------------
+[RESPONSE]:
+# Task Manager API
+
+## Project Description
+The Task Manager API is a .NET-based web application designed to manage tasks for users. It provides features for user registration, login, task creation, retrieval, and deletion.
+
+## Key Features
+
+* User registration and login with JWT authentication
+* Task creation, retrieval, and deletion for authenticated users
+* Task management with title, description, and completion status
+* User-specific task lists
+
+## Tech Stack
+
+* .NET Core
+* ASP.NET Core
+* Entity Framework Core
+* SQLite
+* JWT authentication
+
+## Project Structure Overview
+
+The project consists of the following modules:
+
+* `Program.cs`: The main entry point of the application, configuring services and middleware.
+* `Controllers/TasksController.cs`: Handles task-related requests (GET, POST, DELETE).
+* `Controllers/UsersController.cs`: Handles user-related requests (registration, login).
+* `Data/AppDbContext.cs`: The database context for interacting with the SQLite database.
+* `Models/MyTask.cs` and `Models/User.cs`: Represent tasks and users, respectively.
+
+## Getting Started / Basic Usage
+
+1. Clone the repository and navigate to the project directory.
+2. Run `dotnet restore` to restore NuGet packages.
+3. Run `dotnet run` to start the application.
+4. Use a tool like Postman or curl to test the API endpoints.
+
+### API Endpoints
+
+* `POST /api/Users/register`: Register a new user.
+* `POST /api/Users/login`: Login an existing user and retrieve a JWT token.
+* `GET /api/Tasks/user`: Retrieve tasks for the authenticated user.
+* `POST /api/Tasks/add`: Create a new task for the authenticated user.
+* `DELETE /api/Tasks/Delete/{Id}`: Delete a task by ID.
+
+### Example Use Case
+
+1. Register a new user: `POST /api/Users/register` with a JSON body containing `Username`, `Email`, and `Password`.
+2. Login the user: `POST /api/Users/login` with a JSON body containing `Email` and `Password`. Retrieve the JWT token from the response.
+3. Create a new task: `POST /api/Tasks/add` with a JSON body containing `name` and `description`, and include the JWT token in the `Authorization` header.
+4. Retrieve tasks for the user: `GET /api/Tasks/user` with the JWT token in the `Authorization` header.
+==================================================
 

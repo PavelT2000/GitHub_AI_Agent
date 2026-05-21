@@ -9,9 +9,9 @@ load_dotenv(dotenv_path=env_path)
 class Config:
     """Глобальный конфиг проекта"""
     GITHUB_TOKEN = str(os.getenv("GITHUB_TOKEN"))
-    AI_API_KEY = str(os.getenv("GROQ_API_KEY"))
+    AI_API_KEY = str(os.getenv("AI_API_KEY"))
     AI_BASE_URL=str(os.getenv("AI_BASE_URL"))
-    AI_MODEL = str(os.getenv("GROQ_MODEL"))
+    AI_MODEL = str(os.getenv("AI_MODEL"))
     AI_DEBUG = bool(os.getenv("AI_DEBUG"))
 
     if not GITHUB_TOKEN:

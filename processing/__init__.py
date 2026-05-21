@@ -1,1 +1,7 @@
-from .proccesing import get_all_repositories, download_repository, setup_aiignore, get_repo_information
+from .proccesing import (
+    get_all_repositories,
+    download_repository,
+    setup_aiignore,
+    get_repo_information,
+    generate_readme  # Добавили сюда
+)

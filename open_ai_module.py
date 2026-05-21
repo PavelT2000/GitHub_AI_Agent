@@ -3,21 +3,19 @@ from openai import OpenAI  # Используем универсальный к�
 from config import settings
 import tiktoken
 
-def get_ai_completion(messages, tools=None, base_url=None, api_key=None, model=None):
+def get_ai_completion(messages, tools=None):
     """
     Универсальный метод для работы с OpenAI-совместимыми API (Groq, OpenAI, и т.д.)
     """
     try:
-        # Используем переданные параметры или берем дефолтные из конфига
         client = OpenAI(
-            base_url=base_url or settings.AI_BASE_URL,
-            api_key=api_key or settings.AI_API_KEY
+            base_url=settings.AI_BASE_URL,
+            api_key=settings.AI_API_KEY
         )
-        target_model = model or settings.AI_MODEL
+        target_model =settings.AI_MODEL
 
-        # --- Блок отладки: Запрос ---
+
         if settings.AI_DEBUG:
-            # Считаем токены (примерно, так как у разных моделей разные токенайзеры)
             token_count = count_tokens(messages, model="gpt-4")
 
             debug_request = (
@@ -39,7 +37,6 @@ def get_ai_completion(messages, tools=None, base_url=None, api_key=None, model=N
             if user_input != 'y':
                 return "Отмена пользователем."
 
-        # --- Выполнение запроса ---
         params = {
             "messages": messages,
             "model": target_model,
@@ -48,10 +45,9 @@ def get_ai_completion(messages, tools=None, base_url=None, api_key=None, model=N
             params["tools"] = tools
             params["tool_choice"] = "auto"
 
-        # Этот метод идентичен и для OpenAI, и для Groq
+
         chat_completion = client.chat.completions.create(**params)
 
-        # --- Блок отладки: Ответ ---
         if settings.AI_DEBUG:
             response_message = chat_completion.choices[0].message
             debug_response = f"{'-'*50}\n[RESPONSE]:\n"
