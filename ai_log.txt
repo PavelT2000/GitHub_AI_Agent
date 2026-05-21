@@ -1,1660 +1,120 @@
+==================================================
+NEW REQUEST | URL: https://api.groq.com/openai/v1/ | Model: meta-llama/llama-4-scout-17b-16e-instruct
+--------------------------------------------------
+[SYSTEM]: You are a strict code context optimizer. Analyze the provided directory tree and token counts.
+Your goal is to generate .aiignore patterns to exclude build artifacts, cache, generated code, and heavy non-business assets, while retaining project structure.
+
+CRITICAL RULES:
+1. ALWAYS IGNORE: Build and IDE folders (.vs/, bin/, obj/, .git/, .idea/).
+2. ALWAYS IGNORE heavy text data, assets, and binaries: *.txt, *.log, *.dll, *.exe, *.pdb, *.cache, *.png, *.jpg, *.zip.
+3. ALWAYS IGNORE automatically generated UI code and resources: *.Designer.cs, *.resx.
+4. NEVER IGNORE critical project structure and config files: DO NOT ignore *.csproj, *.sln, *.json, .gitignore.
+5. KEEP source code files intact (*.cs, *.py, *.js).
+
+OUTPUT FORMAT:
+Output ONLY valid wildcard patterns (one per line). Strictly NO explanations, NO markdown formatting, NO introduction, NO bullet points. Just raw text patterns.
+[USER]: Project/
+  .vs/ (~15000 tokens)
+  bin/Debug/ (~8000 tokens)
+  src/ (~2000 tokens)
+[ASSISTANT]: .vs/
+bin/
+obj/
+[USER]: Расширения: .cs, .csproj, .docx, .mp3, .png, .resx, .sln, .txt, .xlsx
+Файлы без расширения: .aiignore, .gitignore
+
 --------------------------------------------------
 [RESPONSE]:
-Second_week/TaskManagerV2.0/Program.cs
-Second_week/TaskManagerV2.0/Controllers/TasksController.cs
-Second_week/TaskManagerV2.0/Controllers/UsersController.cs
-Second_week/TaskManagerV2.0/Data/AppDbContext.cs
-Second_week/TaskManagerV2.0/Models/MyTask.cs
-Second_week/TaskManagerV2.0/Models/User.cs
-Second_week/TaskManager/TaskManager/Program.cs
-Second_week/TaskManager/TaskManager/Controllers/TaskController.cs
-Second_week/TaskManager/TaskManager/Data/AppDbContext.cs
-Second_week/TaskManager/TaskManager/Models/MyTask.cs
-TODOLIst/TODOLIst/App.cs
-TODOLIst/TODOLIst/Program.cs
-TODOLIst/TODOLIst/Task.cs
+.vs/
+bin/
+obj/
+*.txt
+*.log
+*.dll
+*.exe
+*.pdb
+*.cache
+*.png
+*.jpg
+*.zip
+*.Designer.cs
+*.resx
+*.docx
+*.mp3
+*.xlsx
 ==================================================
 
 ==================================================
 NEW REQUEST | URL: https://api.groq.com/openai/v1/ | Model: meta-llama/llama-4-scout-17b-16e-instruct
 --------------------------------------------------
-[SYSTEM]: You are a strict codebase architect CLI tool. Your task is to select the most critical project files for logic analysis.
+[SYSTEM]: You are a strict code context optimizer. Analyze the provided directory tree and token counts.
+Your goal is to generate .aiignore patterns to exclude build artifacts (.vs, bin, obj), cache, binaries, and heavy temporary test files, WHILE KEEPING structural configuration files.
 
-CRITICAL CONSTRAINT: The total token weight of selected files MUST NOT exceed 40000 tokens.
-Select only core business logic files (entry points, controllers, services, models, data contexts).
-Ignore tests, build artifacts, migrations, and UI assets.
+CRITICAL RULES:
+1. NEVER IGNORE project structure and build configuration files: DO NOT add *.csproj or *.sln to the ignore list.
+2. ALWAYS IGNORE build and IDE artifacts: .vs/, bin/, obj/, .git/.
+3. ALWAYS IGNORE compiled binaries and logs: *.dll, *.exe, *.pdb, *.log, *.cache.
 
-OUTPUT FORMAT RULES:
-1. Output ONLY a flat list of relative file paths (one path per line).
-2. Strictly NO numbered lists (do not use 1, 2, 3).
-3. Strictly NO introduction, NO Markdown code blocks, NO conclusion text, and NO human commentary.
-4. Output must be raw plain text paths only.
-[USER]: STRUCTURE:
-Folder/App.cs (~4000 tokens)
-Folder/Test.cs (~2000 tokens)
-FILES REGISTRY WITH WEIGHTS:
-Folder/App.cs (4000 tokens)
-Folder/Test.cs (2000 tokens)
-[ASSISTANT]: Folder/App.cs
-[USER]: STRUCTURE:
-1Task/ (~30573 tokens)
-  1Task/ (~15193 tokens)
-    Properties/ (~449 tokens)
-      AssemblyInfo.cs
-    1Task.csproj
+OUTPUT FORMAT:
+Output ONLY valid wildcard patterns, one per line. Strictly NO explanations, NO markdown formatting (do not use blocks like ```), NO introduction, and NO bullet points. Just raw text patterns.
+[USER]: Project/
+  .vs/ (~15000 tokens)
+  bin/Debug/ (~8000 tokens)
+  src/ (~2000 tokens)
+[ASSISTANT]: .vs/
+bin/
+obj/
+[USER]: Lab1/ (~4124 tokens)
+  Lab1/ (~3843 tokens)
+    Form1.cs
+    Lab1.csproj
     Program.cs
-  1Task.sln
-2Task/ (~30512 tokens)
-  2Task/ (~15185 tokens)
-    Properties/ (~449 tokens)
-      AssemblyInfo.cs
-    2Task.csproj
+  Lab1.sln
+Lab2/ (~1410 tokens)
+  Lab2/ (~1129 tokens)
+    Form1.cs
+    Lab2.csproj
     Program.cs
-  2Task.sln
-5Task/ (~32960 tokens)
-  5Task/ (~17223 tokens)
-    Properties/ (~449 tokens)
-      AssemblyInfo.cs
-    5Task.csproj
+  Lab2.sln
+Lab3/ (~2508 tokens)
+  Lab3/ (~2227 tokens)
+    Form1.cs
+    Lab3.csproj
     Program.cs
-  5Task.sln
-6Task/ (~31520 tokens)
-  6Task/ (~16718 tokens)
-    Properties/ (~449 tokens)
-      AssemblyInfo.cs
-    6Task.csproj
-    Program.cs
-  6Task.sln
-7Task/ (~34672 tokens)
-  7Task/ (~18290 tokens)
-    Properties/ (~449 tokens)
-      AssemblyInfo.cs
-    7Task.csproj
-    Program.cs
-  7Task.sln
-Burley/ (~32209 tokens)
-  Burley/ (~16748 tokens)
-    Properties/ (~450 tokens)
-      AssemblyInfo.cs
-    Burley.csproj
-    Program.cs
-  Burley.sln
-CorrectDays/ (~33155 tokens)
-  CorrectDays/ (~17421 tokens)
-    Properties/ (~452 tokens)
-      AssemblyInfo.cs
-    CorrectDays.csproj
-    Program.cs
-  CorrectDays.sln
-First_week/ (~4276351 tokens)
-  Projects/ (~4060430 tokens)
-    Books/ (~35297 tokens)
-      Books/ (~19867 tokens)
-        Properties/ (~449 tokens)
-          AssemblyInfo.cs
-        Book.cs
-        Books.csproj
-        Program.cs
-      Books.sln
-    Calculator/ (~32121 tokens)
-      Calculator/ (~16872 tokens)
-        Properties/ (~452 tokens)
-          AssemblyInfo.cs
-        Calculator.csproj
-        Program.cs
-      Calculator.sln
-    IsOdd/ (~29071 tokens)
-      IsOdd/ (~15287 tokens)
-        Properties/ (~449 tokens)
-          AssemblyInfo.cs
-        IsOdd.csproj
-        Program.cs
-      IsOdd.sln
-    Loading/ (~33650 tokens)
-      Loading/ (~18411 tokens)
-        Properties/ (~450 tokens)
-          AssemblyInfo.cs
-        Loading.csproj
-        Program.cs
-      Loading.sln
-    MasSum/ (~25616 tokens)
-      MasSum/ (~17821 tokens)
-        Properties/ (~450 tokens)
-          AssemblyInfo.cs
-        MasSum.csproj
-        Program.cs
-      MasSum.sln
-    MaxValue/ (~31034 tokens)
-      MaxValue/ (~16918 tokens)
-        Properties/ (~451 tokens)
-          AssemblyInfo.cs
-        MaxValue.csproj
-        Program.cs
-      MaxValue.sln
-    PasswordGenerator/ (~31384 tokens)
-      PasswordGenerator/ (~16953 tokens)
-        Properties/ (~455 tokens)
-          AssemblyInfo.cs
-        PasswordGenerator.csproj
-        Program.cs
-      PasswordGenerator.sln
-    PersonSays/ (~33160 tokens)
-      PersonSays/ (~17766 tokens)
-        Properties/ (~452 tokens)
-          AssemblyInfo.cs
-        Person.cs
-        PersonSays.csproj
-        Program.cs
-      PersonSays.sln
-    Ready/ (~33967 tokens)
-      Ready/ (~18722 tokens)
-        Properties/ (~449 tokens)
-          AssemblyInfo.cs
-        Program.cs
-        Ready.csproj
-      Ready.sln
-    TODOLIst/ (~3640127 tokens)
-      TODOLIst/ (~385191 tokens)
-        Properties/ (~451 tokens)
-          AssemblyInfo.cs
-        bin/Debug/ (~367792 tokens)
-          file
-        App.cs
-        Program.cs
-        TODOLIst.csproj
-        Task.cs
-      TODOLIst.sln
-    TextFileReader/ (~37009 tokens)
-      TextFileReader/ (~18841 tokens)
-        Properties/ (~454 tokens)
-          AssemblyInfo.cs
-        FileReader.cs
-        Program.cs
-        TextFileReader.csproj
-      TextFileReader.sln
-    ThreeDividingNumbers/ (~30330 tokens)
-      ThreeDividingNumbers/ (~15997 tokens)
-        Properties/ (~457 tokens)
-          AssemblyInfo.cs
-        Program.cs
-        ThreeDividingNumbers.csproj
-      ThreeDividingNumbers.sln
-    UserData/ (~35363 tokens)
-      UserData/ (~18444 tokens)
-        Properties/ (~451 tokens)
-          AssemblyInfo.cs
-        Program.cs
-        User.cs
-        UserData.csproj
-      UserData.sln
-    ZereDividingCheck/ (~32296 tokens)
-      ZereDividingCheck/ (~16663 tokens)
-        Properties/ (~455 tokens)
-          AssemblyInfo.cs
-        Program.cs
-        ZereDividingCheck.csproj
-      ZereDividingCheck.sln
-ProgTask/ (~15228318 tokens)
-  ProgTask/ (~1993 tokens)
-    ProgTask.cpp
-    ProgTask.vcxproj
-    ProgTask.vcxproj.filters
-  ProgTask.sln
-Projects/ (~384365 tokens)
-  Books/ (~35297 tokens)
-    Books/ (~19867 tokens)
-      Properties/ (~449 tokens)
-        AssemblyInfo.cs
-      Book.cs
-      Books.csproj
-      Program.cs
-    Books.sln
-  Calculator/ (~32121 tokens)
-    Calculator/ (~16872 tokens)
-      Properties/ (~452 tokens)
-        AssemblyInfo.cs
-      Calculator.csproj
-      Program.cs
-    Calculator.sln
-  IsOdd/ (~29071 tokens)
-    IsOdd/ (~15287 tokens)
-      Properties/ (~449 tokens)
-        AssemblyInfo.cs
-      IsOdd.csproj
-      Program.cs
-    IsOdd.sln
-  Loading/ (~33650 tokens)
-    Loading/ (~18411 tokens)
-      Properties/ (~450 tokens)
-        AssemblyInfo.cs
-      Loading.csproj
-      Program.cs
-    Loading.sln
-  MasSum/ (~25616 tokens)
-    MasSum/ (~17821 tokens)
-      Properties/ (~450 tokens)
-        AssemblyInfo.cs
-      MasSum.csproj
-      Program.cs
-    MasSum.sln
-  MaxValue/ (~31034 tokens)
-    MaxValue/ (~16918 tokens)
-      Properties/ (~451 tokens)
-        AssemblyInfo.cs
-      MaxValue.csproj
-      Program.cs
-    MaxValue.sln
-  PasswordGenerator/ (~31384 tokens)
-    PasswordGenerator/ (~16953 tokens)
-      Properties/ (~455 tokens)
-        AssemblyInfo.cs
-      PasswordGenerator.csproj
-      Program.cs
-    PasswordGenerator.sln
-  PersonSays/ (~33160 tokens)
-    PersonSays/ (~17766 tokens)
-      Properties/ (~452 tokens)
-        AssemblyInfo.cs
-      Person.cs
-      PersonSays.csproj
-      Program.cs
-    PersonSays.sln
-  Ready/ (~33967 tokens)
-    Ready/ (~18722 tokens)
-      Properties/ (~449 tokens)
-        AssemblyInfo.cs
-      Program.cs
-      Ready.csproj
-    Ready.sln
-  TextFileReader/ (~36786 tokens)
-    TextFileReader/ (~18852 tokens)
-      Properties/ (~454 tokens)
-        AssemblyInfo.cs
-      FileReader.cs
-      Program.cs
-      TextFileReader.csproj
-    TextFileReader.sln
-  ThreeDividingNumbers/ (~30330 tokens)
-    ThreeDividingNumbers/ (~15997 tokens)
-      Properties/ (~457 tokens)
-        AssemblyInfo.cs
-      Program.cs
-      ThreeDividingNumbers.csproj
-    ThreeDividingNumbers.sln
-  ZereDividingCheck/ (~31945 tokens)
-    ZereDividingCheck/ (~16671 tokens)
-      Properties/ (~455 tokens)
-        AssemblyInfo.cs
-      Program.cs
-      ZereDividingCheck.csproj
-    ZereDividingCheck.sln
-Releases/TaskManager/ (~180694 tokens)
-  file
-Second_week/ (~65872508 tokens)
-  MyFirstApi/ (~206127 tokens)
-    MyFirstApi.csproj
-    MyFirstApi.http
-    MyFirstApi.sln
-    Program.cs
-  TaskManager/ (~18917635 tokens)
-    TaskManager/ (~17813030 tokens)
-      Controllers/ (~983 tokens)
-        HomeController.cs
-        TaskController.cs
-      Data/ (~57 tokens)
-        AppDbContext.cs
-      Migrations/ (~2319 tokens)
-        [7 files: *.cs]
-      Models/ (~136 tokens)
-        ErrorViewModel.cs
-        MyTask.cs
-      Services/ (~648 tokens)
-        AuthOptions.cs
-        TokenService.cs
-      Views/ (~1223 tokens)
-        Home/ (~96 tokens)
-          Index.cshtml
-          Privacy.cshtml
-        Shared/ (~1092 tokens)
-          Error.cshtml
-          _Layout.cshtml
-          _Layout.cshtml.css
-          _ValidationScriptsPartial.cshtml
-        _ViewImports.cshtml
-        _ViewStart.cshtml
-      bin/Debug/net8.0/ (~15547602 tokens)
-      wwwroot/ (~2051594 tokens)
-        css/ (~90 tokens)
-          site.css
-        js/ (~57 tokens)
-          site.js
-        lib/ (~2050088 tokens)
-          bootstrap/ (~1872951 tokens)
-            dist/ (~1872663 tokens)
-              css/ (~1249444 tokens)
-                [16 files: *.css]
-              js/ (~623218 tokens)
-                [6 files: *.js]
-            LICENSE
-          jquery/dist/ (~131734 tokens)
-            jquery.js
-            jquery.min.js
-          jquery-validation/dist/ (~38147 tokens)
-            additional-methods.js
-            additional-methods.min.js
-            jquery.validate.js
-            jquery.validate.min.js
-          jquery-validation-unobtrusive/ (~6697 tokens)
-            jquery.validate.unobtrusive.js
-            jquery.validate.unobtrusive.min.js
-      Person.cs
-      Program.cs
-      TaskManager.csproj
-      tasks.db
-    TaskManagerTraining.sln
-  TaskManagerV2.0/ (~46748396 tokens)
-    Controllers/ (~1532 tokens)
-      TasksController.cs
-      TestController.cs
-      UsersController.cs
-    Data/ (~169 tokens)
-      AppDbContext.cs
-    Migrations/ (~3966 tokens)
-      [7 files: *.cs]
-    Models/ (~531 tokens)
-      MyTask.cs
-      User.cs
-    Properties/PublishProfiles/ (~347 tokens)
-      IISProfile.pubxml
-    bin/ (~37485493 tokens)
-      Debug/net8.0/ (~14325031 tokens)
-      Release/net8.0/ (~23155866 tokens)
-    Program.cs
-    TaskManagerV2.0.csproj
-    TaskManagerV2.0.http
-    TaskManagerV2.0.sln
-    tasks.db
-TODOLIst/ (~3640127 tokens)
-  TODOLIst/ (~385191 tokens)
-    Properties/ (~451 tokens)
-      AssemblyInfo.cs
-    bin/Debug/ (~367792 tokens)
-      file
-    App.cs
-    Program.cs
-    TODOLIst.csproj
-    Task.cs
-  TODOLIst.sln
-Trash/ (~550 tokens)
-  TasksController.cs
-  TasksData.cs
-.aiignore
-
-FILES REGISTRY WITH WEIGHTS:
-.aiignore (219 tokens)
-1Task/1Task.sln (280 tokens)
-2Task/2Task.sln (280 tokens)
-5Task/5Task.sln (280 tokens)
-6Task/6Task.sln (280 tokens)
-7Task/7Task.sln (280 tokens)
-Burley/Burley.sln (281 tokens)
-CorrectDays/CorrectDays.sln (285 tokens)
-ProgTask/ProgTask.sln (331 tokens)
-TODOLIst/TODOLIst.sln (252 tokens)
-Trash/TasksController.cs (187 tokens)
-Trash/TasksData.cs (363 tokens)
-TODOLIst/TODOLIst/App.cs (2379 tokens)
-TODOLIst/TODOLIst/Program.cs (91 tokens)
-TODOLIst/TODOLIst/Task.cs (336 tokens)
-TODOLIst/TODOLIst/TODOLIst.csproj (680 tokens)
-TODOLIst/TODOLIst/Properties/AssemblyInfo.cs (451 tokens)
-TODOLIst/TODOLIst/bin/Debug/file (38 tokens)
-Second_week/MyFirstApi/MyFirstApi.csproj (83 tokens)
-Second_week/MyFirstApi/MyFirstApi.http (33 tokens)
-Second_week/MyFirstApi/MyFirstApi.sln (280 tokens)
-Second_week/MyFirstApi/Program.cs (266 tokens)
-Second_week/TaskManager/TaskManagerTraining.sln (252 tokens)
-Second_week/TaskManagerV2.0/Program.cs (373 tokens)
-Second_week/TaskManagerV2.0/TaskManagerV2.0.csproj (272 tokens)
-Second_week/TaskManagerV2.0/TaskManagerV2.0.http (36 tokens)
-Second_week/TaskManagerV2.0/TaskManagerV2.0.sln (284 tokens)
-Second_week/TaskManagerV2.0/tasks.db (7168 tokens)
-Second_week/TaskManagerV2.0/Controllers/TasksController.cs (587 tokens)
-Second_week/TaskManagerV2.0/Controllers/TestController.cs (102 tokens)
-Second_week/TaskManagerV2.0/Controllers/UsersController.cs (841 tokens)
-Second_week/TaskManagerV2.0/Data/AppDbContext.cs (169 tokens)
-Second_week/TaskManagerV2.0/Migrations/20250102085113_InitialCreate.cs (650 tokens)
-Second_week/TaskManagerV2.0/Migrations/20250102085113_InitialCreate.Designer.cs (760 tokens)
-Second_week/TaskManagerV2.0/Migrations/20250102095219_Update1.cs (190 tokens)
-Second_week/TaskManagerV2.0/Migrations/20250102095219_Update1.Designer.cs (758 tokens)
-Second_week/TaskManagerV2.0/Migrations/20250102095928_Update2.cs (113 tokens)
-Second_week/TaskManagerV2.0/Migrations/20250102095928_Update2.Designer.cs (758 tokens)
-Second_week/TaskManagerV2.0/Migrations/AppDbContextModelSnapshot.cs (735 tokens)
-Second_week/TaskManagerV2.0/Models/MyTask.cs (285 tokens)
-Second_week/TaskManagerV2.0/Models/User.cs (246 tokens)
-Second_week/TaskManagerV2.0/Properties/PublishProfiles/IISProfile.pubxml (264 tokens)
-Second_week/TaskManager/TaskManager/Person.cs (77 tokens)
-Second_week/TaskManager/TaskManager/Program.cs (865 tokens)
-Second_week/TaskManager/TaskManager/TaskManager.csproj (191 tokens)
-Second_week/TaskManager/TaskManager/tasks.db (6144 tokens)
-Second_week/TaskManager/TaskManager/Controllers/HomeController.cs (204 tokens)
-Second_week/TaskManager/TaskManager/Controllers/TaskController.cs (778 tokens)
-Second_week/TaskManager/TaskManager/Data/AppDbContext.cs (57 tokens)
-Second_week/TaskManager/TaskManager/Migrations/20241229081953_InitialCreate.cs (283 tokens)
-Second_week/TaskManager/TaskManager/Migrations/20241229081953_InitialCreate.Designer.cs (312 tokens)
-Second_week/TaskManager/TaskManager/Migrations/20241229174228_2Create.cs (413 tokens)
-Second_week/TaskManager/TaskManager/Migrations/20241229174228_2Create.Designer.cs (251 tokens)
-Second_week/TaskManager/TaskManager/Migrations/20241230111629_MyTaskV2Add.cs (382 tokens)
-Second_week/TaskManager/TaskManager/Migrations/20241230111629_MyTaskV2Add.Designer.cs (351 tokens)
-Second_week/TaskManager/TaskManager/Migrations/AppDbContextModelSnapshot.cs (326 tokens)
-Second_week/TaskManager/TaskManager/Models/ErrorViewModel.cs (51 tokens)
-Second_week/TaskManager/TaskManager/Models/MyTask.cs (85 tokens)
-Second_week/TaskManager/TaskManager/Services/AuthOptions.cs (144 tokens)
-Second_week/TaskManager/TaskManager/Services/TokenService.cs (504 tokens)
-Second_week/TaskManager/TaskManager/Views/_ViewImports.cshtml (26 tokens)
-Second_week/TaskManager/TaskManager/Views/_ViewStart.cshtml (8 tokens)
-Second_week/TaskManager/TaskManager/wwwroot/css/site.css (90 tokens)
-Second_week/TaskManager/TaskManager/wwwroot/js/site.js (57 tokens)
-Second_week/TaskManager/TaskManager/wwwroot/lib/bootstrap/LICENSE (288 tokens)
-Second_week/TaskManager/TaskManager/wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js (4955 tokens)
-Second_week/TaskManager/TaskManager/wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js (1457 tokens)
-Second_week/TaskManager/TaskManager/wwwroot/lib/jquery-validation/dist/additional-methods.js (13244 tokens)
-Second_week/TaskManager/TaskManager/wwwroot/lib/jquery-validation/dist/additional-methods.min.js (5544 tokens)
-Second_week/TaskManager/TaskManager/wwwroot/lib/jquery-validation/dist/jquery.validate.js (13207 tokens)
-Second_week/TaskManager/TaskManager/wwwroot/lib/jquery-validation/dist/jquery.validate.min.js (6151 tokens)
-Second_week/TaskManager/TaskManager/wwwroot/lib/jquery/dist/jquery.js (74865 tokens)
-Second_week/TaskManager/TaskManager/wwwroot/lib/jquery/dist/jquery.min.js (22375 tokens)
-Second_week/TaskManager/TaskManager/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.css (18883 tokens)
-Second_week/TaskManager/TaskManager/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.min.css (12831 tokens)
-Second_week/TaskManager/TaskManager/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.css (18901 tokens)
-Second_week/TaskManager/TaskManager/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css (12850 tokens)
-Second_week/TaskManager/TaskManager/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.css (1569 tokens)
-Second_week/TaskManager/TaskManager/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.min.css (1163 tokens)
-Second_week/TaskManager/TaskManager/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.css (1562 tokens)
-Second_week/TaskManager/TaskManager/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css (1181 tokens)
-Second_week/TaskManager/TaskManager/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.css (19112 tokens)
-Second_week/TaskManager/TaskManager/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.min.css (13371 tokens)
-Second_week/TaskManager/TaskManager/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.css (19076 tokens)
-Second_week/TaskManager/TaskManager/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css (13353 tokens)
-Second_week/TaskManager/TaskManager/wwwroot/lib/bootstrap/dist/css/bootstrap.css (53839 tokens)
-Second_week/TaskManager/TaskManager/wwwroot/lib/bootstrap/dist/css/bootstrap.min.css (40681 tokens)
-Second_week/TaskManager/TaskManager/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.css (53749 tokens)
-Second_week/TaskManager/TaskManager/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.min.css (40707 tokens)
-Second_week/TaskManager/TaskManager/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.js (53818 tokens)
-Second_week/TaskManager/TaskManager/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.min.js (19618 tokens)
-Second_week/TaskManager/TaskManager/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.js (35999 tokens)
-Second_week/TaskManager/TaskManager/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.min.js (18005 tokens)
-Second_week/TaskManager/TaskManager/wwwroot/lib/bootstrap/dist/js/bootstrap.js (38298 tokens)
-Second_week/TaskManager/TaskManager/wwwroot/lib/bootstrap/dist/js/bootstrap.min.js (14879 tokens)
-Second_week/TaskManager/TaskManager/Views/Home/Index.cshtml (60 tokens)
-Second_week/TaskManager/TaskManager/Views/Home/Privacy.cshtml (36 tokens)
-Second_week/TaskManager/TaskManager/Views/Shared/Error.cshtml (221 tokens)
-Second_week/TaskManager/TaskManager/Views/Shared/_Layout.cshtml (596 tokens)
-Second_week/TaskManager/TaskManager/Views/Shared/_Layout.cshtml.css (231 tokens)
-Second_week/TaskManager/TaskManager/Views/Shared/_ValidationScriptsPartial.cshtml (44 tokens)
-Releases/TaskManager/file (18 tokens)
-Projects/Books/Books.sln (250 tokens)
-Projects/Calculator/Calculator.sln (253 tokens)
-Projects/IsOdd/IsOdd.sln (250 tokens)
-Projects/Loading/Loading.sln (251 tokens)
-Projects/MasSum/MasSum.sln (250 tokens)
-Projects/MaxValue/MaxValue.sln (252 tokens)
-Projects/PasswordGenerator/PasswordGenerator.sln (259 tokens)
-Projects/PersonSays/PersonSays.sln (253 tokens)
-Projects/Ready/Ready.sln (250 tokens)
-Projects/TextFileReader/TextFileReader.sln (256 tokens)
-Projects/ThreeDividingNumbers/ThreeDividingNumbers.sln (261 tokens)
-Projects/ZereDividingCheck/ZereDividingCheck.sln (259 tokens)
-Projects/ZereDividingCheck/ZereDividingCheck/Program.cs (223 tokens)
-Projects/ZereDividingCheck/ZereDividingCheck/ZereDividingCheck.csproj (595 tokens)
-Projects/ZereDividingCheck/ZereDividingCheck/Properties/AssemblyInfo.cs (455 tokens)
-Projects/ThreeDividingNumbers/ThreeDividingNumbers/Program.cs (114 tokens)
-Projects/ThreeDividingNumbers/ThreeDividingNumbers/ThreeDividingNumbers.csproj (596 tokens)
-Projects/ThreeDividingNumbers/ThreeDividingNumbers/Properties/AssemblyInfo.cs (457 tokens)
-Projects/TextFileReader/TextFileReader/FileReader.cs (148 tokens)
-Projects/TextFileReader/TextFileReader/Program.cs (221 tokens)
-Projects/TextFileReader/TextFileReader/TextFileReader.csproj (604 tokens)
-Projects/TextFileReader/TextFileReader/Properties/AssemblyInfo.cs (454 tokens)
-Projects/Ready/Ready/Program.cs (319 tokens)
-Projects/Ready/Ready/Ready.csproj (589 tokens)
-Projects/Ready/Ready/Properties/AssemblyInfo.cs (449 tokens)
-Projects/PersonSays/PersonSays/Person.cs (140 tokens)
-Projects/PersonSays/PersonSays/PersonSays.csproj (601 tokens)
-Projects/PersonSays/PersonSays/Program.cs (69 tokens)
-Projects/PersonSays/PersonSays/Properties/AssemblyInfo.cs (452 tokens)
-Projects/PasswordGenerator/PasswordGenerator/PasswordGenerator.csproj (595 tokens)
-Projects/PasswordGenerator/PasswordGenerator/Program.cs (340 tokens)
-Projects/PasswordGenerator/PasswordGenerator/Properties/AssemblyInfo.cs (455 tokens)
-Projects/MaxValue/MaxValue/MaxValue.csproj (590 tokens)
-Projects/MaxValue/MaxValue/Program.cs (164 tokens)
-Projects/MaxValue/MaxValue/Properties/AssemblyInfo.cs (451 tokens)
-Projects/MasSum/MasSum/MasSum.csproj (884 tokens)
-Projects/MasSum/MasSum/Program.cs (161 tokens)
-Projects/MasSum/MasSum/Properties/AssemblyInfo.cs (450 tokens)
-Projects/Loading/Loading/Loading.csproj (590 tokens)
-Projects/Loading/Loading/Program.cs (248 tokens)
-Projects/Loading/Loading/Properties/AssemblyInfo.cs (450 tokens)
-Projects/IsOdd/IsOdd/IsOdd.csproj (589 tokens)
-Projects/IsOdd/IsOdd/Program.cs (108 tokens)
-Projects/IsOdd/IsOdd/Properties/AssemblyInfo.cs (449 tokens)
-Projects/Calculator/Calculator/Calculator.csproj (591 tokens)
-Projects/Calculator/Calculator/Program.cs (348 tokens)
-Projects/Calculator/Calculator/Properties/AssemblyInfo.cs (452 tokens)
-Projects/Books/Books/Book.cs (299 tokens)
-Projects/Books/Books/Books.csproj (598 tokens)
-Projects/Books/Books/Program.cs (288 tokens)
-Projects/Books/Books/Properties/AssemblyInfo.cs (449 tokens)
-ProgTask/ProgTask/ProgTask.cpp (34 tokens)
-ProgTask/ProgTask/ProgTask.vcxproj (1656 tokens)
-ProgTask/ProgTask/ProgTask.vcxproj.filters (260 tokens)
-First_week/Projects/Books/Books.sln (250 tokens)
-First_week/Projects/Calculator/Calculator.sln (253 tokens)
-First_week/Projects/IsOdd/IsOdd.sln (250 tokens)
-First_week/Projects/Loading/Loading.sln (251 tokens)
-First_week/Projects/MasSum/MasSum.sln (250 tokens)
-First_week/Projects/MaxValue/MaxValue.sln (252 tokens)
-First_week/Projects/PasswordGenerator/PasswordGenerator.sln (259 tokens)
-First_week/Projects/PersonSays/PersonSays.sln (253 tokens)
-First_week/Projects/Ready/Ready.sln (250 tokens)
-First_week/Projects/TextFileReader/TextFileReader.sln (256 tokens)
-First_week/Projects/ThreeDividingNumbers/ThreeDividingNumbers.sln (261 tokens)
-First_week/Projects/TODOLIst/TODOLIst.sln (252 tokens)
-First_week/Projects/UserData/UserData.sln (252 tokens)
-First_week/Projects/ZereDividingCheck/ZereDividingCheck.sln (259 tokens)
-First_week/Projects/ZereDividingCheck/ZereDividingCheck/Program.cs (215 tokens)
-First_week/Projects/ZereDividingCheck/ZereDividingCheck/ZereDividingCheck.csproj (595 tokens)
-First_week/Projects/ZereDividingCheck/ZereDividingCheck/Properties/AssemblyInfo.cs (455 tokens)
-First_week/Projects/UserData/UserData/Program.cs (286 tokens)
-First_week/Projects/UserData/UserData/User.cs (257 tokens)
-First_week/Projects/UserData/UserData/UserData.csproj (599 tokens)
-First_week/Projects/UserData/UserData/Properties/AssemblyInfo.cs (451 tokens)
-First_week/Projects/TODOLIst/TODOLIst/App.cs (2379 tokens)
-First_week/Projects/TODOLIst/TODOLIst/Program.cs (91 tokens)
-First_week/Projects/TODOLIst/TODOLIst/Task.cs (336 tokens)
-First_week/Projects/TODOLIst/TODOLIst/TODOLIst.csproj (680 tokens)
-First_week/Projects/TODOLIst/TODOLIst/Properties/AssemblyInfo.cs (451 tokens)
-First_week/Projects/TODOLIst/TODOLIst/bin/Debug/file (38 tokens)
-First_week/Projects/ThreeDividingNumbers/ThreeDividingNumbers/Program.cs (114 tokens)
-First_week/Projects/ThreeDividingNumbers/ThreeDividingNumbers/ThreeDividingNumbers.csproj (596 tokens)
-First_week/Projects/ThreeDividingNumbers/ThreeDividingNumbers/Properties/AssemblyInfo.cs (457 tokens)
-First_week/Projects/TextFileReader/TextFileReader/FileReader.cs (148 tokens)
-First_week/Projects/TextFileReader/TextFileReader/Program.cs (209 tokens)
-First_week/Projects/TextFileReader/TextFileReader/TextFileReader.csproj (604 tokens)
-First_week/Projects/TextFileReader/TextFileReader/Properties/AssemblyInfo.cs (454 tokens)
-First_week/Projects/Ready/Ready/Program.cs (319 tokens)
-First_week/Projects/Ready/Ready/Ready.csproj (589 tokens)
-First_week/Projects/Ready/Ready/Properties/AssemblyInfo.cs (449 tokens)
-First_week/Projects/PersonSays/PersonSays/Person.cs (140 tokens)
-First_week/Projects/PersonSays/PersonSays/PersonSays.csproj (601 tokens)
-First_week/Projects/PersonSays/PersonSays/Program.cs (69 tokens)
-First_week/Projects/PersonSays/PersonSays/Properties/AssemblyInfo.cs (452 tokens)
-First_week/Projects/PasswordGenerator/PasswordGenerator/PasswordGenerator.csproj (595 tokens)
-First_week/Projects/PasswordGenerator/PasswordGenerator/Program.cs (340 tokens)
-First_week/Projects/PasswordGenerator/PasswordGenerator/Properties/AssemblyInfo.cs (455 tokens)
-First_week/Projects/MaxValue/MaxValue/MaxValue.csproj (590 tokens)
-First_week/Projects/MaxValue/MaxValue/Program.cs (164 tokens)
-First_week/Projects/MaxValue/MaxValue/Properties/AssemblyInfo.cs (451 tokens)
-First_week/Projects/MasSum/MasSum/MasSum.csproj (884 tokens)
-First_week/Projects/MasSum/MasSum/Program.cs (161 tokens)
-First_week/Projects/MasSum/MasSum/Properties/AssemblyInfo.cs (450 tokens)
-First_week/Projects/Loading/Loading/Loading.csproj (590 tokens)
-First_week/Projects/Loading/Loading/Program.cs (248 tokens)
-First_week/Projects/Loading/Loading/Properties/AssemblyInfo.cs (450 tokens)
-First_week/Projects/IsOdd/IsOdd/IsOdd.csproj (589 tokens)
-First_week/Projects/IsOdd/IsOdd/Program.cs (108 tokens)
-First_week/Projects/IsOdd/IsOdd/Properties/AssemblyInfo.cs (449 tokens)
-First_week/Projects/Calculator/Calculator/Calculator.csproj (591 tokens)
-First_week/Projects/Calculator/Calculator/Program.cs (348 tokens)
-First_week/Projects/Calculator/Calculator/Properties/AssemblyInfo.cs (452 tokens)
-First_week/Projects/Books/Books/Book.cs (299 tokens)
-First_week/Projects/Books/Books/Books.csproj (598 tokens)
-First_week/Projects/Books/Books/Program.cs (288 tokens)
-First_week/Projects/Books/Books/Properties/AssemblyInfo.cs (449 tokens)
-CorrectDays/CorrectDays/CorrectDays.csproj (593 tokens)
-CorrectDays/CorrectDays/Program.cs (530 tokens)
-CorrectDays/CorrectDays/Properties/AssemblyInfo.cs (452 tokens)
-Burley/Burley/Burley.csproj (590 tokens)
-Burley/Burley/Program.cs (407 tokens)
-Burley/Burley/Properties/AssemblyInfo.cs (450 tokens)
-7Task/7Task/7Task.csproj (590 tokens)
-7Task/7Task/Program.cs (420 tokens)
-7Task/7Task/Properties/AssemblyInfo.cs (449 tokens)
-6Task/6Task/6Task.csproj (590 tokens)
-6Task/6Task/Program.cs (333 tokens)
-6Task/6Task/Properties/AssemblyInfo.cs (449 tokens)
-5Task/5Task/5Task.csproj (590 tokens)
-5Task/5Task/Program.cs (633 tokens)
-5Task/5Task/Properties/AssemblyInfo.cs (449 tokens)
-2Task/2Task/2Task.csproj (590 tokens)
-2Task/2Task/Program.cs (132 tokens)
-2Task/2Task/Properties/AssemblyInfo.cs (449 tokens)
-1Task/1Task/1Task.csproj (590 tokens)
-1Task/1Task/Program.cs (139 tokens)
-1Task/1Task/Properties/AssemblyInfo.cs (449 tokens)
+  Lab3.sln
+.gitignore
 
 --------------------------------------------------
 [RESPONSE]:
-Second_week/TaskManagerV2.0/Program.cs
-Second_week/TaskManagerV2.0/Controllers/TasksController.cs
-Second_week/TaskManagerV2.0/Controllers/UsersController.cs
-Second_week/TaskManagerV2.0/Data/AppDbContext.cs
-Second_week/TaskManagerV2.0/Models/MyTask.cs
-Second_week/TaskManagerV2.0/Models/User.cs
-Second_week/TaskManager/TaskManager/Program.cs
-Second_week/TaskManager/TaskManager/Controllers/TaskController.cs
-Second_week/TaskManager/TaskManager/Data/AppDbContext.cs
-Second_week/TaskManager/TaskManager/Models/MyTask.cs
-TODOLIst/TODOLIst/App.cs
-TODOLIst/TODOLIst/Program.cs
-TODOLIst/TODOLIst/Task.cs
+.vs/
+bin/
+obj/
+*.dll
+*.exe
+*.pdb
+*.log
+*.cache
+*.vscode/
 ==================================================
 
 ==================================================
 NEW REQUEST | URL: https://api.groq.com/openai/v1/ | Model: meta-llama/llama-4-scout-17b-16e-instruct
 --------------------------------------------------
-[SYSTEM]: You are an expert technical writer and senior software architect.
-Your task is to analyze the provided source code context and generate a professional, comprehensive README.md for the repository.
+[SYSTEM]: You are a codebase architect CLI tool. Your task is to select files containing application logic for comprehensive analysis.
 
-THE README MUST INCLUDE:
-1. Project Title & Clear Description (What is this project, its purpose, and core problem solved).
-2. Key Features (Bullet points highlighting main architectural components and business logic).
-3. Tech Stack (Languages, frameworks, and core dependencies identified from the code).
-4. Project Structure Overview (Brief technical map of the main modules).
-5. Getting Started / Basic Usage guide based on the entry points found.
+CRITICAL CONSTRAINT: Select as many relevant files as possible, maximizing information density without exceeding the strict budget of 25000 tokens total. Stop adding files only when the next file would violate this limit.
 
-OUTPUT FORMAT RULES:
-- Output ONLY valid Markdown content. Do NOT wrap the entire response in ```markdown blocks.
-- Do NOT write introduction text like 'Here is your README' or concluding remarks.
-- Keep it highly professional, technical, clean, and developer-friendly.
-[USER]: REPOSITORY NAME: .Net
-
-SOURCE CODE CONTEXT:
-=== Selected Repository Context for: .Net ===
-Budget Limit: 40000 tokens
-
---- File: Second_week/TaskManagerV2.0/Program.cs (~373 tokens) ---
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
-using TaskManagerV2._0.Data;
-
-
-
-var builder = WebApplication.CreateBuilder(args);
-
-builder.Services.AddAuthorization();
-builder.Services.AddAuthentication(options =>
-{
-    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-
-})
-.AddJwtBearer(options =>
-{
-    options.TokenValidationParameters = new TokenValidationParameters
-    {
-        ValidateIssuerSigningKey = true,
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"].ToString())),
-        ValidateIssuer = false,
-        ValidateAudience = false
-    };
-});
-
-builder.Services.AddDbContext<AppDbContext>(options =>
-options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
-builder.Services.AddControllers();
-
-
-
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-
-var app = builder.Build();
-
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
-app.UseAuthentication();
-app.UseAuthorization();
-
-app.UseHttpsRedirection();
-app.MapControllers();
-
-
-
-app.Run();
-
-
-----------------------------------------
-
---- File: Second_week/TaskManagerV2.0/Controllers/TasksController.cs (~587 tokens) ---
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using System.Linq;
-using System.Security.Claims;
-using TaskManagerV2._0.Data;
-using TaskManagerV2._0.Models;
-
-[ApiController]
-[Route("api/[controller]")]
-public class TasksController : ControllerBase
-{
-    private readonly AppDbContext _context;
-
-    public TasksController(AppDbContext context)
-    {
-        _context = context;
-    }
-
-    // Получить список задач пользователя
-    [HttpGet("user")]
-    [Authorize]
-    public IActionResult GetTasksByUserId()
-    {
-        var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
-        var user = _context.Users.Include(u => u.Tasks).FirstOrDefault(u => u.Id == userId);
-        if (user == null)
-            return NotFound("Пользователь не найден.");
-
-        return Ok(user.Tasks);
-    }
-
-   
-    [HttpPost("add")]
-    [Authorize]
-    public IActionResult AddTask([FromBody] MyTaskDTO taskRequest)
-    {
-        var task = new MyTask();
-        task.Title = taskRequest.name;
-        task.Description = taskRequest.description;
-      
-        var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
-
-        var user = _context.Users.Include(u => u.Tasks).FirstOrDefault(u => u.Id == userId);
-        if (user == null)
-            return Unauthorized("Пользователь не найден.");
-
-        task.UserId = userId; 
-        task.UserId = userId;
-        task.User = user;
-        _context.Tasks.Add(task);
-        _context.SaveChanges();
-
-        return Ok("Успещно добавлено");
-    }
-    [Authorize]
-    [HttpDelete("Delete/{Id}")]
-    public IActionResult RemoveTask(int Id)
-    {
-        var task =_context.Tasks.Find(Id);
-        var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
-
-        if (task == null || task.UserId!=userId) return NotFound("Задача не найдена");
-        
-        _context.Tasks.Remove(task);
-        _context.SaveChanges();
-        return Ok("Задача удалена");
-
-    }
-
-    public class MyTaskDTO
-    {
-        public string name { get; set; }
-        public string description { get; set; }
-        
-    }
-}
-
-----------------------------------------
-
---- File: Second_week/TaskManagerV2.0/Controllers/UsersController.cs (~841 tokens) ---
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
-using Microsoft.IdentityModel.Tokens;
-using TaskManagerV2._0.Data;
-
-namespace TaskManager.Controllers
-{
-    [ApiController]
-    [Route("api/[controller]")]
-    public class UsersController : ControllerBase
-    {
-        private readonly AppDbContext _context;
-        private readonly string _jwtSecret;
-
-        public UsersController(AppDbContext context, IConfiguration configuration)
-        {
-            _context = context;
-            _jwtSecret = configuration["Jwt:Key"];
-        }
-
-        [HttpPost("register")]
-        public async Task<IActionResult> Register([FromBody] UserRegisterDto request)
-        {
-            if (await _context.Users.AnyAsync(u => u.Email == request.Email))
-            {
-                return BadRequest("Пользователь с таким email уже существует.");
-            }
-
-            var user = new User
-            {
-                Email = request.Email,
-                Username = request.Username,
-                PasswordHash = BCrypt.Net.BCrypt.HashPassword(request.Password)
-            };
-
-            _context.Users.Add(user);
-            await _context.SaveChangesAsync();
-
-            return Ok("Пользователь успешно зарегистрирован.");
-        }
-
-        [HttpPost("login")]
-        public async Task<IActionResult> Login([FromBody] UserLoginDto request)
-        {
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == request.Email);
-
-            if (user == null || !BCrypt.Net.BCrypt.Verify(request.Password, user.PasswordHash))
-            {
-                return Unauthorized("Неверный email или пароль.");
-            }
-
-            var token = GenerateJwtToken(user);
-            return Ok(new { Token = token });
-        }
-
-        
-        private string GenerateJwtToken(User user)
-        {
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.UTF8.GetBytes(_jwtSecret);
-
-            var tokenDescriptor = new SecurityTokenDescriptor
-            {
-                Subject = new ClaimsIdentity(new[]
-                {
-                    new Claim(ClaimTypes.Name, user.Username),
-                    new Claim(ClaimTypes.Email, user.Email),
-                    new Claim(ClaimTypes.NameIdentifier, user.Id.ToString())
-                }),
-                Expires = DateTime.UtcNow.AddHours(1),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
-            };
-
-            var token = tokenHandler.CreateToken(tokenDescriptor);
-            return tokenHandler.WriteToken(token);
-        }
-    }
-
-    // DTO для регистрации пользователя
-    public class UserRegisterDto
-    {
-        public string Username { get; set; }
-        public string Email { get; set; }
-        public string Password { get; set; }
-    }
-
-    // DTO для входа пользователя
-    public class UserLoginDto
-    {
-        public string Email { get; set; }
-        public string Password { get; set; }
-    }
-}
-
-----------------------------------------
-
---- File: Second_week/TaskManagerV2.0/Data/AppDbContext.cs (~169 tokens) ---
-﻿using Microsoft.EntityFrameworkCore;
-using TaskManagerV2._0.Models;
-
-namespace TaskManagerV2._0.Data
-{
-    public class AppDbContext: DbContext
-    {
-        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
-        public DbSet<User> Users { get; set; }
-        public DbSet<MyTask> Tasks { get; set; }
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<MyTask>()
-                .HasOne(t => t.User)
-                .WithMany(u => u.Tasks)
-                .HasForeignKey(t => t.UserId)
-                .OnDelete(DeleteBehavior.Cascade);
-        }
-    }
-}
-
-----------------------------------------
-
---- File: Second_week/TaskManagerV2.0/Models/MyTask.cs (~285 tokens) ---
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace TaskManagerV2._0.Models
-{
-    public class MyTask
-    {
-        [Key] // Указывает, что это поле является первичным ключом
-        public int Id { get; set; }
-
-        [Required(ErrorMessage = "Название задачи обязательно.")]
-        [StringLength(100, ErrorMessage = "Название задачи не должно превышать 100 символов.")]
-        public string Title { get; set; }
-
-        [StringLength(500, ErrorMessage = "Описание задачи не должно превышать 500 символов.")]
-        public string Description { get; set; }
-
-        [Required]
-        public bool IsCompleted { get; set; } = false; // По умолчанию задача не выполнена
-
-        // Внешний ключ для связи с пользователем
-        public int UserId { get; set; }
-
-        // Навигационное свойство для связи с пользователем
-        public User User;
-    }
-}
-
-----------------------------------------
-
---- File: Second_week/TaskManagerV2.0/Models/User.cs (~246 tokens) ---
-﻿using System.ComponentModel.DataAnnotations;
-using TaskManagerV2._0.Models;
-
-public class User
-{
-    [Key] 
-    public int Id { get; set; }
-
-    [Required(ErrorMessage = "Имя пользователя обязательно.")]
-    [StringLength(50, ErrorMessage = "Имя пользователя не должно превышать 50 символов.")]
-    public string Username { get; set; }
-
-    [Required(ErrorMessage = "Электронная почта обязательна.")]
-    [EmailAddress(ErrorMessage = "Некорректный формат электронной почты.")]
-    public string Email { get; set; }
-
-    [Required(ErrorMessage = "Пароль обязателен.")]
-    [StringLength(100, ErrorMessage = "Пароль должен быть от 6 до 100 символов.", MinimumLength = 6)]
-    public string PasswordHash { get; set; }
-
-    
-    public List<MyTask> Tasks { get; set; } = new List<MyTask>();
-}
-----------------------------------------
-
---- File: Second_week/TaskManager/TaskManager/Program.cs (~865 tokens) ---
-using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Authentication.BearerToken;
-
-using TaskManager;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
-using TaskManager.Services;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using Microsoft.AspNetCore.Authorization;
-using TaskManager.Models;
-var people = new List<Person>
-{
-    new Person("bob@gmail.com","12345"),
-    new Person("tom@gmail.com","45345")
-
-
-};
-
-var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddDbContext<AppDbContext>(options =>
-options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
-
-builder.Services.AddAuthorization();
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddJwtBearer(options =>
-    {
-        options.TokenValidationParameters = new TokenValidationParameters
-        {
-            // ���������, ����� �� �������������� �������� ��� ��������� ������
-            ValidateIssuer = true,
-            // ������, �������������� ��������
-            ValidIssuer = AuthOptions.ISSUER,
-            // ����� �� �������������� ����������� ������
-            ValidateAudience = true,
-            // ��������� ����������� ������
-            ValidAudience = AuthOptions.AUDIENCE,
-            // ����� �� �������������� ����� �������������
-            ValidateLifetime = true,
-            // ��������� ����� ������������
-            IssuerSigningKey = AuthOptions.GetSymmetricSecurityKey(),
-            // ��������� ����� ������������
-            ValidateIssuerSigningKey = true,
-        };
-    });
-
-
-
-
-
-
-// Add services to the container.
-builder.Services.AddControllersWithViews();
-
-var app = builder.Build();
-app.UseAuthentication();
-app.UseAuthorization();
-
-
-app.Map("/data", [Authorize] () => new { message = "Hello World!" });
-app.MapPost("/login", (Person loginData) =>
-{
-    // ������� ������������ 
-    Person? person = people.FirstOrDefault(p => p.Email == loginData.Email && p.Password == loginData.Password);
-    // ���� ������������ �� ������, ���������� ��������� ��� 401
-    if (person is null) return Results.Unauthorized();
-    var claims = new List<Claim> { new Claim(ClaimTypes.Name, person.Password) };
-    var jwt = new JwtSecurityToken(
-            issuer: AuthOptions.ISSUER,
-            audience: AuthOptions.AUDIENCE,
-            claims: claims,
-            expires: DateTime.UtcNow.Add(TimeSpan.FromMinutes(10)), // ����� �������� 2 ������
-            signingCredentials: new SigningCredentials(AuthOptions.GetSymmetricSecurityKey(), SecurityAlgorithms.HmacSha256));
-    var encodedJwt = new JwtSecurityTokenHandler().WriteToken(jwt);
-    // ��������� �����
-    var response = new
-    {
-        access_token = encodedJwt,
-        username = person.Email
-    };
-
-    return Results.Json(response);
-});
-
-
-// Configure the HTTP request pipeline.
-if (!app.Environment.IsDevelopment())
-{
-    app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseHsts();
-}
-
-app.UseHttpsRedirection();
-app.UseStaticFiles();
-
-app.UseRouting();
-
-app.UseAuthorization();
-
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
-
-app.Run();
-
-----------------------------------------
-
---- File: Second_week/TaskManager/TaskManager/Controllers/TaskController.cs (~778 tokens) ---
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-
-[ApiController]
-[Route("api/[controller]")]
-public class UsersController : ControllerBase
-{
-    private readonly AppDbContext _context;
-
-    public UsersController(AppDbContext context)
-    {
-        _context = context;
-    }
-
-    // Регистрация нового пользователя
-    [HttpPost("register")]
-    public IActionResult Register([FromBody] User user)
-    {
-        if (!ModelState.IsValid)
-            return BadRequest(ModelState);
-
-        // Проверка на уникальность имени пользователя
-        if (_context.Users.Any(u => u.Username == user.Username))
-            return Conflict("Пользователь с таким именем уже существует.");
-
-        // Хэширование пароля
-        user.PasswordHash = HashPassword(user.PasswordHash);
-
-        _context.Users.Add(user);
-        _context.SaveChanges();
-        return Ok("Пользователь успешно зарегистрирован.");
-    }
-
-    // Вход в систему
-    [HttpPost("login")]
-    public IActionResult Login([FromBody] LoginRequest request)
-    {
-        var user = _context.Users.SingleOrDefault(u => u.Username == request.Username);
-        if (user == null || !VerifyPassword(request.Password, user.PasswordHash))
-            return Unauthorized("Неверное имя пользователя или пароль.");
-
-        // Генерация JWT
-        var tokenHandler = new JwtSecurityTokenHandler();
-        var key = Encoding.UTF8.GetBytes("YourSuperSecretKey"); // Используйте более сложный ключ
-        var tokenDescriptor = new SecurityTokenDescriptor
-        {
-            Subject = new ClaimsIdentity(new[] {
-            new Claim(ClaimTypes.Name, user.Username),
-            new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()) // UserId
-        }),
-            Expires = DateTime.UtcNow.AddHours(1),
-            SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
-        };
-
-        var token = tokenHandler.CreateToken(tokenDescriptor);
-        var tokenString = tokenHandler.WriteToken(token);
-
-        return Ok(new { Token = tokenString });
-    }
-
-    // Методы для хэширования пароля
-    private string HashPassword(string password)
-    {
-        using var sha256 = SHA256.Create();
-        var bytes = Encoding.UTF8.GetBytes(password);
-        var hash = sha256.ComputeHash(bytes);
-        return Convert.ToBase64String(hash);
-    }
-
-    private bool VerifyPassword(string password, string storedHash)
-    {
-        return HashPassword(password) == storedHash;
-    }
-}
-
-// DTO для входа
-public class LoginRequest
-{
-    [Required]
-    public string Username { get; set; }
-
-    [Required]
-    public string Password { get; set; }
-}
-
-----------------------------------------
-
---- File: Second_week/TaskManager/TaskManager/Data/AppDbContext.cs (~57 tokens) ---
-﻿using Microsoft.EntityFrameworkCore;
-
-public class AppDbContext : DbContext
-{
-    public DbSet<MyTask> MyTasks { get; set; }
-
-    public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
-    
-}
-
-----------------------------------------
-
---- File: Second_week/TaskManager/TaskManager/Models/MyTask.cs (~85 tokens) ---
-﻿using System.ComponentModel.DataAnnotations;
-
-public class MyTask
-{
-    public int Id { get; set; } // Номер задачи
-
-    [Required]
-    public string Name { get; set; } // Название задачи
-    public string Description { get; set; }
-
-    public DateTime DateTime { get; set; }
-
-
-    
-
-    
-
-
-
-}
-
-----------------------------------------
-
---- File: TODOLIst/TODOLIst/App.cs (~2379 tokens) ---
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using static System.Net.Mime.MediaTypeNames;
-
-enum state
-{
-    menu,
-    delete,
-    change
-}
-namespace TODOLIst
-{
-    abstract class App
-    {
-        static bool isWorking;
-        static int choosedTask=-1;
-        
-        static string MainMenu =
-            "Выберите действие\n" +
-            "0. Выход\n" +
-            "1. Вывод задач\n" +
-            "2. Добавить задачу\n" +
-            "3. Выбрать задачу\n" +
-            "4. Удалить задачу\n" +
-            "5. Редактиоровать задачу\n" +
-            "6. Сохранить\n";
-        static string DeleteMenu = 
-            "1. Удалить выбранную\n" +
-            "2. Удалить все\n";
-        static string currentMenu=MainMenu;
-        static state state = state.menu;
-        static List<Task> tasks = new List<Task>();
-
-        public static void StartApp()
-        {
-            Load();
-            isWorking = true;
-            state = state.menu;
-            while (isWorking)
-            {
-                Console.Clear();
-                Console.WriteLine(currentMenu);
-                ReadInput();
-            }
-        }
-        public static void ReadInput()
-        {
-            char key = Console.ReadKey().KeyChar;
-            switch (state)
-            {
-                case state.menu:
-                    switch (key)
-                    {
-                        case '0':
-                            Exit();
-                            break;
-                        case '1':
-                            OutTasks();
-                            break;
-                        case '2':
-                            AddTask();
-                            break;
-                        case '3':
-                            ChooseTask();
-                            break;
-                        case '4':
-                            Delete();
-                            break;
-                        case '6':
-                            Save();
-                            break;
-                    }
-                    break;
-                case state.delete:
-                    switch(key)
-                    {
-                        case '1':
-                            DeleteChoosed();
-                            break;
-                        case '2':
-                            DeleteAll();
-                                break;
-                    }
-                break;
-            }
-        }
-        public static void Exit()
-        {
-            Console.Clear() ;
-            Console.WriteLine($"Вы хотите соохранить задачи");
-            Console.WriteLine("1.Да\n" +
-                "2.Нет");
-            switch (Console.ReadKey().KeyChar)
-            {
-                case '1':
-                    Save();
-                    Console.Clear ();
-                    Environment.Exit(0);
-                    break;
-                case '2':
-                    Console.Clear();
-                    Environment.Exit(0);
-                    break;
-            }
-        }
-        public static void DeleteAll()
-        {
-            Console.Clear();
-            
-                Console.WriteLine($"Вы уверены что хотите удалить все задачи");
-                Console.WriteLine("1.Да\n" +
-                    "2.Нет");
-                switch (Console.ReadKey().KeyChar)
-                {
-                    case '1':
-                        tasks.Clear();
-                    Console.Clear();
-                    Console.WriteLine("Вы всё нахуй удалили\nнажмите любую клавишу чтобы продолжить...");
-                    Console.ReadKey();
-                    break;
-                    default:
-                        Console.Clear();
-                        Console.WriteLine("Вы ничего не удалили\nнажмите любую клавишу чтобы продолжить...");
-                        Console.ReadKey();
-                        break;
-                }
-            
-            currentMenu = MainMenu;
-            state = state.menu;
-        }
-        public static void DeleteChoosed()
-        {
-            Console.Clear();
-            if (choosedTask != -1)
-            {
-                Console.WriteLine($"Вы уверены что хотите удалить задачу {choosedTask + 1}");
-                tasks[choosedTask].OutData();
-                Console.WriteLine("1.Да\n" +
-                    "2.Нет");
-                switch (Console.ReadKey().KeyChar)
-                {
-                    case '1':
-                        tasks.RemoveAt(choosedTask);
-                        Console.Clear();
-                        Console.WriteLine($"Вы удалили задачу №{choosedTask+1}\nнажмите любую клавишу чтобы продолжить...");
-                        Console.ReadKey();
-                        break;
-                    default:
-                        Console.Clear();
-                        Console.WriteLine("Вы ничего не удалили\nнажмите любую клавишу чтобы продолжить...");
-                        Console.ReadKey();
-                        break;
-                }
-            }
-            currentMenu = MainMenu;
-            state=state.menu;
-        }
-        public static void Delete()
-        {
-            state = state.delete;
-            currentMenu = DeleteMenu;
-
-        }
-
-        public static void Save()
-        {
-            Console.Clear();
-            Console.WriteLine("Сохраняем...");
-            string jsonData = JsonConvert.SerializeObject(tasks);
-            File.WriteAllText("file.json", jsonData);
-            Thread.Sleep(1000);
-            Console.Clear();
-            Console.WriteLine("Сохранено\nнажмите любую клавишу чтобы продолжить...");
-            Console.ReadKey();
-        }
-        public static void Load()
-        {
-            if (File.Exists("file.json"))
-            {
-                string jsonData = File.ReadAllText("file.json");
-                tasks = JsonConvert.DeserializeObject<List<Task>>(jsonData);
-            }
-        }
-
-        public static void ChooseTask()
-        {
-            if (tasks.Count != 0)
-            {
-                Console.Clear();
-                for (int i = 0; i < tasks.Count; i++)
-                {
-                    Console.WriteLine($"ЗАДАЧА №{i + 1}\n");
-                    tasks[i].OutData();
-                }
-                Console.WriteLine("Выберите номер задачи");
-                choosedTask = -1;
-                if (int.TryParse(Console.ReadLine(), out choosedTask))
-                {
-                    Console.WriteLine("Задача выбрана\nнажмите любую клавишу чтобы продолжить...");
-                    Console.ReadKey();
-                }
-                else
-                {
-                    Console.WriteLine("Задача не выбрана\nнажмите любую клавишу чтобы продолжить...");
-                    Console.ReadKey();
-                }
-                choosedTask = choosedTask == -1 ? -1 : choosedTask -1;
-            }
-            else
-            {
-                Console.Clear();
-                Console.WriteLine("У вас нет ни одной задачи\nнажмите любую клавишу чтобы продолжить...");
-                Console.ReadKey();
-            }
-
-
-        }
-        public static void OutTasks()
-        {
-            Console.Clear();
-            for (int i = 0; i < tasks.Count; i++)
-            {
-                Console.WriteLine($"ЗАДАЧА №{i+1}\n");
-                tasks[i].OutData();
-            }
-            Console.WriteLine("Нажмите любую клавишу чтобы продолжить...");
-            Console.ReadKey();
-        }
-        public static void AddTask()
-        {
-            Console.Clear();
-            Console.WriteLine("Введите название задачи");
-            string name = Console.ReadLine();
-            Console.WriteLine("Введите описание задачи");
-            string description = Console.ReadLine();
-            Console.WriteLine("Время в формате дд.мм.гг или просто нажмите Enter");
-            string time = Console.ReadLine();
-            DateTime timeD = DateTime.Now;
-            DateTime.TryParse(time, out timeD);
-            tasks.Add(new Task(name, description, timeD));
-            Console.WriteLine("Добавляем вашу задачу...");
-            Thread.Sleep(1000);
-            Console.Clear();
-            Console.WriteLine("Успешно добавлено\nНажмите любую клавишу чтобы продолжить...");
-            Console.ReadKey();
-        }
-    }
-}
-
-----------------------------------------
-
---- File: TODOLIst/TODOLIst/Program.cs (~91 tokens) ---
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-
-namespace TODOLIst
-{
-    internal class Program
-    {
-        static void Main(string[] args)
-        {
-
-          
-          
-       
-
-            App.StartApp();
-        }
-    }
-}
-
-----------------------------------------
-
---- File: TODOLIst/TODOLIst/Task.cs (~336 tokens) ---
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-
-
-namespace TODOLIst
-{
-    [Serializable]
-    public class Task
-    {
-        [JsonProperty("name")]
-        private string name
-        {
-            get; set;
-        }
-        [JsonProperty("description")]
-        private string description
-        {
-            get; set;
-        }
-        [JsonProperty("date")]
-        private DateTime? date
-        {
-            get; set;
-        }
-
-        public Task()
-        {
-        }
-
-        
-        public Task(string name, string description)
-        {
-            this.name = name;
-            this.description = description;
-            date = null;
-            
-        }
-
-        public Task(string name, string description, DateTime? date)
-        {
-            this.name = name;
-            this.description = description;
-            this.date = date;
-        }
-
-        public void OutData()
-        {
-            Console.WriteLine($"Задача: {name}\nОписание:\n{description}\nДата: {date.ToString()}\n");
-            
-
-        }
-        
-    }
-    
-}
-
-----------------------------------------
-
-=== End of Context. Total Collected Tokens: ~7092 ===
-
---------------------------------------------------
-[RESPONSE]:
-# Task Manager API
-
-## Project Description
-The Task Manager API is a .NET-based web application designed to manage tasks for users. It provides features for user registration, login, task creation, retrieval, and deletion.
-
-## Key Features
-
-* User registration and login with JWT authentication
-* Task creation, retrieval, and deletion for authenticated users
-* Task management with title, description, and completion status
-* User-specific task lists
-
-## Tech Stack
-
-* .NET Core
-* ASP.NET Core
-* Entity Framework Core
-* SQLite
-* JWT authentication
-
-## Project Structure Overview
-
-The project consists of the following modules:
-
-* `Program.cs`: The main entry point of the application, configuring services and middleware.
-* `Controllers/TasksController.cs`: Handles task-related requests (GET, POST, DELETE).
-* `Controllers/UsersController.cs`: Handles user-related requests (registration, login).
-* `Data/AppDbContext.cs`: The database context for interacting with the SQLite database.
-* `Models/MyTask.cs` and `Models/User.cs`: Represent tasks and users, respectively.
-
-## Getting Started / Basic Usage
-
-1. Clone the repository and navigate to the project directory.
-2. Run `dotnet restore` to restore NuGet packages.
-3. Run `dotnet run` to start the application.
-4. Use a tool like Postman or curl to test the API endpoints.
-
-### API Endpoints
-
-* `POST /api/Users/register`: Register a new user.
-* `POST /api/Users/login`: Login an existing user and retrieve a JWT token.
-* `GET /api/Tasks/user`: Retrieve tasks for the authenticated user.
-* `POST /api/Tasks/add`: Create a new task for the authenticated user.
-* `DELETE /api/Tasks/Delete/{Id}`: Delete a task by ID.
-
-### Example Use Case
-
-1. Register a new user: `POST /api/Users/register` with a JSON body containing `Username`, `Email`, and `Password`.
-2. Login the user: `POST /api/Users/login` with a JSON body containing `Email` and `Password`. Retrieve the JWT token from the response.
-3. Create a new task: `POST /api/Tasks/add` with a JSON body containing `name` and `description`, and include the JWT token in the `Authorization` header.
-4. Retrieve tasks for the user: `GET /api/Tasks/user` with the JWT token in the `Authorization` header.
-==================================================
-
-==================================================
-NEW REQUEST | URL: https://api.groq.com/openai/v1/ | Model: meta-llama/llama-4-scout-17b-16e-instruct
---------------------------------------------------
-[SYSTEM]: You are a strict codebase architect CLI tool. Your task is to select the most critical project files for logic analysis.
-
-CRITICAL CONSTRAINT: The total token weight of selected files MUST NOT exceed 20000 tokens.
-Select only core business logic files (entry points, controllers, services, models, data contexts).
-Ignore tests, build artifacts, migrations, and UI assets.
+SELECTION PRIORITY:
+- High Priority: Source code files (.cs, .py, .js, .ts, .go, etc.), including entry points, services, controllers, models, and UI logic code (e.g., Form1.cs, views, components).
+- Low Priority: Configuration files, setup files.
+- DO NOT SELECT: Build artifacts, dependency folders (node_modules, bin, obj), binary assets, and test files.
 
 You receive a directory tree: folders end with '/', files are listed by name with indentation (not full paths per line).
 Token counts are shown as (~N tokens). Reconstruct full relative paths from the tree when answering.
 
 OUTPUT FORMAT RULES:
 1. Output ONLY a flat list of relative file paths from repository root (one path per line, use /).
-2. Strictly NO numbered lists (do not use 1, 2, 3).
+2. Strictly NO numbered lists.
 3. Strictly NO introduction, NO Markdown code blocks, NO conclusion text, and NO human commentary.
 4. Output must be raw plain text paths only.
 [USER]: Project/
@@ -1662,592 +122,36 @@ OUTPUT FORMAT RULES:
     App.cs (~4000 tokens)
     Test.cs (~2000 tokens)
 [ASSISTANT]: src/App.cs
-[USER]: 1Task/ (~912 tokens)
-  .vs/1Task/ (~716 tokens)
-    v17/ (~716 tokens)
-      DocumentLayout.backup.json (~358 tokens)
-      DocumentLayout.json (~358 tokens)
-  1Task/ (~196 tokens)
-    bin/Debug/ (~46 tokens)
-      1Task.exe.config (~46 tokens)
-    obj/Debug/ (~104 tokens)
-      1Task.csproj.FileListAbsolute.txt (~104 tokens)
-    App.config (~46 tokens)
-2Task/ (~914 tokens)
-  .vs/2Task/ (~718 tokens)
-    v17/ (~718 tokens)
-      DocumentLayout.backup.json (~359 tokens)
-      DocumentLayout.json (~359 tokens)
-  2Task/ (~196 tokens)
-    bin/Debug/ (~46 tokens)
-      2Task.exe.config (~46 tokens)
-    obj/Debug/ (~104 tokens)
-      2Task.csproj.FileListAbsolute.txt (~104 tokens)
-    App.config (~46 tokens)
-5Task/ (~912 tokens)
-  .vs/5Task/ (~716 tokens)
-    v17/ (~716 tokens)
-      DocumentLayout.backup.json (~358 tokens)
-      DocumentLayout.json (~358 tokens)
-  5Task/ (~196 tokens)
-    bin/Debug/ (~46 tokens)
-      5Task.exe.config (~46 tokens)
-    obj/Debug/ (~104 tokens)
-      5Task.csproj.FileListAbsolute.txt (~104 tokens)
-    App.config (~46 tokens)
-6Task/ (~914 tokens)
-  .vs/6Task/ (~718 tokens)
-    v17/ (~718 tokens)
-      DocumentLayout.backup.json (~359 tokens)
-      DocumentLayout.json (~359 tokens)
-  6Task/ (~196 tokens)
-    bin/Debug/ (~46 tokens)
-      6Task.exe.config (~46 tokens)
-    obj/Debug/ (~104 tokens)
-      6Task.csproj.FileListAbsolute.txt (~104 tokens)
-    App.config (~46 tokens)
-7Task/ (~914 tokens)
-  .vs/7Task/ (~718 tokens)
-    v17/ (~718 tokens)
-      DocumentLayout.backup.json (~359 tokens)
-      DocumentLayout.json (~359 tokens)
-  7Task/ (~196 tokens)
-    bin/Debug/ (~46 tokens)
-      7Task.exe.config (~46 tokens)
-    obj/Debug/ (~104 tokens)
-      7Task.csproj.FileListAbsolute.txt (~104 tokens)
-    App.config (~46 tokens)
-Burley/ (~925 tokens)
-  .vs/Burley/ (~724 tokens)
-    v17/ (~724 tokens)
-      DocumentLayout.backup.json (~362 tokens)
-      DocumentLayout.json (~362 tokens)
-  Burley/ (~201 tokens)
-    bin/Debug/ (~46 tokens)
-      Burley.exe.config (~46 tokens)
-    obj/Debug/ (~109 tokens)
-      Burley.csproj.FileListAbsolute.txt (~109 tokens)
-    App.config (~46 tokens)
-CorrectDays/ (~988 tokens)
-  .vs/CorrectDays/ (~760 tokens)
-    v17/ (~760 tokens)
-      DocumentLayout.backup.json (~380 tokens)
-      DocumentLayout.json (~380 tokens)
-  CorrectDays/ (~228 tokens)
-    bin/Debug/ (~46 tokens)
-      CorrectDays.exe.config (~46 tokens)
-    obj/Debug/ (~136 tokens)
-      CorrectDays.csproj.FileListAbsolute.txt (~136 tokens)
-    App.config (~46 tokens)
-First_week/ (~1490351 tokens)
-  Projects/ (~1489911 tokens)
-    Books/ (~1552 tokens)
-      .vs/Books/ (~1236 tokens)
-        v17/ (~1236 tokens)
-          DocumentLayout.backup.json (~618 tokens)
-          DocumentLayout.json (~618 tokens)
-      Books/ (~316 tokens)
-        bin/Debug/ (~46 tokens)
-          Books.exe.config (~46 tokens)
-        obj/Debug/ (~224 tokens)
-          Books.csproj.FileListAbsolute.txt (~224 tokens)
-        App.config (~46 tokens)
-    Calculator/ (~1400 tokens)
-      .vs/Calculator/ (~1031 tokens)
-        v17/ (~1031 tokens)
-          DocumentLayout.backup.json (~386 tokens)
-          DocumentLayout.json (~645 tokens)
-      Calculator/ (~369 tokens)
-        bin/Debug/ (~46 tokens)
-          Calculator.exe.config (~46 tokens)
-        obj/Debug/ (~277 tokens)
-          Calculator.csproj.FileListAbsolute.txt (~277 tokens)
-        App.config (~46 tokens)
-    IsOdd/ (~1052 tokens)
-      .vs/IsOdd/ (~736 tokens)
-        v17/ (~736 tokens)
-          DocumentLayout.backup.json (~368 tokens)
-          DocumentLayout.json (~368 tokens)
-      IsOdd/ (~316 tokens)
-        bin/Debug/ (~46 tokens)
-          IsOdd.exe.config (~46 tokens)
-        obj/Debug/ (~224 tokens)
-          IsOdd.csproj.FileListAbsolute.txt (~224 tokens)
-        App.config (~46 tokens)
-    Loading/ (~974 tokens)
-      .vs/Loading/ (~752 tokens)
-        v17/ (~752 tokens)
-          DocumentLayout.backup.json (~376 tokens)
-          DocumentLayout.json (~376 tokens)
-      Loading/ (~222 tokens)
-        bin/Debug/ (~46 tokens)
-          Loading.exe.config (~46 tokens)
-        obj/Debug/ (~130 tokens)
-          Loading.csproj.FileListAbsolute.txt (~130 tokens)
-        App.config (~46 tokens)
-    MasSum/ (~1499 tokens)
-      .vs/MasSum/ (~436 tokens)
-        v17/ (~436 tokens)
-          DocumentLayout.backup.json (~372 tokens)
-          DocumentLayout.json (~64 tokens)
-      MasSum/ (~1063 tokens)
-        .vs/ (~736 tokens)
-          MasSum.csproj.dtbcache.json (~736 tokens)
-        bin/Debug/ (~46 tokens)
-          MasSum.exe.config (~46 tokens)
-        obj/Debug/ (~235 tokens)
-          MasSum.csproj.FileListAbsolute.txt (~235 tokens)
-        App.config (~46 tokens)
-    MaxValue/ (~1106 tokens)
-      .vs/MaxValue/ (~758 tokens)
-        v17/ (~758 tokens)
-          DocumentLayout.backup.json (~379 tokens)
-          DocumentLayout.json (~379 tokens)
-      MaxValue/ (~348 tokens)
-        bin/Debug/ (~46 tokens)
-          MaxValue.exe.config (~46 tokens)
-        obj/Debug/ (~256 tokens)
-          MaxValue.csproj.FileListAbsolute.txt (~256 tokens)
-        App.config (~46 tokens)
-    PasswordGenerator/ (~1264 tokens)
-      .vs/PasswordGenerator/ (~822 tokens)
-        v17/ (~822 tokens)
-          DocumentLayout.backup.json (~411 tokens)
-          DocumentLayout.json (~411 tokens)
-      PasswordGenerator/ (~442 tokens)
-        bin/Debug/ (~46 tokens)
-          PasswordGenerator.exe.config (~46 tokens)
-        obj/Debug/ (~350 tokens)
-          PasswordGenerator.csproj.FileListAbsolute.txt (~350 tokens)
-        App.config (~46 tokens)
-    PersonSays/ (~1697 tokens)
-      .vs/PersonSays/ (~1328 tokens)
-        v17/ (~1328 tokens)
-          DocumentLayout.backup.json (~664 tokens)
-          DocumentLayout.json (~664 tokens)
-      PersonSays/ (~369 tokens)
-        bin/Debug/ (~46 tokens)
-          PersonSays.exe.config (~46 tokens)
-        obj/Debug/ (~277 tokens)
-          PersonSays.csproj.FileListAbsolute.txt (~277 tokens)
-        App.config (~46 tokens)
-    Ready/ (~950 tokens)
-      .vs/Ready/ (~738 tokens)
-        v17/ (~738 tokens)
-          DocumentLayout.backup.json (~369 tokens)
-          DocumentLayout.json (~369 tokens)
-      Ready/ (~212 tokens)
-        bin/Debug/ (~46 tokens)
-          Ready.exe.config (~46 tokens)
-        obj/Debug/ (~120 tokens)
-          Ready.csproj.FileListAbsolute.txt (~120 tokens)
-        App.config (~46 tokens)
-    TODOLIst/ (~1472850 tokens)
-      .vs/TODOLIst/ (~2390 tokens)
-        v17/ (~2390 tokens)
-          DocumentLayout.backup.json (~1195 tokens)
-          DocumentLayout.json (~1195 tokens)
-      TODOLIst/ (~175911 tokens)
-        bin/Debug/ (~175659 tokens)
-          Newtonsoft.Json.xml (~175544 tokens)
-          TODOLIst.exe.config (~46 tokens)
-          file.json (~35 tokens)
-          file.txt (~34 tokens)
-        obj/Debug/ (~171 tokens)
-          TODOLIst.csproj.FileListAbsolute.txt (~171 tokens)
-          TODOLIst.csproj.Up2Date (~0 tokens)
-        App.config (~46 tokens)
-        packages.config (~35 tokens)
-      packages/Newtonsoft.Json.13.0.3/ (~1294549 tokens)
-        lib/ (~1293805 tokens)
-          net20/ (~149876 tokens)
-            Newtonsoft.Json.xml (~149876 tokens)
-          net35/ (~136362 tokens)
-            Newtonsoft.Json.xml (~136362 tokens)
-          net40/ (~139292 tokens)
-            Newtonsoft.Json.xml (~139292 tokens)
-          net45/ (~175544 tokens)
-            Newtonsoft.Json.xml (~175544 tokens)
-          net6.0/ (~174916 tokens)
-            Newtonsoft.Json.xml (~174916 tokens)
-          netstandard1.0/ (~170283 tokens)
-            Newtonsoft.Json.xml (~170283 tokens)
-          netstandard1.3/ (~172304 tokens)
-            Newtonsoft.Json.xml (~172304 tokens)
-          netstandard2.0/ (~175228 tokens)
-            Newtonsoft.Json.xml (~175228 tokens)
-        LICENSE.md (~271 tokens)
-        README.md (~473 tokens)
-    TextFileReader/ (~1673 tokens)
-      .vs/TextFileReader/ (~1414 tokens)
-        v17/ (~1414 tokens)
-          DocumentLayout.backup.json (~707 tokens)
-          DocumentLayout.json (~707 tokens)
-      TextFileReader/ (~259 tokens)
-        bin/Debug/ (~46 tokens)
-          TextFileReader.exe.config (~46 tokens)
-        obj/Debug/ (~167 tokens)
-          TextFileReader.csproj.FileListAbsolute.txt (~167 tokens)
-        App.config (~46 tokens)
-    ThreeDividingNumbers/ (~1316 tokens)
-      .vs/ThreeDividingNumbers/ (~842 tokens)
-        v17/ (~842 tokens)
-          DocumentLayout.backup.json (~421 tokens)
-          DocumentLayout.json (~421 tokens)
-      ThreeDividingNumbers/ (~474 tokens)
-        bin/Debug/ (~46 tokens)
-          ThreeDividingNumbers.exe.config (~46 tokens)
-        obj/Debug/ (~382 tokens)
-          ThreeDividingNumbers.csproj.FileListAbsolute.txt (~382 tokens)
-        App.config (~46 tokens)
-    UserData/ (~1481 tokens)
-      .vs/UserData/ (~1269 tokens)
-        v17/ (~1269 tokens)
-          DocumentLayout.backup.json (~630 tokens)
-          DocumentLayout.json (~639 tokens)
-      UserData/ (~212 tokens)
-        bin/Debug/ (~46 tokens)
-          UserData.exe.config (~46 tokens)
-        obj/Debug/ (~120 tokens)
-          UserData.csproj.FileListAbsolute.txt (~120 tokens)
-        App.config (~46 tokens)
-    ZereDividingCheck/ (~1097 tokens)
-      .vs/ZereDividingCheck/ (~822 tokens)
-        v17/ (~822 tokens)
-          DocumentLayout.backup.json (~411 tokens)
-          DocumentLayout.json (~411 tokens)
-      ZereDividingCheck/ (~275 tokens)
-        bin/Debug/ (~46 tokens)
-          ZereDividingCheck.exe.config (~46 tokens)
-        obj/Debug/ (~183 tokens)
-          ZereDividingCheck.csproj.FileListAbsolute.txt (~183 tokens)
-        App.config (~46 tokens)
-  README.md (~440 tokens)
-ProgTask/ (~373 tokens)
-  .vs/ProgTask/ (~373 tokens)
-    v17/ (~373 tokens)
-      DocumentLayout.json (~373 tokens)
-Projects/ (~15580 tokens)
-  Books/ (~1552 tokens)
-    .vs/Books/ (~1236 tokens)
-      v17/ (~1236 tokens)
-        DocumentLayout.backup.json (~618 tokens)
-        DocumentLayout.json (~618 tokens)
-    Books/ (~316 tokens)
-      bin/Debug/ (~46 tokens)
-        Books.exe.config (~46 tokens)
-      obj/Debug/ (~224 tokens)
-        Books.csproj.FileListAbsolute.txt (~224 tokens)
-      App.config (~46 tokens)
-  Calculator/ (~1400 tokens)
-    .vs/Calculator/ (~1031 tokens)
-      v17/ (~1031 tokens)
-        DocumentLayout.backup.json (~386 tokens)
-        DocumentLayout.json (~645 tokens)
-    Calculator/ (~369 tokens)
-      bin/Debug/ (~46 tokens)
-        Calculator.exe.config (~46 tokens)
-      obj/Debug/ (~277 tokens)
-        Calculator.csproj.FileListAbsolute.txt (~277 tokens)
-      App.config (~46 tokens)
-  IsOdd/ (~1052 tokens)
-    .vs/IsOdd/ (~736 tokens)
-      v17/ (~736 tokens)
-        DocumentLayout.backup.json (~368 tokens)
-        DocumentLayout.json (~368 tokens)
-    IsOdd/ (~316 tokens)
-      bin/Debug/ (~46 tokens)
-        IsOdd.exe.config (~46 tokens)
-      obj/Debug/ (~224 tokens)
-        IsOdd.csproj.FileListAbsolute.txt (~224 tokens)
-      App.config (~46 tokens)
-  Loading/ (~974 tokens)
-    .vs/Loading/ (~752 tokens)
-      v17/ (~752 tokens)
-        DocumentLayout.backup.json (~376 tokens)
-        DocumentLayout.json (~376 tokens)
-    Loading/ (~222 tokens)
-      bin/Debug/ (~46 tokens)
-        Loading.exe.config (~46 tokens)
-      obj/Debug/ (~130 tokens)
-        Loading.csproj.FileListAbsolute.txt (~130 tokens)
-      App.config (~46 tokens)
-  MasSum/ (~1499 tokens)
-    .vs/MasSum/ (~436 tokens)
-      v17/ (~436 tokens)
-        DocumentLayout.backup.json (~372 tokens)
-        DocumentLayout.json (~64 tokens)
-    MasSum/ (~1063 tokens)
-      .vs/ (~736 tokens)
-        MasSum.csproj.dtbcache.json (~736 tokens)
-      bin/Debug/ (~46 tokens)
-        MasSum.exe.config (~46 tokens)
-      obj/Debug/ (~235 tokens)
-        MasSum.csproj.FileListAbsolute.txt (~235 tokens)
-      App.config (~46 tokens)
-  MaxValue/ (~1106 tokens)
-    .vs/MaxValue/ (~758 tokens)
-      v17/ (~758 tokens)
-        DocumentLayout.backup.json (~379 tokens)
-        DocumentLayout.json (~379 tokens)
-    MaxValue/ (~348 tokens)
-      bin/Debug/ (~46 tokens)
-        MaxValue.exe.config (~46 tokens)
-      obj/Debug/ (~256 tokens)
-        MaxValue.csproj.FileListAbsolute.txt (~256 tokens)
-      App.config (~46 tokens)
-  PasswordGenerator/ (~1264 tokens)
-    .vs/PasswordGenerator/ (~822 tokens)
-      v17/ (~822 tokens)
-        DocumentLayout.backup.json (~411 tokens)
-        DocumentLayout.json (~411 tokens)
-    PasswordGenerator/ (~442 tokens)
-      bin/Debug/ (~46 tokens)
-        PasswordGenerator.exe.config (~46 tokens)
-      obj/Debug/ (~350 tokens)
-        PasswordGenerator.csproj.FileListAbsolute.txt (~350 tokens)
-      App.config (~46 tokens)
-  PersonSays/ (~1697 tokens)
-    .vs/PersonSays/ (~1328 tokens)
-      v17/ (~1328 tokens)
-        DocumentLayout.backup.json (~664 tokens)
-        DocumentLayout.json (~664 tokens)
-    PersonSays/ (~369 tokens)
-      bin/Debug/ (~46 tokens)
-        PersonSays.exe.config (~46 tokens)
-      obj/Debug/ (~277 tokens)
-        PersonSays.csproj.FileListAbsolute.txt (~277 tokens)
-      App.config (~46 tokens)
-  Ready/ (~950 tokens)
-    .vs/Ready/ (~738 tokens)
-      v17/ (~738 tokens)
-        DocumentLayout.backup.json (~369 tokens)
-        DocumentLayout.json (~369 tokens)
-    Ready/ (~212 tokens)
-      bin/Debug/ (~46 tokens)
-        Ready.exe.config (~46 tokens)
-      obj/Debug/ (~120 tokens)
-        Ready.csproj.FileListAbsolute.txt (~120 tokens)
-      App.config (~46 tokens)
-  TextFileReader/ (~1673 tokens)
-    .vs/TextFileReader/ (~1414 tokens)
-      v17/ (~1414 tokens)
-        DocumentLayout.backup.json (~707 tokens)
-        DocumentLayout.json (~707 tokens)
-    TextFileReader/ (~259 tokens)
-      bin/Debug/ (~46 tokens)
-        TextFileReader.exe.config (~46 tokens)
-      obj/Debug/ (~167 tokens)
-        TextFileReader.csproj.FileListAbsolute.txt (~167 tokens)
-      App.config (~46 tokens)
-  ThreeDividingNumbers/ (~1316 tokens)
-    .vs/ThreeDividingNumbers/ (~842 tokens)
-      v17/ (~842 tokens)
-        DocumentLayout.backup.json (~421 tokens)
-        DocumentLayout.json (~421 tokens)
-    ThreeDividingNumbers/ (~474 tokens)
-      bin/Debug/ (~46 tokens)
-        ThreeDividingNumbers.exe.config (~46 tokens)
-      obj/Debug/ (~382 tokens)
-        ThreeDividingNumbers.csproj.FileListAbsolute.txt (~382 tokens)
-      App.config (~46 tokens)
-  ZereDividingCheck/ (~1097 tokens)
-    .vs/ZereDividingCheck/ (~822 tokens)
-      v17/ (~822 tokens)
-        DocumentLayout.backup.json (~411 tokens)
-        DocumentLayout.json (~411 tokens)
-    ZereDividingCheck/ (~275 tokens)
-      bin/Debug/ (~46 tokens)
-        ZereDividingCheck.exe.config (~46 tokens)
-      obj/Debug/ (~183 tokens)
-        ZereDividingCheck.csproj.FileListAbsolute.txt (~183 tokens)
-      App.config (~46 tokens)
-Second_week/ (~266071 tokens)
-  MyFirstApi/ (~3424 tokens)
-    Properties/ (~155 tokens)
-      launchSettings.json (~155 tokens)
-    bin/Debug/net9.0/ (~563 tokens)
-      MyFirstApi.deps.json (~419 tokens)
-      MyFirstApi.runtimeconfig.json (~99 tokens)
-      MyFirstApi.staticwebassets.endpoints.json (~16 tokens)
-      appsettings.Development.json (~29 tokens)
-    obj/ (~2677 tokens)
-      Debug/net9.0/ (~863 tokens)
-        MyFirstApi.csproj.FileListAbsolute.txt (~775 tokens)
-        MyFirstApi.csproj.Up2Date (~0 tokens)
-        staticwebassets.build.endpoints.json (~16 tokens)
-        staticwebassets.build.json (~72 tokens)
-      MyFirstApi.csproj.nuget.dgspec.json (~655 tokens)
-      project.assets.json (~1159 tokens)
-    appsettings.Development.json (~29 tokens)
-  TaskManager/ (~119310 tokens)
-    .vs/ (~28736 tokens)
-      TaskManager/ (~0 tokens)
-      TaskManagerTraining/ (~28736 tokens)
-        config/ (~21254 tokens)
-          applicationhost.config (~21254 tokens)
-        v17/ (~7482 tokens)
-          DocumentLayout.backup.json (~3732 tokens)
-          DocumentLayout.json (~3750 tokens)
-    TaskManager/ (~90574 tokens)
-      Properties/ (~248 tokens)
-        launchSettings.json (~248 tokens)
-      Views/ (~0 tokens)
-      bin/Debug/net8.0/ (~15745 tokens)
-        runtimes/ (~0 tokens)
-        TaskManager.deps.json (~13156 tokens)
-        TaskManager.runtimeconfig.json (~116 tokens)
-        TaskManager.staticwebassets.runtime.json (~2444 tokens)
-        appsettings.Development.json (~29 tokens)
-      obj/ (~73726 tokens)
-        Debug/ (~25108 tokens)
-          net8.0/ (~25108 tokens)
-            scopedcss/ (~0 tokens)
-            ApiEndpoints.json (~841 tokens)
-            TaskMana.F3FB485A.Up2Date (~0 tokens)
-            TaskManager.csproj.BuildWithSkipAnalyzers (~0 tokens)
-            TaskManager.csproj.FileListAbsolute.txt (~4876 tokens)
-            TaskManager.sourcelink.json (~34 tokens)
-            staticwebassets.build.json (~13179 tokens)
-            staticwebassets.development.json (~2444 tokens)
-            staticwebassets.pack.json (~3734 tokens)
-            staticwebassets.references.upToDateCheck.txt (~0 tokens)
-            staticwebassets.removed.txt (~0 tokens)
-        TaskManager.csproj.nuget.dgspec.json (~816 tokens)
-        project.assets.json (~47802 tokens)
-      wwwroot/ (~826 tokens)
-        lib/ (~826 tokens)
-          bootstrap/dist/ (~0 tokens)
-          jquery/ (~274 tokens)
-            LICENSE.txt (~274 tokens)
-          jquery-validation/ (~273 tokens)
-            LICENSE.md (~273 tokens)
-          jquery-validation-unobtrusive/ (~279 tokens)
-            LICENSE.txt (~279 tokens)
-      appsettings.Development.json (~29 tokens)
-  TaskManagerV2.0/ (~142998 tokens)
-    .vs/ (~28856 tokens)
-      TaskManagerV2.0/ (~28856 tokens)
-        config/ (~20662 tokens)
-          applicationhost.config (~20662 tokens)
-        v17/ (~8194 tokens)
-          DocumentLayout.backup.json (~4097 tokens)
-          DocumentLayout.json (~4097 tokens)
-    Properties/ (~269 tokens)
-      launchSettings.json (~269 tokens)
-    bin/ (~36325 tokens)
-      Debug/net8.0/ (~12823 tokens)
-        Properties/ (~269 tokens)
-          launchSettings.json (~269 tokens)
-        runtimes/ (~0 tokens)
-        TaskManagerV2.0.deps.json (~12393 tokens)
-        TaskManagerV2.0.runtimeconfig.json (~116 tokens)
-        TaskManagerV2.0.staticwebassets.endpoints.json (~16 tokens)
-        appsettings.Development.json (~29 tokens)
-      Release/net8.0/ (~23502 tokens)
-        Properties/ (~269 tokens)
-          launchSettings.json (~269 tokens)
-        publish/ (~10392 tokens)
-          runtimes/ (~0 tokens)
-          TaskManagerV2.0.deps.json (~10076 tokens)
-          TaskManagerV2.0.runtimeconfig.json (~134 tokens)
-          TaskManagerV2.0.staticwebassets.endpoints.json (~16 tokens)
-          appsettings.Development.json (~29 tokens)
-          web.config (~137 tokens)
-        runtimes/ (~0 tokens)
-        TaskManagerV2.0.deps.json (~12393 tokens)
-        TaskManagerV2.0.runtimeconfig.json (~134 tokens)
-        TaskManagerV2.0.staticwebassets.endpoints.json (~16 tokens)
-        appsettings.Development.json (~29 tokens)
-        launchSettings.json (~269 tokens)
-    obj/ (~77519 tokens)
-      Debug/net8.0/ (~9293 tokens)
-        EndpointInfo/ (~1068 tokens)
-          TaskManagerV2.0.json (~1068 tokens)
-        ApiEndpoints.json (~485 tokens)
-        TaskMana.050FEC7B.Up2Date (~0 tokens)
-        TaskManagerV2.0.csproj.BuildWithSkipAnalyzers (~0 tokens)
-        TaskManagerV2.0.csproj.FileListAbsolute.txt (~7614 tokens)
-        TaskManagerV2.0.sourcelink.json (~35 tokens)
-        staticwebassets.build.endpoints.json (~16 tokens)
-        staticwebassets.build.json (~75 tokens)
-        staticwebassets.references.upToDateCheck.txt (~0 tokens)
-        staticwebassets.removed.txt (~0 tokens)
-      Release/net8.0/ (~27809 tokens)
-        PubTmp/ (~10521 tokens)
-          Out/ (~10392 tokens)
-            runtimes/ (~0 tokens)
-            TaskManagerV2.0.deps.json (~10076 tokens)
-            TaskManagerV2.0.runtimeconfig.json (~134 tokens)
-            TaskManagerV2.0.staticwebassets.endpoints.json (~16 tokens)
-            appsettings.Development.json (~29 tokens)
-            web.config (~137 tokens)
-          TaskManagerV2.0.Parameters.xml (~86 tokens)
-          TaskManagerV2.0.SourceManifest.xml (~43 tokens)
-        PublishOutputs.94f3d1e7fd.txt (~1461 tokens)
-        PublishOutputs.9b546c4744.txt (~1499 tokens)
-        TaskMana.050FEC7B.Up2Date (~0 tokens)
-        TaskManagerV2.0.csproj.FileListAbsolute.txt (~4035 tokens)
-        [6 files: *.json]
-        staticwebassets.references.upToDateCheck.txt (~0 tokens)
-        staticwebassets.removed.txt (~0 tokens)
-      TaskManagerV2.0.csproj.nuget.dgspec.json (~911 tokens)
-      project.assets.json (~39506 tokens)
-    appsettings.Development.json (~29 tokens)
-  README.md (~339 tokens)
-TODOLIst/ (~1472850 tokens)
-  .vs/TODOLIst/ (~2390 tokens)
-    v17/ (~2390 tokens)
-      DocumentLayout.backup.json (~1195 tokens)
-      DocumentLayout.json (~1195 tokens)
-  TODOLIst/ (~175911 tokens)
-    bin/Debug/ (~175659 tokens)
-      Newtonsoft.Json.xml (~175544 tokens)
-      TODOLIst.exe.config (~46 tokens)
-      file.json (~35 tokens)
-      file.txt (~34 tokens)
-    obj/Debug/ (~171 tokens)
-      TODOLIst.csproj.FileListAbsolute.txt (~171 tokens)
-      TODOLIst.csproj.Up2Date (~0 tokens)
-    App.config (~46 tokens)
-    packages.config (~35 tokens)
-  packages/Newtonsoft.Json.13.0.3/ (~1294549 tokens)
-    lib/ (~1293805 tokens)
-      net20/ (~149876 tokens)
-        Newtonsoft.Json.xml (~149876 tokens)
-      net35/ (~136362 tokens)
-        Newtonsoft.Json.xml (~136362 tokens)
-      net40/ (~139292 tokens)
-        Newtonsoft.Json.xml (~139292 tokens)
-      net45/ (~175544 tokens)
-        Newtonsoft.Json.xml (~175544 tokens)
-      net6.0/ (~174916 tokens)
-        Newtonsoft.Json.xml (~174916 tokens)
-      netstandard1.0/ (~170283 tokens)
-        Newtonsoft.Json.xml (~170283 tokens)
-      netstandard1.3/ (~172304 tokens)
-        Newtonsoft.Json.xml (~172304 tokens)
-      netstandard2.0/ (~175228 tokens)
-        Newtonsoft.Json.xml (~175228 tokens)
-    LICENSE.md (~271 tokens)
-    README.md (~473 tokens)
-obj/ (~1197 tokens)
-  .Net.csproj.nuget.dgspec.json (~594 tokens)
-  project.assets.json (~603 tokens)
-README.md (~1786 tokens)
-compressedcontext.txt (~5928 tokens)
+[USER]: Lab1/ (~4124 tokens)
+  Lab1/ (~3843 tokens)
+    Form1.cs (~3645 tokens)
+    Lab1.csproj (~73 tokens)
+    Program.cs (~125 tokens)
+  Lab1.sln (~281 tokens)
+Lab2/ (~1410 tokens)
+  Lab2/ (~1129 tokens)
+    Form1.cs (~928 tokens)
+    Lab2.csproj (~76 tokens)
+    Program.cs (~125 tokens)
+  Lab2.sln (~281 tokens)
+Lab3/ (~2508 tokens)
+  Lab3/ (~2227 tokens)
+    Form1.cs (~2026 tokens)
+    Lab3.csproj (~76 tokens)
+    Program.cs (~125 tokens)
+  Lab3.sln (~281 tokens)
+.gitignore (~1947 tokens)
 
 --------------------------------------------------
 [RESPONSE]:
-src/App.cs
-Projects/Calculator/Calculator/ (~369 tokens)
-Projects/MasSum/MasSum/ (~1063 tokens)
-Projects/MaxValue/MaxValue/ (~348 tokens)
-Projects/PasswordGenerator/PasswordGenerator/ (~442 tokens)
-Projects/PersonSays/PersonSays/ (~369 tokens)
-Projects/TextFileReader/TextFileReader/ (~259 tokens)
-Projects/ThreeDividingNumbers/ThreeDividingNumbers/ (~474 tokens)
-Projects/ZereDividingCheck/ZereDividingCheck/ (~275 tokens)
+Lab1/Form1.cs
+Lab1/Program.cs
+Lab2/Form1.cs
+Lab2/Program.cs
+Lab3/Form1.cs
+Lab3/Program.cs
+src/App.cs 
+.gitignore
 ==================================================
 
 ==================================================
@@ -2267,57 +171,2325 @@ OUTPUT FORMAT RULES:
 - Output ONLY valid Markdown content. Do NOT wrap the entire response in ```markdown blocks.
 - Do NOT write introduction text like 'Here is your README' or concluding remarks.
 - Keep it highly professional, technical, clean, and developer-friendly.
-[USER]: REPOSITORY NAME: .Net
+[USER]: REPOSITORY NAME: TI
 
 SOURCE CODE CONTEXT:
-=== Selected Repository Context for: .Net ===
-Budget Limit: 20000 tokens
+=== Selected Repository Context for: TI ===
+Budget Limit: 25000 tokens
 
-=== End of Context. Total Collected Tokens: ~0 ===
+--- File: .gitignore (~1947 tokens) ---
+## Ignore Visual Studio temporary files, build results, and
+## files generated by popular Visual Studio add-ons.
+##
+## Get latest from https://github.com/github/gitignore/blob/main/VisualStudio.gitignore
+
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.env
+
+# User-specific files (MonoDevelop/Xamarin Studio)
+*.userprefs
+
+# Mono auto generated files
+mono_crash.*
+
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+[Ww][Ii][Nn]32/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+[Aa][Rr][Mm]64[Ee][Cc]/
+bld/
+[Oo]bj/
+[Oo]ut/
+[Ll]og/
+[Ll]ogs/
+
+# Build results on 'Bin' directories
+**/[Bb]in/*
+# Uncomment if you have tasks that rely on *.refresh files to move binaries
+# (https://github.com/github/gitignore/pull/3736)
+#!**/[Bb]in/*.refresh
+
+# Visual Studio 2015/2017 cache/options directory
+.vs/
+# Uncomment if you have tasks that create the project's static files in wwwroot
+#wwwroot/
+
+# Visual Studio 2017 auto generated files
+Generated\ Files/
+
+# MSTest test Results
+[Tt]est[Rr]esult*/
+[Bb]uild[Ll]og.*
+*.trx
+
+# NUnit
+*.VisualState.xml
+TestResult.xml
+nunit-*.xml
+
+# Approval Tests result files
+*.received.*
+
+# Build Results of an ATL Project
+[Dd]ebugPS/
+[Rr]eleasePS/
+dlldata.c
+
+# Benchmark Results
+BenchmarkDotNet.Artifacts/
+
+# .NET Core
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# ASP.NET Scaffolding
+ScaffoldingReadMe.txt
+
+# StyleCop
+StyleCopReport.xml
+
+# Files built by Visual Studio
+*_i.c
+*_p.c
+*_h.h
+*.ilk
+*.meta
+*.obj
+*.idb
+*.iobj
+*.pch
+*.pdb
+*.ipdb
+*.pgc
+*.pgd
+*.rsp
+# but not Directory.Build.rsp, as it configures directory-level build defaults
+!Directory.Build.rsp
+*.sbr
+*.tlb
+*.tli
+*.tlh
+*.tmp
+*.tmp_proj
+*_wpftmp.csproj
+*.log
+*.tlog
+*.vspscc
+*.vssscc
+.builds
+*.pidb
+*.svclog
+*.scc
+
+# Chutzpah Test files
+_Chutzpah*
+
+# Visual C++ cache files
+ipch/
+*.aps
+*.ncb
+*.opendb
+*.opensdf
+*.sdf
+*.cachefile
+*.VC.db
+*.VC.VC.opendb
+
+# Visual Studio profiler
+*.psess
+*.vsp
+*.vspx
+*.sap
+
+# Visual Studio Trace Files
+*.e2e
+
+# TFS 2012 Local Workspace
+$tf/
+
+# Guidance Automation Toolkit
+*.gpState
+
+# ReSharper is a .NET coding add-in
+_ReSharper*/
+*.[Rr]e[Ss]harper
+*.DotSettings.user
+
+# TeamCity is a build add-in
+_TeamCity*
+
+# DotCover is a Code Coverage Tool
+*.dotCover
+
+# AxoCover is a Code Coverage Tool
+.axoCover/*
+!.axoCover/settings.json
+
+# Coverlet is a free, cross platform Code Coverage Tool
+coverage*.json
+coverage*.xml
+coverage*.info
+
+# Visual Studio code coverage results
+*.coverage
+*.coveragexml
+
+# NCrunch
+_NCrunch_*
+.NCrunch_*
+.*crunch*.local.xml
+nCrunchTemp_*
+
+# MightyMoose
+*.mm.*
+AutoTest.Net/
+
+# Web workbench (sass)
+.sass-cache/
+
+# Installshield output folder
+[Ee]xpress/
+
+# DocProject is a documentation generator add-in
+DocProject/buildhelp/
+DocProject/Help/*.HxT
+DocProject/Help/*.HxC
+DocProject/Help/*.hhc
+DocProject/Help/*.hhk
+DocProject/Help/*.hhp
+DocProject/Help/Html2
+DocProject/Help/html
+
+# Click-Once directory
+publish/
+
+# Publish Web Output
+*.[Pp]ublish.xml
+*.azurePubxml
+# Note: Comment the next line if you want to checkin your web deploy settings,
+# but database connection strings (with potential passwords) will be unencrypted
+*.pubxml
+*.publishproj
+
+# Microsoft Azure Web App publish settings. Comment the next line if you want to
+# checkin your Azure Web App publish settings, but sensitive information contained
+# in these scripts will be unencrypted
+PublishScripts/
+
+# NuGet Packages
+*.nupkg
+# NuGet Symbol Packages
+*.snupkg
+# The packages folder can be ignored because of Package Restore
+**/[Pp]ackages/*
+# except build/, which is used as an MSBuild target.
+!**/[Pp]ackages/build/
+# Uncomment if necessary however generally it will be regenerated when needed
+#!**/[Pp]ackages/repositories.config
+# NuGet v3's project.json files produces more ignorable files
+*.nuget.props
+*.nuget.targets
+
+# Microsoft Azure Build Output
+csx/
+*.build.csdef
+
+# Microsoft Azure Emulator
+ecf/
+rcf/
+
+# Windows Store app package directories and files
+AppPackages/
+BundleArtifacts/
+Package.StoreAssociation.xml
+_pkginfo.txt
+*.appx
+*.appxbundle
+*.appxupload
+
+# Visual Studio cache files
+# files ending in .cache can be ignored
+*.[Cc]ache
+# but keep track of directories ending in .cache
+!?*.[Cc]ache/
+
+# Others
+ClientBin/
+~$*
+*~
+*.dbmdl
+*.dbproj.schemaview
+*.jfm
+*.pfx
+*.publishsettings
+orleans.codegen.cs
+
+# Including strong name files can present a security risk
+# (https://github.com/github/gitignore/pull/2483#issue-259490424)
+#*.snk
+
+# Since there are multiple workflows, uncomment next line to ignore bower_components
+# (https://github.com/github/gitignore/pull/1529#issuecomment-104372622)
+#bower_components/
+
+# RIA/Silverlight projects
+Generated_Code/
+
+# Backup & report files from converting an old project file
+# to a newer Visual Studio version. Backup files are not needed,
+# because we have git ;-)
+_UpgradeReport_Files/
+Backup*/
+UpgradeLog*.XML
+UpgradeLog*.htm
+ServiceFabricBackup/
+*.rptproj.bak
+
+# SQL Server files
+*.mdf
+*.ldf
+*.ndf
+
+# Business Intelligence projects
+*.rdl.data
+*.bim.layout
+*.bim_*.settings
+*.rptproj.rsuser
+*- [Bb]ackup.rdl
+*- [Bb]ackup ([0-9]).rdl
+*- [Bb]ackup ([0-9][0-9]).rdl
+
+# Microsoft Fakes
+FakesAssemblies/
+
+# GhostDoc plugin setting file
+*.GhostDoc.xml
+
+# Node.js Tools for Visual Studio
+.ntvs_analysis.dat
+node_modules/
+
+# Visual Studio 6 build log
+*.plg
+
+# Visual Studio 6 workspace options file
+*.opt
+
+# Visual Studio 6 auto-generated workspace file (contains which files were open etc.)
+*.vbw
+
+# Visual Studio 6 auto-generated project file (contains which files were open etc.)
+*.vbp
+
+# Visual Studio 6 workspace and project file (working project files containing files to include in project)
+*.dsw
+*.dsp
+
+# Visual Studio 6 technical files
+*.ncb
+*.aps
+
+# Visual Studio LightSwitch build output
+**/*.HTMLClient/GeneratedArtifacts
+**/*.DesktopClient/GeneratedArtifacts
+**/*.DesktopClient/ModelManifest.xml
+**/*.Server/GeneratedArtifacts
+**/*.Server/ModelManifest.xml
+_Pvt_Extensions
+
+# Paket dependency manager
+**/.paket/paket.exe
+paket-files/
+
+# FAKE - F# Make
+**/.fake/
+
+# CodeRush personal settings
+**/.cr/personal
+
+# Python Tools for Visual Studio (PTVS)
+**/__pycache__/
+*.pyc
+
+# Cake - Uncomment if you are using it
+#tools/**
+#!tools/packages.config
+
+# Tabs Studio
+*.tss
+
+# Telerik's JustMock configuration file
+*.jmconfig
+
+# BizTalk build output
+*.btp.cs
+*.btm.cs
+*.odx.cs
+*.xsd.cs
+
+# OpenCover UI analysis results
+OpenCover/
+
+# Azure Stream Analytics local run output
+ASALocalRun/
+
+# MSBuild Binary and Structured Log
+*.binlog
+MSBuild_Logs/
+
+# AWS SAM Build and Temporary Artifacts folder
+.aws-sam
+
+# NVidia Nsight GPU debugger configuration file
+*.nvuser
+
+# MFractors (Xamarin productivity tool) working folder
+**/.mfractor/
+
+# Local History for Visual Studio
+**/.localhistory/
+
+# Visual Studio History (VSHistory) files
+.vshistory/
+
+# BeatPulse healthcheck temp database
+healthchecksdb
+
+# Backup folder for Package Reference Convert tool in Visual Studio 2017
+MigrationBackup/
+
+# Ionide (cross platform F# VS Code tools) working folder
+**/.ionide/
+
+# Fody - auto-generated XML schema
+FodyWeavers.xsd
+
+# VS Code files for those working on multiple tools
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/*.code-snippets
+
+# Local History for Visual Studio Code
+.history/
+
+# Built Visual Studio Code Extensions
+*.vsix
+
+# Windows Installer files from build outputs
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
+
+----------------------------------------
+
+=== End of Context. Total Collected Tokens: ~1947 ===
+
+==================================================
+NEW REQUEST | URL: https://api.groq.com/openai/v1/ | Model: meta-llama/llama-4-scout-17b-16e-instruct
+--------------------------------------------------
+[SYSTEM]: You are a strict code context optimizer. Analyze the provided directory tree and token counts.
+Your goal is to generate .aiignore patterns to exclude build artifacts, cache, generated code, and heavy non-business assets, while retaining project structure.
+
+CRITICAL RULES:
+1. ALWAYS IGNORE: Build and IDE folders (.vs/, bin/, obj/, .git/, .idea/).
+2. ALWAYS IGNORE heavy text data, assets, and binaries: *.txt, *.log, *.dll, *.exe, *.pdb, *.cache, *.png, *.jpg, *.zip.
+3. ALWAYS IGNORE automatically generated UI code and resources: *.Designer.cs, *.resx.
+4. NEVER IGNORE critical project structure and config files: DO NOT ignore *.csproj, *.sln, *.json, .gitignore.
+5. KEEP source code files intact (*.cs, *.py, *.js).
+
+OUTPUT FORMAT:
+Output ONLY valid wildcard patterns (one per line). Strictly NO explanations, NO markdown formatting, NO introduction, NO bullet points. Just raw text patterns.
+[USER]: Project/
+  .vs/ (~15000 tokens)
+  bin/Debug/ (~8000 tokens)
+  src/ (~2000 tokens)
+[ASSISTANT]: .vs/
+bin/
+obj/
+[USER]: Расширения: .cs, .csproj, .docx, .mp3, .png, .resx, .sln, .txt, .xlsx
+Файлы без расширения: .aiignore, .gitignore
 
 --------------------------------------------------
 [RESPONSE]:
-# .Net Repository README
-## Project Title & Clear Description
-The .Net repository is a comprehensive framework for building a wide range of applications, from web and mobile to desktop and cloud-based services. This project aims to provide a robust and scalable architecture for developing .Net applications, solving the core problem of fragmented and inefficient development processes.
+.vs/
+bin/
+obj/
+*.txt
+*.log
+*.dll
+*.exe
+*.pdb
+*.cache
+*.png
+*.jpg
+*.zip
+*.docx
+*.mp3
+*.xlsx
+*.resx
+==================================================
+
+==================================================
+NEW REQUEST | URL: https://api.groq.com/openai/v1/ | Model: meta-llama/llama-4-scout-17b-16e-instruct
+--------------------------------------------------
+[SYSTEM]: You are a strict code context optimizer. Analyze the provided directory tree and token counts.
+Your goal is to generate .aiignore patterns to exclude build artifacts (.vs, bin, obj), cache, binaries, and heavy temporary test files, WHILE KEEPING structural configuration files.
+
+CRITICAL RULES:
+1. NEVER IGNORE project structure and build configuration files: DO NOT add *.csproj or *.sln to the ignore list.
+2. ALWAYS IGNORE build and IDE artifacts: .vs/, bin/, obj/, .git/.
+3. ALWAYS IGNORE compiled binaries and logs: *.dll, *.exe, *.pdb, *.log, *.cache.
+
+OUTPUT FORMAT:
+Output ONLY valid wildcard patterns, one per line. Strictly NO explanations, NO markdown formatting (do not use blocks like ```), NO introduction, and NO bullet points. Just raw text patterns.
+[USER]: Project/
+  .vs/ (~15000 tokens)
+  bin/Debug/ (~8000 tokens)
+  src/ (~2000 tokens)
+[ASSISTANT]: .vs/
+bin/
+obj/
+[USER]: Lab1/ (~7287 tokens)
+  Lab1/ (~7006 tokens)
+    Form1.Designer.cs
+    Form1.cs
+    Lab1.csproj
+    Program.cs
+  Lab1.sln
+Lab2/ (~3191 tokens)
+  Lab2/ (~2910 tokens)
+    Form1.Designer.cs
+    Form1.cs
+    Lab2.csproj
+    Program.cs
+  Lab2.sln
+Lab3/ (~4500 tokens)
+  Lab3/ (~4219 tokens)
+    Form1.Designer.cs
+    Form1.cs
+    Lab3.csproj
+    Program.cs
+  Lab3.sln
+.gitignore
+
+--------------------------------------------------
+[RESPONSE]:
+.vs/
+bin/
+obj/
+*.dll
+*.exe
+*.pdb
+*.log
+*.cache
+*.suo
+==================================================
+
+==================================================
+NEW REQUEST | URL: https://api.groq.com/openai/v1/ | Model: meta-llama/llama-4-scout-17b-16e-instruct
+--------------------------------------------------
+[SYSTEM]: You are a codebase architect CLI tool. Your task is to select files containing application logic for comprehensive analysis.
+
+CRITICAL CONSTRAINT: Select as many relevant files as possible, maximizing information density without exceeding the strict budget of 25000 tokens total. Stop adding files only when the next file would violate this limit.
+
+SELECTION PRIORITY:
+- High Priority: Source code files (.cs, .py, .js, .ts, .go, etc.), including entry points, services, controllers, models, and UI logic code.
+- Medium Priority: Project files (*.csproj, *.sln).
+- DO NOT SELECT: .gitignore, build artifacts, binary assets, or test-only scaffolding unless no source code exists.
+
+You receive a flat list where each line is a FULL relative path from repository root (POSIX /), followed by (~N tokens).
+Copy paths EXACTLY as shown — do not shorten or guess nested folders.
+
+OUTPUT FORMAT RULES:
+1. Output ONLY a flat list of relative file paths (one per line, use /).
+2. Strictly NO numbered lists.
+3. Strictly NO introduction, NO Markdown code blocks, NO conclusion text, and NO human commentary.
+4. Output must be raw plain text paths only.
+[USER]: Lab1/Lab1/Program.cs (~125 tokens)
+Lab1/Lab1/Form1.cs (~3645 tokens)
+Lab1/Lab1.csproj (~73 tokens)
+[ASSISTANT]: Lab1/Lab1/Program.cs
+Lab1/Lab1/Form1.cs
+Lab1/Lab1.csproj
+[USER]: .gitignore (~1947 tokens)
+Lab1/Lab1.sln (~281 tokens)
+Lab1/Lab1/Form1.Designer.cs (~3163 tokens)
+Lab1/Lab1/Form1.cs (~3645 tokens)
+Lab1/Lab1/Lab1.csproj (~73 tokens)
+Lab1/Lab1/Program.cs (~125 tokens)
+Lab2/Lab2.sln (~281 tokens)
+Lab2/Lab2/Form1.Designer.cs (~1781 tokens)
+Lab2/Lab2/Form1.cs (~928 tokens)
+Lab2/Lab2/Lab2.csproj (~76 tokens)
+Lab2/Lab2/Program.cs (~125 tokens)
+Lab3/Lab3.sln (~281 tokens)
+Lab3/Lab3/Form1.Designer.cs (~1992 tokens)
+Lab3/Lab3/Form1.cs (~2026 tokens)
+Lab3/Lab3/Lab3.csproj (~76 tokens)
+Lab3/Lab3/Program.cs (~125 tokens)
+
+--------------------------------------------------
+[RESPONSE]:
+Lab1/Lab1/Program.cs
+Lab1/Lab1/Form1.cs
+Lab1/Lab1.csproj
+Lab2/Lab2/Program.cs
+Lab2/Lab2/Form1.cs
+Lab2/Lab2/Lab2.csproj
+Lab3/Lab3/Program.cs
+Lab3/Lab3/Form1.cs
+Lab3/Lab3/Lab3.csproj
+Lab1/Lab1.sln
+Lab2/Lab2.sln
+Lab3/Lab3.sln
+Lab1/Lab1/Form1.Designer.cs 
+Lab2/Lab2/Form1.Designer.cs 
+Lab3/Lab3/Form1.Designer.cs
+==================================================
+
+==================================================
+NEW REQUEST | URL: https://api.groq.com/openai/v1/ | Model: meta-llama/llama-4-scout-17b-16e-instruct
+--------------------------------------------------
+[SYSTEM]: You are an expert technical writer and senior software architect.
+Your task is to analyze the provided source code context and generate a professional, comprehensive README.md for the repository.
+
+THE README MUST INCLUDE:
+1. Project Title & Clear Description (What is this project, its purpose, and core problem solved).
+2. Key Features (Bullet points highlighting main architectural components and business logic).
+3. Tech Stack (Languages, frameworks, and core dependencies identified from the code).
+4. Project Structure Overview (Brief technical map of the main modules).
+5. Getting Started / Basic Usage guide based on the entry points found.
+
+OUTPUT FORMAT RULES:
+- Output ONLY valid Markdown content. Do NOT wrap the entire response in ```markdown blocks.
+- Do NOT write introduction text like 'Here is your README' or concluding remarks.
+- Keep it highly professional, technical, clean, and developer-friendly.
+[USER]: REPOSITORY NAME: TI
+
+SOURCE CODE CONTEXT:
+=== Selected Repository Context for: TI ===
+Budget Limit: 25000 tokens
+
+--- File: Lab1/Lab1/Program.cs (~125 tokens) ---
+namespace Lab1
+{
+    internal static class Program
+    {
+        /// <summary>
+        ///  The main entry point for the application.
+        /// </summary>
+        [STAThread]
+        static void Main()
+        {
+            // To customize application configuration such as set high DPI settings or default font,
+            // see https://aka.ms/applicationconfiguration.
+            ApplicationConfiguration.Initialize();
+            Application.Run(new Form1());
+        }
+    }
+}
+----------------------------------------
+
+--- File: Lab1/Lab1/Form1.cs (~3645 tokens) ---
+using System;
+using System.Collections.Frozen;
+using System.Reflection;
+using System.Windows.Forms;
+
+namespace Lab1
+{
+    public partial class Form1 : Form
+    {
+        public static readonly int LenOfAlfavit = 33;
+
+        public static readonly FrozenDictionary<char, long> LetterToIndex = new Dictionary<char, long>()
+        { {'�', 0 }, {'�', 1 }, {'�', 2 }, {'�', 3 }, {'�', 4 }, {'�', 5 }, {'�', 6 }, {'�', 7 },
+          {'�', 8 }, {'�', 9 }, {'�', 10 },{'�', 11 },{'�', 12 },{'�', 13 },{'�', 14 },{'�', 15 },
+          {'�', 16 },{'�', 17 },{'�', 18 },{'�', 19 },{'�', 20 },{'�', 21 },{'�', 22 },{'�', 23 },
+          {'�', 24 },{'�', 25 },{'�', 26 },{'�', 27 },{'�', 28 },{'�',29 }, {'�', 30 },{'�', 31 },
+          {'�', 32 }}.ToFrozenDictionary();
+
+        public static readonly string IndexToLetter = "��������������������������������";
+
+        public enum ShipherType
+        {
+            Decimazii,
+            Vijener
+        }
+        public enum ShipherFunction
+        {
+            Shipher,
+            DeShipher
+        }
+
+        private ShipherType SelectedShipherType { get; set; } = ShipherType.Decimazii;
+        private ShipherFunction SelectedShipherFunction { get; set; } = ShipherFunction.Shipher;
+
+
+        #region ����� ���������
+        public bool CheckDezimaziiKey(long value)
+        {
+            long k = value;
+            long l = LenOfAlfavit;
+
+            while (l != 0 && k != 0)
+            {
+                if (k > l) k %= l;
+                else l %= k;
+            }
+            return (k + l) == 1;
+        }
+
+        public string EncryptDezimaziiText(string str, long key)
+        {
+            textDataGridView.Columns.Add("clearColumn", "�������� ������");
+            textDataGridView.Rows.Add();
+            textDataGridView.Rows[0].Cells[0].Value = "���������� ������";
+            textDataGridView.Rows.Add();
+            textDataGridView.Rows[1].Cells[0].Value = "�������� ������";
+
+            string shiphroText = ""; int indexData = 0;
+            for (int i = 0; i < str.Length; i++)
+            {
+                if (LetterToIndex.ContainsKey(char.ToLower(str[i])))
+                {
+                    long? index = (LetterToIndex[char.ToLower(str[i])] * key) % LenOfAlfavit;
+                    shiphroText += IndexToLetter[(int)index];
+
+                    textDataGridView.Columns.Add((str[i] + i).ToString(), str[i].ToString());
+                    textDataGridView.Rows[0].Cells[indexData + 1].Value = LetterToIndex[char.ToLower(str[i])] +
+                        "*" + key + "%" + LenOfAlfavit + "=" + index;
+                    textDataGridView.Rows[1].Cells[indexData + 1].Value = shiphroText[^1];
+                    indexData++;
+                }
+                else if (!char.IsLetter(str[i]))
+                {
+                    shiphroText += str[i];
+                }
+            }
+
+            foreach (DataGridViewColumn column in textDataGridView.Columns)
+            {
+                column.SortMode = DataGridViewColumnSortMode.NotSortable;
+            }
+
+            return shiphroText;
+        }
+
+        public long InverseKey(long k)
+        {
+            k %= LenOfAlfavit;
+            for (int x = 1; x < LenOfAlfavit; x++)
+            {
+                if ((k * x) % LenOfAlfavit == 1)
+                    return x;
+            }
+            return 0;
+        }
+
+        public string DecryptDezimaziiText(string str, long key)
+        {
+            textDataGridView.Columns.Add("clearColumn", "�������� ������");
+            textDataGridView.Rows.Add();
+            textDataGridView.Rows[0].Cells[0].Value = "���������� ������";
+            textDataGridView.Rows.Add();
+            textDataGridView.Rows[1].Cells[0].Value = "�������� ������";
+
+
+            string plainText = ""; int indexData = 0;
+            for (int i = 0; i < str.Length; i++)
+            {
+                if (LetterToIndex.ContainsKey(char.ToLower(str[i])))
+                {
+                    long? index = (LetterToIndex[char.ToLower(str[i])] * InverseKey(key)) % LenOfAlfavit;
+                    plainText += IndexToLetter[(int)index];
+
+                    textDataGridView.Columns.Add((str[i] + i).ToString(), str[i].ToString());
+                    textDataGridView.Rows[0].Cells[indexData + 1].Value = LetterToIndex[char.ToLower(str[i])] +
+                        "*" + InverseKey(key) + "%" + LenOfAlfavit + "=" + index;
+                    textDataGridView.Rows[1].Cells[indexData + 1].Value = plainText[^1];
+                    indexData++;
+                }
+                else if (!char.IsLetter(str[i]))
+                {
+                    plainText += str[i];
+                }
+            }
+
+            foreach (DataGridViewColumn column in textDataGridView.Columns)
+            {
+                column.SortMode = DataGridViewColumnSortMode.NotSortable;
+            }
+            return plainText;
+        }
+        #endregion
+
+
+        #region �������
+        public string EncryptVijenerText(string str, string secretKey)
+        {
+            textDataGridView.Columns.Add("clearColumn", "�������� ������");
+            textDataGridView.Rows.Add();
+            textDataGridView.Rows[0].Cells[0].Value = "����� �����";
+            textDataGridView.Rows.Add();
+            textDataGridView.Rows[1].Cells[0].Value = "�������� ������";
+
+            string fullKey = (secretKey + str).ToLower().Replace('\n', ' ').Replace('\t', ' ').Replace(" ", "");
+            string shiphroText = "";
+            int keyPointer = 0;
+            int indexData = 1;
+
+            for (int i = 0; i < str.Length; i++)
+            {
+                if (LetterToIndex.ContainsKey(char.ToLower(str[i])))
+                {
+                    char kChar = fullKey[keyPointer];
+                    while (!LetterToIndex.ContainsKey(kChar))
+                    {
+                        keyPointer++;
+                        kChar = fullKey[keyPointer];
+                    }
+                    long m = LetterToIndex[char.ToLower(str[i])];
+                    long k = LetterToIndex[kChar];
+
+                    long cipherIndex = (m + k) % LenOfAlfavit;
+                    char cipherChar = IndexToLetter[(int)cipherIndex];
+
+                    shiphroText += cipherChar;
+
+                    textDataGridView.Columns.Add((str[i] + i).ToString(), str[i].ToString());
+                    textDataGridView.Rows[0].Cells[indexData].Value = fullKey[keyPointer];
+                    textDataGridView.Rows[1].Cells[indexData].Value = shiphroText[^1];
+
+                    keyPointer++;
+                    indexData++;
+                }
+                else if (!char.IsLetter(str[i]))
+                {
+                    shiphroText += str[i];
+                }
+            }
+
+            return shiphroText;
+        }
+
+        public string DecryptVijenerText(string str, string secretKey)
+        {
+            textDataGridView.Columns.Add("clearColumn", "�������� ������");
+            textDataGridView.Rows.Add();
+            textDataGridView.Rows[0].Cells[0].Value = "����� �����";
+            textDataGridView.Rows.Add();
+            textDataGridView.Rows[1].Cells[0].Value = "�������� ������";
+
+            string shiphroText = "";
+            int keyPointer = 0;
+            int indexData = 1;
+
+            for (int i = 0; i < str.Length; i++)
+            {
+
+                if (LetterToIndex.ContainsKey(char.ToLower(str[i])))
+                {
+                    char kChar = (keyPointer < secretKey.Length)
+                                 ? char.ToLower(secretKey[keyPointer])
+                                 : char.ToLower(shiphroText[keyPointer - secretKey.Length]);
+                    while (!LetterToIndex.ContainsKey(kChar))
+                    {
+                        keyPointer++;
+                        kChar = (keyPointer < secretKey.Length)
+                                 ? char.ToLower(secretKey[keyPointer])
+                                 : char.ToLower(shiphroText[keyPointer - secretKey.Length]);
+                    }
+
+                    long m = LetterToIndex[char.ToLower(str[i])];
+                    long k = LetterToIndex[kChar];
+
+                    long cipherIndex = (m - k + LenOfAlfavit) % LenOfAlfavit;
+                    char cipherChar = IndexToLetter[(int)cipherIndex];
+
+                    shiphroText += cipherChar;
+
+                    textDataGridView.Columns.Add((str[i] + i).ToString(), str[i].ToString());
+                    textDataGridView.Rows[0].Cells[indexData].Value = kChar;
+                    textDataGridView.Rows[1].Cells[indexData].Value = shiphroText[^1];
+
+                    keyPointer++;
+                    indexData++;
+                }
+                else if (!char.IsLetter(str[i]))
+                {
+                    shiphroText += str[i];
+                }
+            }
+            return shiphroText;
+        }
+        #endregion
+
+        public Form1()
+        {
+            InitializeComponent();
+            shipherFunctionComboBox.SelectedIndex = shipherMetodComboBox.SelectedIndex = 0;
+            openFileDialog1.Multiselect = false;
+            saveFileDialog1.Filter = openFileDialog1.Filter = "��������� �����|*.txt|��� �����|*.*";
+        }
+
+        private void ShipherTypeComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            SelectedShipherType = (ShipherType)shipherMetodComboBox.SelectedIndex;
+            StartProcessing();
+        }
+
+        private void shipherFunctionComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            SelectedShipherFunction = (ShipherFunction)shipherFunctionComboBox.SelectedIndex;
+            StartProcessing();
+        }
+
+        #region ������ � �������
+        private void saveButton_Click(object sender, EventArgs e)
+        {
+            saveFileDialog1.FileName = "ShiphredText.txt";
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                using (FileStream file = new(saveFileDialog1.FileName, FileMode.Create, FileAccess.ReadWrite))
+                {
+                    using (StreamWriter wr = new(file))
+                    {
+                        wr.Write(finalTextBox.Text?.Length > 0 ? finalTextBox.Text : " ");
+                    }
+                }
+            }
+        }
+
+        private void openButton_Click(object sender, EventArgs e)
+        {
+            openFileDialog1.FileName = "";
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                using (FileStream file = new(openFileDialog1.FileName, FileMode.Open, FileAccess.Read))
+                {
+                    using (StreamReader wr = new(file))
+                    {
+                        startTextBox.Text = wr.ReadToEnd();
+                    }
+                }
+            }
+        }
+        #endregion
+
+
+        private void startTextBox_TextChanged(object sender, EventArgs e)
+        {
+            StartProcessing();
+        }
+        private void keyTextBox_TextChanged(object sender, EventArgs e)
+        {
+            StartProcessing();
+        }
+
+        private void StartProcessing()
+        {
+            textDataGridView.Columns.Clear();
+            textDataGridView.Rows.Clear();
+            if (keyTextBox.Text?.Length > 0 && startTextBox.Text?.Length > 0)
+            {
+                switch (SelectedShipherType)
+                {
+                    case ShipherType.Decimazii:
+                        long dkey;
+                        string normalKey = "";
+                        for (int i = 0; i < keyTextBox.Text.Length; i++)
+                        {
+                            if (char.IsDigit(keyTextBox.Text[i]))
+                            {
+                                normalKey += keyTextBox.Text[i];
+                            }
+                        }
+                        if (long.TryParse(normalKey, out dkey))
+                        {
+                            errorKeyLabel.Text = "";
+                            if (!CheckDezimaziiKey(dkey))
+                            {
+                                errorKeyLabel.Text = "���� ������� �� �������"; return;
+                            }
+                        }
+                        else
+                        {
+                            errorKeyLabel.Text = "������������ ����� �����";
+                        }
+
+                        switch (SelectedShipherFunction)
+                        {
+                            case ShipherFunction.Shipher:
+                                finalTextBox.Text = EncryptDezimaziiText(startTextBox.Text, dkey);
+                                break;
+                            case ShipherFunction.DeShipher:
+                                finalTextBox.Text = DecryptDezimaziiText(startTextBox.Text, dkey);
+                                break;
+                        }
+
+                        break;
+                    case ShipherType.Vijener:
+                        normalKey = "";
+                        for (int i = 0; i < keyTextBox.Text.Length; i++)
+                        {
+                            if (LetterToIndex.ContainsKey(char.ToLower(keyTextBox.Text[i])))
+                            {
+                                normalKey += keyTextBox.Text[i];
+                            }
+                        }
+                        if (normalKey?.Length <= 0)
+                        {
+                            errorKeyLabel.Text = "���� ������"; return;
+                        }
+
+                        switch (SelectedShipherFunction)
+                        {
+                            case ShipherFunction.Shipher:
+                                finalTextBox.Text = EncryptVijenerText(startTextBox.Text, normalKey);
+                                break;
+                            case ShipherFunction.DeShipher:
+                                finalTextBox.Text = DecryptVijenerText(startTextBox.Text, normalKey);
+                                break;
+                        }
+                        break;
+                }
+
+
+            }
+        }
+
+        private void textDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+    }
+}
+
+----------------------------------------
+
+--- File: Lab1/Lab1/Lab1.csproj (~73 tokens) ---
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>net8.0-windows</TargetFramework>
+		<Nullable>enable</Nullable>
+		<UseWindowsForms>true</UseWindowsForms>
+		<ImplicitUsings>enable</ImplicitUsings>
+	</PropertyGroup>
+
+</Project>
+----------------------------------------
+
+--- File: Lab2/Lab2/Program.cs (~125 tokens) ---
+namespace Lab2
+{
+    internal static class Program
+    {
+        /// <summary>
+        ///  The main entry point for the application.
+        /// </summary>
+        [STAThread]
+        static void Main()
+        {
+            // To customize application configuration such as set high DPI settings or default font,
+            // see https://aka.ms/applicationconfiguration.
+            ApplicationConfiguration.Initialize();
+            Application.Run(new Form1());
+        }
+    }
+}
+----------------------------------------
+
+--- File: Lab2/Lab2/Form1.cs (~928 tokens) ---
+using System.Text;
+
+namespace Lab2
+{
+    public partial class Form1 : Form
+    {
+        //������� 7, ������� 29
+
+        private byte[] _fileBytes;
+        private int[] _resultInt;
+        private const int Degree = 29;
+
+        public Form1()
+        {
+            InitializeComponent();
+            openFileDialog1.Multiselect = false;
+            saveFileDialog1.Filter = openFileDialog1.Filter = "��� �����|*.*";
+
+        }
+
+        #region ������ � �������
+        private void saveFileButton_Click(object sender, EventArgs e)
+        {
+            if (_resultInt == null)
+            {
+                MessageBox.Show("��� ������ ��� ����������.");
+                return;
+            }
+            saveFileDialog1.FileName = "";
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                File.WriteAllBytes(saveFileDialog1.FileName, _resultInt);
+                MessageBox.Show("���� ������� ��������.");
+            }
+        }
+
+        private void openFileButton_Click(object sender, EventArgs e)
+        {
+            openFileDialog1.FileName = "";
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                _fileBytes = File.ReadAllBytes(openFileDialog1.FileName);
+                startListBox.Items.Clear();
+                foreach (byte b in _fileBytes)
+                {
+                    startListBox.Items.Add(Convert.ToString(b, 2).PadLeft(8, '0'));
+                    finalListBox.Text = "";
+                    keyListBox.Text = "";
+                }
+            }
+        }
+        #endregion
+
+        private void ProcessEncryption()
+        {
+            if (_fileBytes == null)
+            {
+                MessageBox.Show("������� �������� ����!");
+                return;
+            }
+
+            string seedStr = "";
+            for (int i = 0; i < startRegisterTextBox.Text.Length; i++)
+            {
+                if (startRegisterTextBox.Text[i] == '0' || startRegisterTextBox.Text[i] == '1')
+                {
+                    seedStr += startRegisterTextBox.Text[i];
+                }
+            }
+            if (seedStr.Length < Degree)
+            {
+                MessageBox.Show($"������� ��������� ��������� (������� {Degree} ���)!");
+                return;
+            }
+
+            uint register = 0;
+            for (int i = 0; i < Degree; i++)
+            {
+                if (seedStr[i] == '1')
+                    register |= (1u << (Degree - 1 - i));
+            }
+
+            _resultBytes = new byte[_fileBytes.Length];
+            keyListBox.Clear();
+            finalListBox.Items.Clear();
+
+            StringBuilder keyVisualizer = new StringBuilder();
+
+            for (int i = 0; i < _fileBytes.Length; i++)
+            {
+                byte keyByte = 0;
+
+                for (int bit = 0; bit < 8; bit++)
+                {
+                    uint Ki = (register >> 28) & 1; 
+                    keyByte = (byte)((keyByte << 1) | Ki); 
+                    uint fb = ((register >> 28) ^ (register >> 1)) & 1;
+                    register = ((register << 1) & 0x1FFFFFFF) | fb;
+
+                    keyVisualizer.Append(Ki);
+                }
+                keyVisualizer.Append("\n");
+                _resultBytes[i] = (byte)(_fileBytes[i] ^ keyByte);
+
+                finalListBox.Items.Add(Convert.ToString(_resultBytes[i], 2).PadLeft(8, '0'));
+            }
+            keyListBox.Text = (keyVisualizer.ToString());
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            ProcessEncryption();
+        }
+    }
+}
+
+----------------------------------------
+
+--- File: Lab2/Lab2/Lab2.csproj (~76 tokens) ---
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+</Project>
+----------------------------------------
+
+--- File: Lab3/Lab3/Program.cs (~125 tokens) ---
+namespace Lab3
+{
+    internal static class Program
+    {
+        /// <summary>
+        ///  The main entry point for the application.
+        /// </summary>
+        [STAThread]
+        static void Main()
+        {
+            // To customize application configuration such as set high DPI settings or default font,
+            // see https://aka.ms/applicationconfiguration.
+            ApplicationConfiguration.Initialize();
+            Application.Run(new Form1());
+        }
+    }
+}
+----------------------------------------
+
+--- File: Lab3/Lab3/Form1.cs (~2026 tokens) ---
+using System.Runtime.InteropServices;
+
+namespace Lab3
+{
+    public partial class Form1 : Form
+    {
+        private byte[] _fileBytes;
+        private byte[] _resultbyte;
+        public Form1()
+        {
+            InitializeComponent();
+            openFileDialog1.Multiselect = false;
+            saveFileDialog1.Filter = openFileDialog1.Filter = "��� �����|*.*";
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            openFileDialog1.FileName = "";
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                _fileBytes = File.ReadAllBytes(openFileDialog1.FileName);
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (_resultbyte == null)
+            {
+                MessageBox.Show("��� ������ ��� ����������.");
+                return;
+            }
+            saveFileDialog1.FileName = "";
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                File.WriteAllBytes(saveFileDialog1.FileName, _resultbyte);
+                MessageBox.Show("���� ������� ��������.");
+            }
+        }
+
+        bool CheckNumSimple(int num)
+        {
+            if (num <= 1) return false;
+            if (num <= 3) return true;
+            if (num % 2 == 0 || num % 3 == 0) return false;
+
+            for (int i = 5; i * i <= num; i += 6)
+            {
+                if (num % i == 0 || num % (i + 2) == 0)
+                    return false;
+            }
+
+            return true;
+        }
+
+        bool CheckNumsChipher(ref int p, ref int q, ref int k)
+        {
+            if (!int.TryParse(pTextBox.Text, out p))
+            {
+                MessageBox.Show("p �� �����");
+                return false;
+            }
+            if (!CheckNumSimple(p))
+            {
+                MessageBox.Show("p �� �������");
+                return false;
+            }
+            if (!int.TryParse(qTextBox.Text, out q))
+            {
+                MessageBox.Show("q �� �����");
+                return false;
+            }
+            if (!CheckNumSimple(q))
+            {
+                MessageBox.Show("q �� �������");
+                return false;
+            }
+            if (p==q)
+            {
+                MessageBox.Show("q � p ������ ���� �������");
+                return false;
+            }
+            if (!int.TryParse(kTextBox.Text, out k))
+            {
+                MessageBox.Show("Kc �� �����");
+                return false;
+            }
+            return true;
+        }
+
+        bool CheckNumsDeChipher(ref int r, ref int k)
+        {
+            if (!int.TryParse(rTextBox.Text, out r))
+            {
+                MessageBox.Show("r �� �����");
+                return false;
+            }
+            if (!int.TryParse(kTextBox.Text, out k))
+            {
+                MessageBox.Show("Kc �� �����");
+                return false;
+            }
+            return true;
+        }
+
+        public int EvclidEx(int d, int fr)
+        {
+            int m0 = fr, t, q;
+            int x0 = 0, x1 = 1;
+
+            if (fr == 1) return 0;
+
+            while (d > 1)
+            {
+                if (fr == 0) break;
+                q = d / fr;
+                t = fr;
+                fr = d % fr;
+                d = t;
+                t = x0;
+                x0 = x1 - q * x0;
+                x1 = t;
+            }
+
+            if (d != 1) return -1;
+
+            if (x1 < 0) x1 += m0;
+            return x1;
+        }
+
+        public int FastPower(int a, int b, int n)
+        {
+            long res = 1;
+            long baseNum = a % n;
+            while (b > 0)
+            {
+                if (b % 2 == 1) res = (res * baseNum) % n;
+                baseNum = (baseNum * baseNum) % n;
+                b /= 2;
+            }
+            return (int)res;
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            if (_fileBytes != null)
+            {
+                int p = 0, q = 0, k = 0, r = 0, fr = 0, Ke = 0;
+                if (pTextBox.Text?.Length > 0 && qTextBox.Text?.Length > 0 && kTextBox.Text?.Length > 0)
+                {
+                    if (CheckNumsChipher(ref p, ref q, ref k))
+                    {
+                        r = p * q;
+                        fr = (p - 1) * (q - 1);
+                        rTextBox.Text = r.ToString();
+                        if (r < 256 || r > 65_536)
+                        {
+                            MessageBox.Show("p � q ���� � ������������ ����� ������ ����� ��� ������ ����");
+                            return;
+                        }
+                        if (k <= 1 || k > fr)
+                        {
+                            MessageBox.Show("Kc �� ���������� �����");
+                            return;
+                        }
+
+                        Ke = EvclidEx(k, fr);
+                        if (Ke != -1)
+                        {
+                            MessageBox.Show($"�������� ����: {Ke}");
+
+                            ushort[] encryptedData = new ushort[_fileBytes.Length];
+                            System.Text.StringBuilder sb = new System.Text.StringBuilder();
+
+                            for (int i = 0; i < _fileBytes.Length; i++)
+                            {
+                                encryptedData[i] = (ushort)FastPower(_fileBytes[i], Ke, r);
+                                sb.Append(encryptedData[i].ToString() + " ");
+                            }
+
+                            richTextBox1.Text = sb.ToString();
+                            _resultbyte = MemoryMarshal.AsBytes(encryptedData.AsSpan()).ToArray();
+
+                            MessageBox.Show("���������� ���������");
+                        }
+                        else
+                        {
+                            MessageBox.Show("KC � f(r) �� ������� �������. �������� ������ Kc");
+                        }
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("������� p, q � Kc");
+                }
+            }
+            else
+            {
+                MessageBox.Show("�� ������ ����");
+            }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            if (_fileBytes != null)
+            {
+                int r = 0, k = 0;
+                if (rTextBox.Text?.Length > 0 && kTextBox.Text?.Length > 0)
+                {
+                    if (CheckNumsDeChipher(ref r, ref k))
+                    {
+                        try
+                        {
+                            ReadOnlySpan<ushort> encryptedData = MemoryMarshal.Cast<byte, ushort>(_fileBytes);
+
+                            byte[] decryptedBytes = new byte[encryptedData.Length];
+                            richTextBox1.Clear();
+                            System.Text.StringBuilder sb = new System.Text.StringBuilder();
+
+                            for (int i = 0; i < encryptedData.Length; i++)
+                            {
+                                decryptedBytes[i] = (byte)FastPower(encryptedData[i], k, r);
+
+                                sb.Append(decryptedBytes[i] + " ");
+                            }
+
+                            richTextBox1.Text = sb.ToString();
+                            _resultbyte = decryptedBytes;
+
+                            MessageBox.Show("������������� ��������� �������!");
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("������: ��������� ����� ��� ����������� �����.");
+                        }
+                    }
+                }
+                else MessageBox.Show("������� r � Kc");
+            }
+            else MessageBox.Show("�� ������ ����");
+        }
+    }
+}
+
+----------------------------------------
+
+--- File: Lab3/Lab3/Lab3.csproj (~76 tokens) ---
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+</Project>
+----------------------------------------
+
+--- File: Lab1/Lab1.sln (~281 tokens) ---
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36908.2 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lab1", "Lab1\Lab1.csproj", "{E46EB2C7-8650-4E8C-882A-D7F40EB5DA6F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E46EB2C7-8650-4E8C-882A-D7F40EB5DA6F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E46EB2C7-8650-4E8C-882A-D7F40EB5DA6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E46EB2C7-8650-4E8C-882A-D7F40EB5DA6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E46EB2C7-8650-4E8C-882A-D7F40EB5DA6F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5D117190-B995-414B-A832-EA7B1430A9D0}
+	EndGlobalSection
+EndGlobal
+
+----------------------------------------
+
+--- File: Lab2/Lab2.sln (~281 tokens) ---
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.37012.4 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lab2", "Lab2\Lab2.csproj", "{AC2FF46B-A655-4B7B-B8A3-4821B2F3E04F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AC2FF46B-A655-4B7B-B8A3-4821B2F3E04F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC2FF46B-A655-4B7B-B8A3-4821B2F3E04F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC2FF46B-A655-4B7B-B8A3-4821B2F3E04F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC2FF46B-A655-4B7B-B8A3-4821B2F3E04F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {824648AF-B987-4DB9-A0F1-C220ACFAD92E}
+	EndGlobalSection
+EndGlobal
+
+----------------------------------------
+
+--- File: Lab3/Lab3.sln (~281 tokens) ---
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.37012.4 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lab3", "Lab3\Lab3.csproj", "{25A8198D-09B2-482C-8D84-75702BC1FDC4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{25A8198D-09B2-482C-8D84-75702BC1FDC4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{25A8198D-09B2-482C-8D84-75702BC1FDC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{25A8198D-09B2-482C-8D84-75702BC1FDC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{25A8198D-09B2-482C-8D84-75702BC1FDC4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8991F36C-1F05-4A73-9537-6AC13489E0C3}
+	EndGlobalSection
+EndGlobal
+
+----------------------------------------
+
+--- File: Lab1/Lab1/Form1.Designer.cs (~3163 tokens) ---
+﻿namespace Lab1
+{
+    partial class Form1
+    {
+        /// <summary>
+        ///  Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        ///  Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        ///  Required method for Designer support - do not modify
+        ///  the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            label1 = new Label();
+            shipherMetodComboBox = new ComboBox();
+            startTextBox = new RichTextBox();
+            finalTextBox = new RichTextBox();
+            label2 = new Label();
+            label3 = new Label();
+            openFileDialog1 = new OpenFileDialog();
+            saveFileDialog1 = new SaveFileDialog();
+            shipherFunctionComboBox = new ComboBox();
+            label4 = new Label();
+            label5 = new Label();
+            keyTextBox = new RichTextBox();
+            errorKeyLabel = new Label();
+            результатШифрованияToolStripMenuItem = new ToolStripMenuItem();
+            параметрыПрограммыToolStripMenuItem = new ToolStripMenuItem();
+            button1 = new Button();
+            button2 = new Button();
+            textDataGridView = new DataGridView();
+            ((System.ComponentModel.ISupportInitialize)textDataGridView).BeginInit();
+            SuspendLayout();
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 14F);
+            label1.Location = new Point(12, 12);
+            label1.Margin = new Padding(5, 0, 5, 0);
+            label1.Name = "label1";
+            label1.Size = new Size(295, 32);
+            label1.TabIndex = 0;
+            label1.Text = "Выберите тип кодировки";
+            // 
+            // shipherMetodComboBox
+            // 
+            shipherMetodComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            shipherMetodComboBox.Font = new Font("Segoe UI", 14F);
+            shipherMetodComboBox.FormattingEnabled = true;
+            shipherMetodComboBox.Items.AddRange(new object[] { "Метод децимаций", "Виженер (самоген.)" });
+            shipherMetodComboBox.Location = new Point(12, 47);
+            shipherMetodComboBox.Name = "shipherMetodComboBox";
+            shipherMetodComboBox.Size = new Size(295, 39);
+            shipherMetodComboBox.TabIndex = 1;
+            shipherMetodComboBox.SelectedIndexChanged += ShipherTypeComboBox_SelectedIndexChanged;
+            // 
+            // startTextBox
+            // 
+            startTextBox.Location = new Point(12, 123);
+            startTextBox.Name = "startTextBox";
+            startTextBox.Size = new Size(729, 285);
+            startTextBox.TabIndex = 2;
+            startTextBox.Text = "";
+            startTextBox.TextChanged += startTextBox_TextChanged;
+            // 
+            // finalTextBox
+            // 
+            finalTextBox.Location = new Point(762, 123);
+            finalTextBox.Name = "finalTextBox";
+            finalTextBox.ReadOnly = true;
+            finalTextBox.Size = new Size(729, 285);
+            finalTextBox.TabIndex = 3;
+            finalTextBox.Text = "";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(12, 89);
+            label2.Name = "label2";
+            label2.Size = new Size(189, 32);
+            label2.TabIndex = 4;
+            label2.Text = "Исходный текст";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(762, 89);
+            label3.Name = "label3";
+            label3.Size = new Size(263, 32);
+            label3.TabIndex = 5;
+            label3.Text = "Зашифрованный текст";
+            // 
+            // openFileDialog1
+            // 
+            openFileDialog1.FileName = "openFileDialog1";
+            // 
+            // shipherFunctionComboBox
+            // 
+            shipherFunctionComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            shipherFunctionComboBox.Font = new Font("Segoe UI", 14F);
+            shipherFunctionComboBox.FormattingEnabled = true;
+            shipherFunctionComboBox.Items.AddRange(new object[] { "Шифрация", "Дешифрация" });
+            shipherFunctionComboBox.Location = new Point(317, 47);
+            shipherFunctionComboBox.Name = "shipherFunctionComboBox";
+            shipherFunctionComboBox.Size = new Size(295, 39);
+            shipherFunctionComboBox.TabIndex = 9;
+            shipherFunctionComboBox.SelectedIndexChanged += shipherFunctionComboBox_SelectedIndexChanged;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Font = new Font("Segoe UI", 14F);
+            label4.Location = new Point(317, 12);
+            label4.Margin = new Padding(5, 0, 5, 0);
+            label4.Name = "label4";
+            label4.Size = new Size(232, 32);
+            label4.TabIndex = 8;
+            label4.Text = "Выберите функцию";
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Font = new Font("Segoe UI", 14F);
+            label5.Location = new Point(631, 12);
+            label5.Margin = new Padding(5, 0, 5, 0);
+            label5.Name = "label5";
+            label5.Size = new Size(170, 32);
+            label5.TabIndex = 10;
+            label5.Text = "Введите ключ";
+            // 
+            // keyTextBox
+            // 
+            keyTextBox.Location = new Point(631, 47);
+            keyTextBox.Name = "keyTextBox";
+            keyTextBox.Size = new Size(543, 39);
+            keyTextBox.TabIndex = 11;
+            keyTextBox.Text = "";
+            keyTextBox.TextChanged += keyTextBox_TextChanged;
+            // 
+            // errorKeyLabel
+            // 
+            errorKeyLabel.AutoSize = true;
+            errorKeyLabel.Font = new Font("Segoe UI", 14F);
+            errorKeyLabel.Location = new Point(811, 12);
+            errorKeyLabel.Margin = new Padding(5, 0, 5, 0);
+            errorKeyLabel.Name = "errorKeyLabel";
+            errorKeyLabel.Size = new Size(0, 32);
+            errorKeyLabel.TabIndex = 12;
+            // 
+            // результатШифрованияToolStripMenuItem
+            // 
+            результатШифрованияToolStripMenuItem.Name = "результатШифрованияToolStripMenuItem";
+            результатШифрованияToolStripMenuItem.Size = new Size(352, 36);
+            результатШифрованияToolStripMenuItem.Text = "Зашифрованный текст";
+            // 
+            // параметрыПрограммыToolStripMenuItem
+            // 
+            параметрыПрограммыToolStripMenuItem.Name = "параметрыПрограммыToolStripMenuItem";
+            параметрыПрограммыToolStripMenuItem.Size = new Size(352, 36);
+            параметрыПрограммыToolStripMenuItem.Text = "Параметры программы";
+            // 
+            // button1
+            // 
+            button1.Location = new Point(1253, 12);
+            button1.Name = "button1";
+            button1.Size = new Size(240, 48);
+            button1.TabIndex = 13;
+            button1.Text = "Сохранить";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += saveButton_Click;
+            // 
+            // button2
+            // 
+            button2.Location = new Point(1253, 66);
+            button2.Name = "button2";
+            button2.Size = new Size(240, 48);
+            button2.TabIndex = 14;
+            button2.Text = "Открыть";
+            button2.UseVisualStyleBackColor = true;
+            button2.Click += openButton_Click;
+            // 
+            // textDataGridView
+            // 
+            textDataGridView.AllowUserToAddRows = false;
+            textDataGridView.AllowUserToDeleteRows = false;
+            textDataGridView.AllowUserToResizeRows = false;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.TopCenter;
+            textDataGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            textDataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            textDataGridView.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            textDataGridView.CausesValidation = false;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = SystemColors.Control;
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 14F);
+            dataGridViewCellStyle2.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
+            textDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            textDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            textDataGridView.Location = new Point(12, 427);
+            textDataGridView.Name = "textDataGridView";
+            textDataGridView.ReadOnly = true;
+            textDataGridView.RowHeadersWidth = 51;
+            textDataGridView.Size = new Size(1479, 193);
+            textDataGridView.TabIndex = 15;
+            textDataGridView.CellContentClick += textDataGridView_CellContentClick;
+            // 
+            // Form1
+            // 
+            AutoScaleDimensions = new SizeF(13F, 31F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(1505, 632);
+            Controls.Add(textDataGridView);
+            Controls.Add(button2);
+            Controls.Add(button1);
+            Controls.Add(errorKeyLabel);
+            Controls.Add(keyTextBox);
+            Controls.Add(label5);
+            Controls.Add(shipherFunctionComboBox);
+            Controls.Add(label4);
+            Controls.Add(label3);
+            Controls.Add(label2);
+            Controls.Add(finalTextBox);
+            Controls.Add(startTextBox);
+            Controls.Add(shipherMetodComboBox);
+            Controls.Add(label1);
+            Font = new Font("Segoe UI", 14F);
+            Margin = new Padding(5);
+            Name = "Form1";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Шифратор";
+            ((System.ComponentModel.ISupportInitialize)textDataGridView).EndInit();
+            ResumeLayout(false);
+            PerformLayout();
+        }
+
+        #endregion
+
+        private Label label1;
+        private ComboBox shipherMetodComboBox;
+        private RichTextBox startTextBox;
+        private RichTextBox finalTextBox;
+        private Label label2;
+        private Label label3;
+        private OpenFileDialog openFileDialog1;
+        private SaveFileDialog saveFileDialog1;
+        private ComboBox shipherFunctionComboBox;
+        private Label label4;
+        private Label label5;
+        private RichTextBox keyTextBox;
+        private Label errorKeyLabel;
+        private ToolStripMenuItem результатШифрованияToolStripMenuItem;
+        private ToolStripMenuItem параметрыПрограммыToolStripMenuItem;
+        private Button button1;
+        private Button button2;
+        private DataGridView textDataGridView;
+    }
+}
+
+----------------------------------------
+
+--- File: Lab2/Lab2/Form1.Designer.cs (~1781 tokens) ---
+﻿namespace Lab2
+{
+    partial class Form1
+    {
+        /// <summary>
+        ///  Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        ///  Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        ///  Required method for Designer support - do not modify
+        ///  the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            openFileButton = new Button();
+            saveFileButton = new Button();
+            startListBox = new ListBox();
+            startRegisterTextBox = new TextBox();
+            label1 = new Label();
+            label2 = new Label();
+            label3 = new Label();
+            finalListBox = new ListBox();
+            label4 = new Label();
+            button1 = new Button();
+            openFileDialog1 = new OpenFileDialog();
+            saveFileDialog1 = new SaveFileDialog();
+            keyListBox = new RichTextBox();
+            SuspendLayout();
+            // 
+            // openFileButton
+            // 
+            openFileButton.Location = new Point(12, 12);
+            openFileButton.Name = "openFileButton";
+            openFileButton.Size = new Size(200, 61);
+            openFileButton.TabIndex = 0;
+            openFileButton.Text = "Открыть файл";
+            openFileButton.UseVisualStyleBackColor = true;
+            openFileButton.Click += openFileButton_Click;
+            // 
+            // saveFileButton
+            // 
+            saveFileButton.Location = new Point(627, 12);
+            saveFileButton.Name = "saveFileButton";
+            saveFileButton.Size = new Size(200, 61);
+            saveFileButton.TabIndex = 1;
+            saveFileButton.Text = "Сохранить файл";
+            saveFileButton.UseVisualStyleBackColor = true;
+            saveFileButton.Click += saveFileButton_Click;
+            // 
+            // startListBox
+            // 
+            startListBox.FormattingEnabled = true;
+            startListBox.ItemHeight = 25;
+            startListBox.Location = new Point(12, 136);
+            startListBox.Name = "startListBox";
+            startListBox.Size = new Size(381, 254);
+            startListBox.TabIndex = 2;
+            // 
+            // startRegisterTextBox
+            // 
+            startRegisterTextBox.Location = new Point(218, 40);
+            startRegisterTextBox.Name = "startRegisterTextBox";
+            startRegisterTextBox.Size = new Size(403, 33);
+            startRegisterTextBox.TabIndex = 3;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(218, 12);
+            label1.Name = "label1";
+            label1.Size = new Size(229, 25);
+            label1.TabIndex = 4;
+            label1.Text = "Исходные биты регистра";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(12, 108);
+            label2.Name = "label2";
+            label2.Size = new Size(303, 25);
+            label2.TabIndex = 5;
+            label2.Text = "Исходный файл в двоичном виде";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(446, 108);
+            label3.Name = "label3";
+            label3.Size = new Size(326, 25);
+            label3.TabIndex = 6;
+            label3.Text = "Полученный файл в двоичном виде";
+            // 
+            // finalListBox
+            // 
+            finalListBox.FormattingEnabled = true;
+            finalListBox.ItemHeight = 25;
+            finalListBox.Location = new Point(446, 136);
+            finalListBox.Name = "finalListBox";
+            finalListBox.Size = new Size(381, 254);
+            finalListBox.TabIndex = 7;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new Point(12, 409);
+            label4.Name = "label4";
+            label4.Size = new Size(230, 25);
+            label4.TabIndex = 8;
+            label4.Text = "Полученные биты ключа";
+            // 
+            // button1
+            // 
+            button1.Location = new Point(627, 437);
+            button1.Name = "button1";
+            button1.Size = new Size(200, 79);
+            button1.TabIndex = 10;
+            button1.Text = "Зашифровать";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
+            // 
+            // openFileDialog1
+            // 
+            openFileDialog1.FileName = "openFileDialog1";
+            // 
+            // keyListBox
+            // 
+            keyListBox.Location = new Point(12, 437);
+            keyListBox.Name = "keyListBox";
+            keyListBox.Size = new Size(609, 79);
+            keyListBox.TabIndex = 11;
+            keyListBox.Text = "";
+            // 
+            // Form1
+            // 
+            AutoScaleDimensions = new SizeF(11F, 25F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(839, 530);
+            Controls.Add(keyListBox);
+            Controls.Add(button1);
+            Controls.Add(label4);
+            Controls.Add(finalListBox);
+            Controls.Add(label3);
+            Controls.Add(label2);
+            Controls.Add(label1);
+            Controls.Add(startRegisterTextBox);
+            Controls.Add(startListBox);
+            Controls.Add(saveFileButton);
+            Controls.Add(openFileButton);
+            Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            Margin = new Padding(5);
+            Name = "Form1";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Lab2";
+            ResumeLayout(false);
+            PerformLayout();
+        }
+
+        #endregion
+
+        private Button openFileButton;
+        private Button saveFileButton;
+        private ListBox startListBox;
+        private TextBox startRegisterTextBox;
+        private Label label1;
+        private Label label2;
+        private Label label3;
+        private ListBox finalListBox;
+        private Label label4;
+        private Button button1;
+        private OpenFileDialog openFileDialog1;
+        private SaveFileDialog saveFileDialog1;
+        private RichTextBox keyListBox;
+    }
+}
+
+----------------------------------------
+
+--- File: Lab3/Lab3/Form1.Designer.cs (~1992 tokens) ---
+﻿namespace Lab3
+{
+    partial class Form1
+    {
+        /// <summary>
+        ///  Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        ///  Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        ///  Required method for Designer support - do not modify
+        ///  the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            label1 = new Label();
+            pTextBox = new TextBox();
+            qTextBox = new TextBox();
+            label2 = new Label();
+            label3 = new Label();
+            kTextBox = new TextBox();
+            button1 = new Button();
+            button2 = new Button();
+            richTextBox1 = new RichTextBox();
+            rTextBox = new TextBox();
+            label4 = new Label();
+            button3 = new Button();
+            button4 = new Button();
+            label5 = new Label();
+            openFileDialog1 = new OpenFileDialog();
+            saveFileDialog1 = new SaveFileDialog();
+            SuspendLayout();
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(14, 15);
+            label1.Margin = new Padding(5, 0, 5, 0);
+            label1.Name = "label1";
+            label1.Size = new Size(108, 26);
+            label1.TabIndex = 0;
+            label1.Text = "Введите p:";
+            // 
+            // pTextBox
+            // 
+            pTextBox.Location = new Point(130, 12);
+            pTextBox.Name = "pTextBox";
+            pTextBox.Size = new Size(172, 34);
+            pTextBox.TabIndex = 1;
+            // 
+            // qTextBox
+            // 
+            qTextBox.Location = new Point(130, 52);
+            qTextBox.Name = "qTextBox";
+            qTextBox.Size = new Size(172, 34);
+            qTextBox.TabIndex = 3;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(14, 55);
+            label2.Margin = new Padding(5, 0, 5, 0);
+            label2.Name = "label2";
+            label2.Size = new Size(108, 26);
+            label2.TabIndex = 2;
+            label2.Text = "Введите q:";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(310, 15);
+            label3.Margin = new Padding(5, 0, 5, 0);
+            label3.Name = "label3";
+            label3.Size = new Size(268, 26);
+            label3.TabIndex = 4;
+            label3.Text = "Введите закрытый ключ Кс:";
+            // 
+            // kTextBox
+            // 
+            kTextBox.Location = new Point(586, 12);
+            kTextBox.Name = "kTextBox";
+            kTextBox.Size = new Size(291, 34);
+            kTextBox.TabIndex = 5;
+            // 
+            // button1
+            // 
+            button1.Location = new Point(332, 51);
+            button1.Name = "button1";
+            button1.Size = new Size(195, 34);
+            button1.TabIndex = 6;
+            button1.Text = "Открыть файл";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
+            // 
+            // button2
+            // 
+            button2.Location = new Point(332, 91);
+            button2.Name = "button2";
+            button2.Size = new Size(195, 34);
+            button2.TabIndex = 7;
+            button2.Text = "Сохранить файл";
+            button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
+            // 
+            // richTextBox1
+            // 
+            richTextBox1.Location = new Point(14, 182);
+            richTextBox1.Name = "richTextBox1";
+            richTextBox1.Size = new Size(863, 169);
+            richTextBox1.TabIndex = 8;
+            richTextBox1.Text = "";
+            // 
+            // rTextBox
+            // 
+            rTextBox.Location = new Point(130, 92);
+            rTextBox.Name = "rTextBox";
+            rTextBox.Size = new Size(172, 34);
+            rTextBox.TabIndex = 10;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new Point(14, 95);
+            label4.Margin = new Padding(5, 0, 5, 0);
+            label4.Name = "label4";
+            label4.Size = new Size(107, 26);
+            label4.TabIndex = 9;
+            label4.Text = "Введите r:";
+            // 
+            // button3
+            // 
+            button3.Location = new Point(635, 55);
+            button3.Name = "button3";
+            button3.Size = new Size(195, 34);
+            button3.TabIndex = 11;
+            button3.Text = "Зашифровать";
+            button3.UseVisualStyleBackColor = true;
+            button3.Click += button3_Click;
+            // 
+            // button4
+            // 
+            button4.Location = new Point(635, 95);
+            button4.Name = "button4";
+            button4.Size = new Size(195, 34);
+            button4.TabIndex = 12;
+            button4.Text = "Расшифровать";
+            button4.UseVisualStyleBackColor = true;
+            button4.Click += button4_Click;
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new Point(14, 153);
+            label5.Name = "label5";
+            label5.Size = new Size(105, 26);
+            label5.TabIndex = 13;
+            label5.Text = "Результат:";
+            // 
+            // openFileDialog1
+            // 
+            openFileDialog1.FileName = "openFileDialog1";
+            // 
+            // Form1
+            // 
+            AutoScaleDimensions = new SizeF(12F, 26F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(889, 359);
+            Controls.Add(label5);
+            Controls.Add(button4);
+            Controls.Add(button3);
+            Controls.Add(rTextBox);
+            Controls.Add(label4);
+            Controls.Add(richTextBox1);
+            Controls.Add(button2);
+            Controls.Add(button1);
+            Controls.Add(kTextBox);
+            Controls.Add(label3);
+            Controls.Add(qTextBox);
+            Controls.Add(label2);
+            Controls.Add(pTextBox);
+            Controls.Add(label1);
+            Font = new Font("Comic Sans MS", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            Margin = new Padding(5);
+            Name = "Form1";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Form1";
+            ResumeLayout(false);
+            PerformLayout();
+        }
+
+        #endregion
+
+        private Label label1;
+        private TextBox pTextBox;
+        private TextBox qTextBox;
+        private Label label2;
+        private Label label3;
+        private TextBox kTextBox;
+        private Button button1;
+        private Button button2;
+        private RichTextBox richTextBox1;
+        private TextBox rTextBox;
+        private Label label4;
+        private Button button3;
+        private Button button4;
+        private Label label5;
+        private OpenFileDialog openFileDialog1;
+        private SaveFileDialog saveFileDialog1;
+    }
+}
+
+----------------------------------------
+
+=== End of Context. Total Collected Tokens: ~14978 ===
+
+--------------------------------------------------
+[RESPONSE]:
+# TI Cryptographic Laboratory
+
+## Project Description
+
+The TI Cryptographic Laboratory is a .NET-based application designed to demonstrate and experiment with various cryptographic techniques. The project consists of three main laboratory works (Lab1, Lab2, and Lab3), each focusing on a different aspect of cryptography.
 
 ## Key Features
-* **Unified Development Framework**: A single framework for building various types of applications, reducing development complexity and increasing productivity.
-* **Modular Architecture**: A modular design allowing for easy extension, customization, and maintenance of the framework and applications.
-* **Language Interoperability**: Support for multiple programming languages, including C#, F#, and Visual Basic .NET, enabling developers to work with their preferred language.
+
+*   **Lab1: Ciphering and Deciphering using Dezimazii and Vijener Methods**
+    *   Implementation of Dezimazii and Vijener ciphering and deciphering methods
+    *   Support for text encryption and decryption using a provided key
+    *   Visualization of the encryption and decryption process in a data grid view
+*   **Lab2: Stream Cipher using Linear Feedback Shift Register (LFSR)**
+    *   Implementation of a stream cipher using LFSR
+    *   Support for file encryption and decryption
+    *   Visualization of the encryption and decryption process in list boxes
+*   **Lab3: RSA Cryptosystem**
+    *   Implementation of the RSA cryptosystem for secure data encryption
+    *   Support for file encryption and decryption using public and private keys
+    *   Visualization of the encryption and decryption process in a rich text box
 
 ## Tech Stack
-* **Programming Languages**: C#, F#, Visual Basic .NET
-* **Frameworks**: .NET Core, .NET Framework
-* **Core Dependencies**: 
-  + Microsoft.AspNetCore
-  + Microsoft.Extensions
-  + System
+
+*   **Programming Languages:** C#
+*   **Frameworks:** .NET 8.0, Windows Forms
+*   **Core Dependencies:** System, System.Windows.Forms, System.Drawing
 
 ## Project Structure Overview
-The .Net repository consists of the following main modules:
-* **src**: Source code for the .Net framework and applications
-* **tests**: Unit tests and integration tests for the framework and applications
-* **docs**: Documentation for the framework, applications, and development guidelines
 
-## Getting Started / Basic Usage
-### Prerequisites
-* .NET Core SDK (version 3.1 or later)
-* Visual Studio Code or Visual Studio (2019 or later)
+The project consists of three main laboratory works:
 
-### Building and Running Applications
-1. Clone the repository: `git clone https://github.com/dotnet/dotnet.git`
-2. Navigate to the repository root: `cd dotnet`
-3. Restore dependencies: `dotnet restore`
-4. Build and run an application: `dotnet build` and `dotnet run`
+*   **Lab1:** Contains the implementation of Dezimazii and Vijener ciphering and deciphering methods
+*   **Lab2:** Contains the implementation of a stream cipher using LFSR
+*   **Lab3:** Contains the implementation of the RSA cryptosystem
 
-### Example Use Case
-Create a new .NET Core console application:
-```bash
-dotnet new console -o MyApp
-cd MyApp
-dotnet run
-```
-This will create a basic console application, build it, and run it.
+Each laboratory work has its own solution file (.sln) and project file (.csproj).
+
+## Getting Started / Basic Usage Guide
+
+1.  Open the solution file (.sln) of the desired laboratory work in Visual Studio.
+2.  Build and run the project.
+3.  Follow the on-screen instructions to perform the desired cryptographic operations.
+
+### Lab1 Usage
+
+*   Select the type of ciphering (Dezimazii or Vijener) and function (encryption or decryption) using the combo boxes.
+*   Enter the input text and key (if required).
+*   Click the "Encrypt" or "Decrypt" button to perform the operation.
+
+### Lab2 Usage
+
+*   Open a file using the "Open File" button.
+*   Enter the initial register bits.
+*   Click the "Encrypt" button to perform the encryption operation.
+*   Save the encrypted file using the "Save File" button.
+
+### Lab3 Usage
+
+*   Enter the public and private keys (p, q, and Kc).
+*   Open a file using the "Open File" button.
+*   Click the "Encrypt" button to perform the encryption operation.
+*   Save the encrypted file using the "Save File" button.
 ==================================================
 

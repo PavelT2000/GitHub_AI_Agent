@@ -89,6 +89,26 @@ def get_optimized_tree(
     return "\n".join(tree_lines)
 
 
+def format_files_for_selection(registry: dict[str, int]) -> str:
+    """Плоский список файлов с полными путями — ИИ копирует пути без угадывания по дереву."""
+    return "\n".join(
+        f"{path} (~{tokens} tokens)"
+        for path, tokens in sorted(registry.items())
+    )
+
+
+def resolve_selected_path(clean_rel_path: str, registry: dict[str, int]) -> str | None:
+    """Сопоставляет путь от ИИ с реестром; учитывает типичную вложенность Lab1/Lab1/."""
+    if clean_rel_path in registry:
+        return clean_rel_path
+    parts = clean_rel_path.split("/")
+    if len(parts) >= 2:
+        alt = f"{parts[0]}/{parts[0]}/{'/'.join(parts[1:])}"
+        if alt in registry:
+            return alt
+    return None
+
+
 def build_files_registry(repo_path: Path, spec: pathspec.PathSpec) -> dict[str, int]:
     """Реестр относительных путей (POSIX) -> оценка токенов для выбранных ИИ файлов."""
     registry: dict[str, int] = {}

@@ -5,7 +5,13 @@ from pathlib import Path
 from git import Repo as GitRepo
 import pathspec
 from open_ai_module import get_ai_completion, count_tokens
-from .utils import get_optimized_tree, get_repo_extensions, build_files_registry
+from .utils import (
+    get_optimized_tree,
+    get_repo_extensions,
+    build_files_registry,
+    format_files_for_selection,
+    resolve_selected_path,
+)
 
 
 def get_all_repositories() -> list[MyRepo]:
@@ -25,7 +31,7 @@ def get_all_repositories() -> list[MyRepo]:
         my_repos.append(repo_obj)
     return my_repos
 
-def download_repository(repo: MyRepo):
+def download_repository(repo: MyRepo, github_token: str | None = None):
     """
     Скачивает репозиторий и обновляет флаг downloaded в объекте MyRepo.
     """
@@ -35,7 +41,9 @@ def download_repository(repo: MyRepo):
     temp_dir.mkdir(exist_ok=True)
     if repo.downloaded:
         return f"Репозиторий {repo.name} уже помечен как скачанный."
-    clean_token = settings.GITHUB_TOKEN.strip()
+    clean_token = (github_token or settings.GITHUB_TOKEN).strip()
+    if not clean_token:
+        raise ValueError("GitHub token не указан: передайте token или задайте GITHUB_TOKEN в .env")
     clone_url = repo.clone_url.replace("https://", f"https://{clean_token}@")
     if download_path.exists() and any(download_path.iterdir()):
         repo.downloaded = True
@@ -51,31 +59,43 @@ def setup_aiignore(repo: MyRepo):
     repo_path = project_root / "temp" / repo.name
     stats = get_repo_extensions(repo_path)
     prompt1 = [
-        {"role": "system", "content": (
-            "You are an automated environment configurator creating a .aiignore file (standard gitignore syntax).\n"
-            "Your task is to analyze the file extensions list and output patterns to IGNORE everything except source code and critical configs.\n\n"
-            "CRITICAL RULES:\n"
-            "1. ALWAYS ignore binary, assets, and cache: *.exe, *.dll, *.pdb, *.so, *.bin, *.cache, *.png, *.jpg, *.ico, *.pdf, *.zip, *.nupkg.\n"
-            "2. ALWAYS keep: *.cs, *.cpp, *.h, *.js, *.css, *.cshtml, *.py.\n"
-            "3. For JSON files, ignore all JSON but explicitly allow appsettings by adding these two exact lines:\n"
-            "*.json\n"
-            "!appsettings.json\n\n"
-            "Output ONLY the raw wildcard patterns, one per line. No explanations, no bullet points, no markdown blocks, no human commentary."
-        )},
-        {"role": "user", "content": stats}
+    {"role": "system", "content": (
+        "You are a strict code context optimizer. Analyze the provided directory tree and token counts.\n"
+        "Your goal is to generate .aiignore patterns to exclude build artifacts, cache, generated code, and heavy non-business assets, while retaining project structure.\n\n"
+        "CRITICAL RULES:\n"
+        "1. ALWAYS IGNORE: Build and IDE folders (.vs/, bin/, obj/, .git/, .idea/).\n"
+        "2. ALWAYS IGNORE heavy text data, assets, and binaries: *.txt, *.log, *.dll, *.exe, *.pdb, *.cache, *.png, *.jpg, *.zip.\n"
+        "3. ALWAYS IGNORE automatically generated UI code and resources: *.Designer.cs, *.resx.\n"
+        "4. NEVER IGNORE critical project structure and config files: DO NOT ignore *.csproj, *.sln, *.json, .gitignore.\n"
+        "5. KEEP source code files intact (*.cs, *.py, *.js).\n\n"
+        "OUTPUT FORMAT:\n"
+        "Output ONLY valid wildcard patterns (one per line). Strictly NO explanations, NO markdown formatting, NO introduction, NO bullet points. Just raw text patterns."
+    )},
+    {"role": "user", "content": (
+        "Project/\n"
+        "  .vs/ (~15000 tokens)\n"
+        "  bin/Debug/ (~8000 tokens)\n"
+        "  src/ (~2000 tokens)"
+    )},
+    {"role": "assistant", "content": ".vs/\nbin/\nobj/"},
+    {"role": "user", "content": stats}
     ]
     res1 = get_ai_completion(prompt1)
     if isinstance(res1, str):
         return
     ext_rules = res1.choices[0].message.content.strip()
-    spec = pathspec.PathSpec.from_lines('gitwildmatch', ext_ignore_rules.splitlines())
+    spec = pathspec.PathSpec.from_lines('gitwildmatch', ext_rules.splitlines())
     compact_tree = get_optimized_tree(repo_path, spec)
     prompt2 = [
         {"role": "system", "content": (
             "You are a strict code context optimizer. Analyze the provided directory tree and token counts.\n"
-            "Your goal is to generate .aiignore patterns to exclude build artifacts (.vs, bin, obj), cache, dependencies, and heavy non-business logic folders.\n"
-            "CRITICAL: Output ONLY valid wildcard patterns (e.g., .vs/, bin/, *.dll), one per line.\n"
-            "Strictly NO explanations, NO markdown formatting (do not use blocks like ```), NO introduction, and NO bullet points. Just raw text patterns."
+            "Your goal is to generate .aiignore patterns to exclude build artifacts (.vs, bin, obj), cache, binaries, and heavy temporary test files, WHILE KEEPING structural configuration files.\n\n"
+            "CRITICAL RULES:\n"
+            "1. NEVER IGNORE project structure and build configuration files: DO NOT add *.csproj or *.sln to the ignore list.\n"
+            "2. ALWAYS IGNORE build and IDE artifacts: .vs/, bin/, obj/, .git/.\n"
+            "3. ALWAYS IGNORE compiled binaries and logs: *.dll, *.exe, *.pdb, *.log, *.cache.\n\n"
+            "OUTPUT FORMAT:\n"
+            "Output ONLY valid wildcard patterns, one per line. Strictly NO explanations, NO markdown formatting (do not use blocks like ```), NO introduction, and NO bullet points. Just raw text patterns."
         )},
         # Даем ИИ пример (One-Shot), чтобы он понял структуру ответа
         {"role": "user", "content": "Project/\n  .vs/ (~15000 tokens)\n  bin/Debug/ (~8000 tokens)\n  src/ (~2000 tokens)"},
@@ -119,7 +139,10 @@ def get_repo_information(repo: MyRepo, token_limit: int = 10000) -> str:
     ignore_file = repo_path / ".ai_github_tool" / ".aiignore"
     ignore_rules = []
     if ignore_file.exists():
-        ignore_rules = ignore_file.read_text(encoding="utf-8").splitlines()
+        ignore_rules = [
+            line for line in ignore_file.read_text(encoding="utf-8").splitlines()
+            if line.strip() and not line.strip().startswith("#")
+        ]
     spec = pathspec.PathSpec.from_lines('gitwildmatch', ignore_rules)
 
     repo_files_registry = build_files_registry(repo_path, spec)
@@ -131,32 +154,31 @@ def get_repo_information(repo: MyRepo, token_limit: int = 10000) -> str:
             "Total Collected Tokens: ~0"
         )
 
-    compact_tree = get_optimized_tree(
-        repo_path, spec, include_file_tokens=True
-    )
+    files_list = format_files_for_selection(repo_files_registry)
 
     prompt = [
         {"role": "system", "content": (
-            "You are a strict codebase architect CLI tool. Your task is to select the most critical project files for logic analysis.\n\n"
-            f"CRITICAL CONSTRAINT: The total token weight of selected files MUST NOT exceed {token_limit} tokens.\n"
-            "Select only core business logic files (entry points, controllers, services, models, data contexts).\n"
-            "Ignore tests, build artifacts, migrations, and UI assets.\n\n"
-            "You receive a directory tree: folders end with '/', files are listed by name with indentation (not full paths per line).\n"
-            "Token counts are shown as (~N tokens). Reconstruct full relative paths from the tree when answering.\n\n"
+            "You are a codebase architect CLI tool. Your task is to select files containing application logic for comprehensive analysis.\n\n"
+            f"CRITICAL CONSTRAINT: Select as many relevant files as possible, maximizing information density without exceeding the strict budget of {token_limit} tokens total. Stop adding files only when the next file would violate this limit.\n\n"
+            "SELECTION PRIORITY:\n"
+            "- High Priority: Source code files (.cs, .py, .js, .ts, .go, etc.), including entry points, services, controllers, models, and UI logic code.\n"
+            "- Medium Priority: Project files (*.csproj, *.sln).\n"
+            "- DO NOT SELECT: .gitignore, build artifacts, binary assets, or test-only scaffolding unless no source code exists.\n\n"
+            "You receive a flat list where each line is a FULL relative path from repository root (POSIX /), followed by (~N tokens).\n"
+            "Copy paths EXACTLY as shown — do not shorten or guess nested folders.\n\n"
             "OUTPUT FORMAT RULES:\n"
-            "1. Output ONLY a flat list of relative file paths from repository root (one path per line, use /).\n"
-            "2. Strictly NO numbered lists (do not use 1, 2, 3).\n"
+            "1. Output ONLY a flat list of relative file paths (one per line, use /).\n"
+            "2. Strictly NO numbered lists.\n"
             "3. Strictly NO introduction, NO Markdown code blocks, NO conclusion text, and NO human commentary.\n"
             "4. Output must be raw plain text paths only."
         )},
         {"role": "user", "content": (
-            "Project/\n"
-            "  src/ (~2000 tokens)\n"
-            "    App.cs (~4000 tokens)\n"
-            "    Test.cs (~2000 tokens)"
+            "Lab1/Lab1/Program.cs (~125 tokens)\n"
+            "Lab1/Lab1/Form1.cs (~3645 tokens)\n"
+            "Lab1/Lab1.csproj (~73 tokens)"
         )},
-        {"role": "assistant", "content": "src/App.cs"},
-        {"role": "user", "content": compact_tree},
+        {"role": "assistant", "content": "Lab1/Lab1/Program.cs\nLab1/Lab1/Form1.cs\nLab1/Lab1.csproj"},
+        {"role": "user", "content": files_list},
     ]
 
     ai_response = get_ai_completion(prompt)
@@ -174,26 +196,39 @@ def get_repo_information(repo: MyRepo, token_limit: int = 10000) -> str:
     final_context.append(f"=== Selected Repository Context for: {repo.name} ===")
     final_context.append(f"Budget Limit: {token_limit} tokens\n")
 
-    for rel_path_str in selected_files:
-        clean_rel_path = rel_path_str.strip("'\" ")
-        # Для работы с диском Python Path сам поймет прямые слэши на любой ОС
-        target_file = repo_path / clean_rel_path
+    skipped_paths: list[str] = []
 
-        if clean_rel_path in repo_files_registry and target_file.exists():
-            file_tokens = repo_files_registry[clean_rel_path]
+    for rel_path_str in selected_files:
+        clean_rel_path = rel_path_str.strip("'\" `")
+        resolved_path = resolve_selected_path(clean_rel_path, repo_files_registry)
+        if not resolved_path:
+            skipped_paths.append(clean_rel_path)
+            continue
+
+        target_file = repo_path / resolved_path
+
+        if target_file.exists():
+            file_tokens = repo_files_registry[resolved_path]
 
             if current_total_tokens + file_tokens > token_limit:
-                final_context.append(f"\n[ВНИМАНИЕ: Сборка остановлена. Следующий файл {clean_rel_path} превышает лимит в {token_limit} токенов]")
+                final_context.append(
+                    f"\n[ВНИМАНИЕ: Сборка остановлена. Следующий файл {resolved_path} превышает лимит в {token_limit} токенов]"
+                )
                 break
 
             try:
                 content = target_file.read_text(encoding="utf-8", errors="replace")
-                final_context.append(f"--- File: {clean_rel_path} (~{file_tokens} tokens) ---")
+                final_context.append(f"--- File: {resolved_path} (~{file_tokens} tokens) ---")
                 final_context.append(content)
                 final_context.append("-" * 40 + "\n")
                 current_total_tokens += file_tokens
             except Exception:
                 continue
+
+    if skipped_paths:
+        final_context.append(
+            f"\n[ВНИМАНИЕ: ИИ указал несуществующие пути, пропущено: {', '.join(skipped_paths)}]"
+        )
 
     final_context.append(f"=== End of Context. Total Collected Tokens: ~{current_total_tokens} ===")
     return "\n".join(final_context)
