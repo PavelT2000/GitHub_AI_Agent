@@ -1,24 +1,40 @@
-import os
 from pathlib import Path
-import pathspec
 from collections import Counter
-from my_repo import MyRepo
+import pathspec
 
 
-def get_optimized_tree(repo_path: Path, spec: pathspec.PathSpec, max_files_per_type=5) -> str:
+def _estimate_tokens(path: Path) -> int:
+    try:
+        return path.stat().st_size // 4
+    except OSError:
+        return 0
+
+
+def get_optimized_tree(
+    repo_path: Path,
+    spec: pathspec.PathSpec,
+    max_files_per_type: int = 5,
+    include_file_tokens: bool = False,
+) -> str:
+    """Строит дерево каталогов с отступами (имена файлов без полного пути)."""
     tree_lines = []
 
-    def build(current_path: Path, prefix="", level=0):
-        # 1. Сбор элементов (как и раньше)
+    def file_line(indent: str, file_path: Path) -> str:
+        name = file_path.name
+        if include_file_tokens:
+            return f"{indent}{name} (~{_estimate_tokens(file_path)} tokens)"
+        return f"{indent}{name}"
+
+    def build(current_path: Path, prefix: str = "", level: int = 0) -> None:
         valid_items = []
         try:
-            items = sorted(list(current_path.iterdir()), key=lambda x: (x.is_file(), x.name))
+            items = sorted(current_path.iterdir(), key=lambda x: (x.is_file(), x.name))
             for item in items:
-                if '.git' in item.parts or '.ai_github_tool' in item.parts:
+                if ".git" in item.parts or ".ai_github_tool" in item.parts:
                     continue
                 if not spec.match_file(str(item.relative_to(repo_path))):
                     valid_items.append(item)
-        except Exception:
+        except OSError:
             return
 
         if not valid_items:
@@ -27,33 +43,27 @@ def get_optimized_tree(repo_path: Path, spec: pathspec.PathSpec, max_files_per_t
         dirs = [i for i in valid_items if i.is_dir()]
         files = [i for i in valid_items if i.is_file()]
 
-        folder_size_chars = sum(f.stat().st_size for f in current_path.rglob('*') if f.is_file())
-        est_tokens = folder_size_chars // 4
-        # 2. ЛОГИКА СХЛОПЫВАНИЯ:
-        # Если в папке только одна подпапка и НЕТ файлов — копим путь в префикс
-        if len(dirs) == 1 and len(files) == 0:
-            child_dir = dirs[0]
-            # Добавляем имя текущей папки в префикс для следующего шага
+        folder_tokens = 0
+        for f in current_path.rglob("*"):
+            if f.is_file() and not spec.match_file(f.relative_to(repo_path).as_posix()):
+                folder_tokens += _estimate_tokens(f)
+
+        if len(dirs) == 1 and not files:
             new_prefix = f"{prefix}{current_path.name}/"
-            build(child_dir, new_prefix, level) # level НЕ увеличиваем, так как строку еще не печатали
+            build(dirs[0], new_prefix, level)
             return
 
-        # 3. ПЕЧАТЬ:
-        # Теперь вычисляем отступ на основе уровня вложенности
         indent = "  " * level
         display_name = f"{prefix}{current_path.name}/"
-        tree_lines.append(f"{indent}{display_name} (~{est_tokens} tokens)")
+        tree_lines.append(f"{indent}{display_name} (~{folder_tokens} tokens)")
 
-        # Для детей увеличиваем уровень отступа
         for d in dirs:
-            build(d, "", level + 1) # Префикс сбрасываем, так как ветка отрисована
+            build(d, "", level + 1)
 
-        # Вывод файлов с правильным отступом
         file_indent = "  " * (level + 1)
         if files:
-            from collections import Counter
             ext_counts = Counter(f.suffix.lower() for f in files)
-            processed_exts = set()
+            processed_exts: set[str] = set()
             for f in files:
                 ext = f.suffix.lower()
                 if ext_counts[ext] > max_files_per_type:
@@ -61,35 +71,49 @@ def get_optimized_tree(repo_path: Path, spec: pathspec.PathSpec, max_files_per_t
                         tree_lines.append(f"{file_indent}[{ext_counts[ext]} files: *{ext}]")
                         processed_exts.add(ext)
                 else:
-                    tree_lines.append(f"{file_indent}{f.name}")
+                    tree_lines.append(file_line(file_indent, f))
 
-    # Запуск от корня (корень обычно не схлопываем для ясности)
-    # Но если нужно схлопнуть и корень — вызываем build(repo_path)
-    # Для красоты структуры начнем обход содержимого корня:
     try:
-        items = sorted(list(repo_path.iterdir()), key=lambda x: (x.is_file(), x.name))
+        items = sorted(repo_path.iterdir(), key=lambda x: (x.is_file(), x.name))
         for item in items:
-            if '.git' in item.parts or '.ai_github_tool' in item.parts:
+            if ".git" in item.parts or ".ai_github_tool" in item.parts:
                 continue
             if not spec.match_file(str(item.relative_to(repo_path))):
                 if item.is_dir():
                     build(item, "", 0)
                 else:
-                    tree_lines.append(f"{item.name}")
-    except Exception as e:
+                    tree_lines.append(file_line("", item))
+    except OSError as e:
         return f"Error: {e}"
 
     return "\n".join(tree_lines)
 
 
+def build_files_registry(repo_path: Path, spec: pathspec.PathSpec) -> dict[str, int]:
+    """Реестр относительных путей (POSIX) -> оценка токенов для выбранных ИИ файлов."""
+    registry: dict[str, int] = {}
+    for path in repo_path.rglob("*"):
+        if not path.is_file():
+            continue
+        if ".git" in path.parts or ".ai_github_tool" in path.parts:
+            continue
+        rel_path = path.relative_to(repo_path).as_posix()
+        if not spec.match_file(rel_path):
+            registry[rel_path] = _estimate_tokens(path)
+    return registry
+
+
 def get_repo_extensions(repo_path: Path) -> str:
     """Собирает уникальные расширения и файлы без расширений."""
-    extensions = set()
-    files_no_ext = set()
-    for path in repo_path.rglob('*'):
-        if path.is_file() and '.git' not in path.parts:
+    extensions: set[str] = set()
+    files_no_ext: set[str] = set()
+    for path in repo_path.rglob("*"):
+        if path.is_file() and ".git" not in path.parts:
             if path.suffix:
                 extensions.add(path.suffix.lower())
             else:
                 files_no_ext.add(path.name)
-    return f"Расширения: {', '.join(extensions)}\nФайлы без расширения: {', '.join(files_no_ext)}"
+    return (
+        f"Расширения: {', '.join(sorted(extensions))}\n"
+        f"Файлы без расширения: {', '.join(sorted(files_no_ext))}"
+    )

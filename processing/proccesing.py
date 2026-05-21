@@ -5,7 +5,7 @@ from pathlib import Path
 from git import Repo as GitRepo
 import pathspec
 from open_ai_module import get_ai_completion, count_tokens
-from .utils import get_optimized_tree, get_repo_extensions
+from .utils import get_optimized_tree, get_repo_extensions, build_files_registry
 
 
 def get_all_repositories() -> list[MyRepo]:
@@ -65,9 +65,9 @@ def setup_aiignore(repo: MyRepo):
         {"role": "user", "content": stats}
     ]
     res1 = get_ai_completion(prompt1)
-    ext_rules = res1.choices[0].message.content
-    if isinstance(res1, str): return
-    ext_ignore_rules = res1.choices[0].message.content.strip()
+    if isinstance(res1, str):
+        return
+    ext_rules = res1.choices[0].message.content.strip()
     spec = pathspec.PathSpec.from_lines('gitwildmatch', ext_ignore_rules.splitlines())
     compact_tree = get_optimized_tree(repo_path, spec)
     prompt2 = [
@@ -122,55 +122,41 @@ def get_repo_information(repo: MyRepo, token_limit: int = 10000) -> str:
         ignore_rules = ignore_file.read_text(encoding="utf-8").splitlines()
     spec = pathspec.PathSpec.from_lines('gitwildmatch', ignore_rules)
 
-    # 2. Получаем текущее оптимизированное дерево для ИИ
-    compact_tree = get_optimized_tree(repo_path, spec)
-
-    # 3. Собираем точную базу данных с принудительным POSIX-форматом слэшей (/)
-    repo_files_registry = {}
-    for p in repo_path.rglob('*'):
-        if p.is_file():
-            if '.git' in p.parts or '.ai_github_tool' in p.parts:
-                continue
-
-            # .as_posix() превращает Windows слэши \ в прямые /
-            relative_posix_str = p.relative_to(repo_path).as_posix()
-
-            # Проверяем фильтр pathspec (он требует прямые слэши)
-            if not spec.match_file(relative_posix_str):
-                try:
-                    file_chars = p.stat().st_size
-                    repo_files_registry[relative_posix_str] = file_chars // 4
-                except Exception:
-                    continue
+    repo_files_registry = build_files_registry(repo_path, spec)
 
     if not repo_files_registry:
-        return f"=== Selected Repository Context for: {repo.name} ===\n[ВНИМАНИЕ: Нет доступных файлов после фильтрации .aiignore]\nTotal Collected Tokens: ~0"
+        return (
+            f"=== Selected Repository Context for: {repo.name} ===\n"
+            "[ВНИМАНИЕ: Нет доступных файлов после фильтрации .aiignore]\n"
+            "Total Collected Tokens: ~0"
+        )
 
-    # Превращаем реестр в текст для ИИ
-    registry_text = "\n".join([f"{path} ({tokens} tokens)" for path, tokens in repo_files_registry.items()])
+    compact_tree = get_optimized_tree(
+        repo_path, spec, include_file_tokens=True
+    )
 
-    # 4. Запрос к ИИ
     prompt = [
         {"role": "system", "content": (
             "You are a strict codebase architect CLI tool. Your task is to select the most critical project files for logic analysis.\n\n"
             f"CRITICAL CONSTRAINT: The total token weight of selected files MUST NOT exceed {token_limit} tokens.\n"
             "Select only core business logic files (entry points, controllers, services, models, data contexts).\n"
             "Ignore tests, build artifacts, migrations, and UI assets.\n\n"
+            "You receive a directory tree: folders end with '/', files are listed by name with indentation (not full paths per line).\n"
+            "Token counts are shown as (~N tokens). Reconstruct full relative paths from the tree when answering.\n\n"
             "OUTPUT FORMAT RULES:\n"
-            "1. Output ONLY a flat list of relative file paths (one path per line).\n"
+            "1. Output ONLY a flat list of relative file paths from repository root (one path per line, use /).\n"
             "2. Strictly NO numbered lists (do not use 1, 2, 3).\n"
             "3. Strictly NO introduction, NO Markdown code blocks, NO conclusion text, and NO human commentary.\n"
             "4. Output must be raw plain text paths only."
         )},
         {"role": "user", "content": (
-            "STRUCTURE:\nFolder/App.cs (~4000 tokens)\nFolder/Test.cs (~2000 tokens)\n"
-            "FILES REGISTRY WITH WEIGHTS:\nFolder/App.cs (4000 tokens)\nFolder/Test.cs (2000 tokens)"
+            "Project/\n"
+            "  src/ (~2000 tokens)\n"
+            "    App.cs (~4000 tokens)\n"
+            "    Test.cs (~2000 tokens)"
         )},
-        {"role": "assistant", "content": "Folder/App.cs"},
-        {"role": "user", "content": (
-            f"STRUCTURE:\n{compact_tree}\n\n"
-            f"FILES REGISTRY WITH WEIGHTS:\n{registry_text}"
-        )}
+        {"role": "assistant", "content": "src/App.cs"},
+        {"role": "user", "content": compact_tree},
     ]
 
     ai_response = get_ai_completion(prompt)
